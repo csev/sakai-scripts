@@ -36,6 +36,19 @@ pre-requisites.
 
 TODO: OS/X pre-requisite instructions.
 
+config-dist.sh
+--------------
+
+This is a configuration script that sets a few parameters.  If you want/
+need to tweak the parameters simply copy this to config.sh so git does
+not try to check it in.  If there is a config.sh, it will be used instead
+of config-dist.sh.
+
+db.sh
+-----
+This sets up a database with an account and password based on the contents
+of config.sh
+
 co.sh
 -----
 
