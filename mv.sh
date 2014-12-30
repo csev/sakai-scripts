@@ -1,10 +1,10 @@
-#! /bin/sh
+#! /bin/bash
 # Compile all of the Sakai source in the right order
 #
 # A good way to do this is:
 #
 # rm -rf ~/.m2/repository/org/sakaiproject
-# sh qmv.sh | tee /tmp/qmv.out
+# bash qmv.sh | tee /tmp/qmv.out
 #
 # This way you get a log of what happens and figure out any loose 
 # linkage or sloppy dependencies.

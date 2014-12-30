@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 source config-dist.sh
 
 if [ "$LOG_DIRECTORY" != "" ]; then

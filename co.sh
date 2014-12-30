@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 source config-dist.sh
 
 echo Checking out from $GIT_REPO

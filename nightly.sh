@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 source config-dist.sh
 
 # sh nightly.sh 2>&1 | tee /tmp/nightly-`date '+%Y-%m-%dT%H:%M'`.out
@@ -8,13 +8,13 @@ date
 
 # rm -rf ~/.m2/repository/org/sakaiproject
 rm -rf trunk
-sh na.sh
-sh co.sh
+bash na.sh
+bash co.sh
 
-sh stop.sh
+bash stop.sh
 rm -f $LOG_DIRECTORY/*
-sh db.sh
+bash db.sh
 
-sh qmv.sh
-sh start.sh
+bash qmv.sh
+bash start.sh
 

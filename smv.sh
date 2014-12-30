@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 # Simply echo the proper maven command for hand builds
 if [ "$MAVEN_OPTS" = "" ] ; then
   echo "Please set your MAVEN_OPTS per the README"

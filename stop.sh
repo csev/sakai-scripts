@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 source config-dist.sh
 
 PROCESS_ID=`lsof -i :$PORT | grep java | awk '{print $2}'`

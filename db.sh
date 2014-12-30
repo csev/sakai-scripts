@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 source config-dist.sh
 
 echo === Creating $MYSQL_DATABASE database
