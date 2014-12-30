@@ -1,7 +1,7 @@
 #! /bin/bash
 source config-dist.sh
 
-# sh nightly.sh 2>&1 | tee /tmp/nightly-`date '+%Y-%m-%dT%H:%M'`.out
+# bash nightly.sh 2>&1 | tee /tmp/nightly-`date '+%Y-%m-%dT%H:%M'`.out
 
 echo "Starting nightly build process"
 date
