@@ -13,8 +13,8 @@ MYSQL_DATABASE=nightly
 MYSQL_USER=sakaiuser
 MYSQL_PASSWORD=sakaipass
 MYSQL_COMMAND='/Applications/MAMP/Library/bin/mysql -S /Applications/MAMP/tmp/mysql/mysql.sock -u root --password=root'
-# Change the database name below as well
-MYSQL_SOURCE='jdbc:mysql://127.0.0.1:8889/nightly?useUnicode=true&characterEncoding=UTF-8'
+# Change the database name below as well - also escape the ampersand
+MYSQL_SOURCE='jdbc:mysql://127.0.0.1:8889/nightly?useUnicode=true\&characterEncoding=UTF-8'
 
 
 # Do some sanity checking...
