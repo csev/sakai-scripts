@@ -1,0 +1,29 @@
+--- apache-tomcat-7.0.21/orig/catalina.properties	2011-10-27 21:27:00.000000000 -0400
++++ apache-tomcat-7.0.21/conf/catalina.properties	2011-10-27 21:23:37.000000000 -0400
+@@ -44,7 +44,7 @@
+ #     "foo/*.jar": Add all the JARs of the specified folder as class 
+ #                  repositories
+ #     "foo/bar.jar": Add bar.jar as a class repository
+-common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar
++common.loader=${catalina.base}/lib,${catalina.base}/lib/*.jar,${catalina.home}/lib,${catalina.home}/lib/*.jar,${catalina.base}/common/classes/,${catalina.base}/common/lib/*.jar
+ 
+ #
+ # List of comma-separated paths defining the contents of the "server" 
+@@ -57,7 +57,7 @@
+ #     "foo/*.jar": Add all the JARs of the specified folder as class 
+ #                  repositories
+ #     "foo/bar.jar": Add bar.jar as a class repository
+-server.loader=
++server.loader=${catalina.base}/server/classes/,${catalina.base}/server/lib/*.jar
+ 
+ #
+ # List of comma-separated paths defining the contents of the "shared" 
+@@ -71,7 +71,7 @@
+ #     "foo/bar.jar": Add bar.jar as a class repository 
+ # Please note that for single jars, e.g. bar.jar, you need the URL form
+ # starting with file:.
+-shared.loader=
++shared.loader=${catalina.base}/shared/classes,${catalina.base}/shared/lib/*.jar
+ 
+ # List of JAR files that should not be scanned for configuration information
+ # such as web fragments, TLD files etc. It must be a comma separated list of
