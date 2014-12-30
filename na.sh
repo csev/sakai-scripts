@@ -1,6 +1,6 @@
 #! /bin/sh
 source config-dist.sh
-TOMCAT=7.0.21
+
 MYPATH=`pwd`
 
 echo Setting up fresh TOMCAT Version:$TOMCAT 
@@ -40,10 +40,12 @@ mkdir -p apache-tomcat-$TOMCAT/shared/classes
 mkdir -p apache-tomcat-$TOMCAT/server/lib
 mkdir -p apache-tomcat-$TOMCAT/common/lib
 
+echo Copying needed jars to common/lib
 cp jars/*.jar apache-tomcat-$TOMCAT/common/lib
 
 mkdir -p apache-tomcat-$TOMCAT/sakai
 
+echo Patching sakai.properties
 PROPFILE="sakai-dist.properties"
 if [ -f "sakai.properties" ]
 then
@@ -53,6 +55,20 @@ fi
 
 echo $PROPFILE
 sed < $PROPFILE "s'MYSQL_USER'$MYSQL_USER'" | sed "s'MYSQL_PASSWORD'$MYSQL_PASSWORD'" | sed "s'MYSQL_SOURCE'$MYSQL_SOURCE'"> apache-tomcat-$TOMCAT/sakai/sakai.properties
+
+echo "Patching server.xml"
+
+sed < patches/server.xml "s/8080/$PORT/" | sed "s/8005/$SHUTDOWN_PORT/" > apache-tomcat-$TOMCAT/conf/server.xml
+
+if [ "$LOG_DIRECTORY" != "" ]; then 
+    echo "Logging to " $LOG_DIRECTORY
+    sed < patches/logging.properties "s'\${catalina.base}/logs'$LOG_DIRECTORY'g" > apache-tomcat-$TOMCAT/conf/logging.properties    
+    echo "Setting up setenv.sh"
+cat > apache-tomcat-$TOMCAT/bin/setenv.sh << EOF
+CATALINA_OUT=$LOG_DIRECTORY/catalina.out
+EOF
+
+fi
 
 echo 
 echo Make sure to include this when running your Tomcat

@@ -1,11 +1,11 @@
 Sakai-Scripts
 =============
 
-A Repo of my scripts that I use to make my life as a Sakai developer easier
+Some scripts that I use to make my life as a Sakai developer easier.
 
 This is a set of scripts to set up a developer instance
 of Sakai on your system.  Sakai can run on a 2GB RAM system
-but is a lot more comfortable with a 4GB app server.
+but is a lot more comfortable with a 4GB or more app server.
 
 Make sure to add this to your .profile so your mavens and Sakai can 
 run.

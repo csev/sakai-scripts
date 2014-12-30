@@ -9,6 +9,7 @@ fi
 
 # Settings
 GIT_REPO=https://github.com/csev/sakai.git
+TOMCAT=7.0.21
 MYSQL_DATABASE=nightly
 MYSQL_USER=sakaiuser
 MYSQL_PASSWORD=sakaipass
@@ -16,6 +17,10 @@ MYSQL_COMMAND='/Applications/MAMP/Library/bin/mysql -S /Applications/MAMP/tmp/my
 # Change the database name below as well - also escape the ampersand
 MYSQL_SOURCE='jdbc:mysql://127.0.0.1:8889/nightly?useUnicode=true\&characterEncoding=UTF-8'
 
+# Leave this empty to leave the logs alone
+LOG_DIRECTORY=/tmp/logs
+PORT=8080
+SHUTDOWN_PORT=8005
 
 # Do some sanity checking...
 if [ "$MAVEN_OPTS" = "" ] ; then
