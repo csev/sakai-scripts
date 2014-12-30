@@ -1,9 +1,9 @@
 #! /bin/sh
 source config-dist.sh
 
-echo $GIT_REPO
+echo Checking out from $GIT_REPO
 
-exit
 # Do a full check out of all of the source
-svn co $GIT_REPO trunk
+rm -rf trunk
+git clone $GIT_REPO trunk
 
