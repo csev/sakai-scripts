@@ -3,6 +3,8 @@
 # If you want to change this file (and you should)
 # Simply copy it to config.sh and make your changes
 # there so git ignores your local copy.
+
+# Check to see if we are overriden - but only do it once
 if [ -f "config.sh" -a "$1" == "" ]
 then
     source config.sh include
@@ -10,10 +12,11 @@ then
 fi
 
 # Settings
-GIT_REPO=https://github.com/csev/sakai.git
+# GIT_REPO=https://github.com/csev/sakai.git
+GIT_REPO=https://github.com/sakaiproject/sakai
 TOMCAT=7.0.21
-# Leave LOG_DIRECTORY empty to leave the logs inside tomcat
-# LOG_DIRECTORY=/tmp/logs
+# Leave LOG_DIRECTORY value empty to leave the logs inside tomcat
+# LOG_DIRECTORY=/var/www/html/sakai/logs/tomcat
 LOG_DIRECTORY=
 PORT=8080
 SHUTDOWN_PORT=8005

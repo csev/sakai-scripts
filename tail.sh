@@ -1,5 +1,9 @@
 #! /bin/bash
 source config-dist.sh
+if [ "$PORT" == "" ]; then
+    echo "Bad configuration or wrong shell"; 
+    exit
+fi
 
 if [ "$LOG_DIRECTORY" != "" ]; then
     if [ -f $LOG_DIRECTORY/catalina.out ]; then

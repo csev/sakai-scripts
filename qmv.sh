@@ -18,6 +18,10 @@
 # pointing to the right versions.
 
 source config-dist.sh
+if [ "$PORT" == "" ]; then 
+    echo "Bad configuration or wrong shell"; 
+    exit 
+fi
 
 goals='clean install sakai:deploy'
 if [ $# != 0 ] ; then

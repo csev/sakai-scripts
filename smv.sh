@@ -1,5 +1,9 @@
 #! /bin/bash
-# Simply echo the proper maven command for hand builds
+
+# This file should be copied into a folder in the PATH
+# so it can be used to compile form any point in the Sakai
+# hierarchy that has a pom.xml
+
 if [ "$MAVEN_OPTS" = "" ] ; then
   echo "Please set your MAVEN_OPTS per the README"
   exit

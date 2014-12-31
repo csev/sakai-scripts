@@ -27,11 +27,11 @@ Developer Quickstart
 This is a quick series of steps to get up and running on a Macintosh:
 
 * Check out this directory
-* Make sure that prerequizite software is installed (see ubuntu.sh)
+* Make sure that prerequisite software is installed (see ubuntu.sh)
 * Either install MAMP (Mac) or have MySql on 3306
-* Copy config-dist.php to config.php
-* Edit config.php to put in the correct repository
-* If you are not running MAMP, edit the MySql root password in config.php
+* Copy config-dist.sh to config.sh
+* Edit config.sh to put in the correct repository
+* If you are not running MAMP, edit the MySql root password in config.sh
 * Run bash db.sh to create a database
 * Run bash na.sh to set up the Tomcat
 * Run bash co.sh to check things out
@@ -72,7 +72,7 @@ of config-dist.sh.
 I think that the default config-dist.sh works without modification for 
 normal development Mac OS/X with MAMP installed and running.  For 
 normal development on a Linux/Mysql box, probably the only thing you 
-would need to change in a config.php is the root mysql password so it
+would need to change in a config.sh is the root mysql password so it
 can set up the database in db.sh
 
 But there is a lot of flexibility here if you are setting up nightly build
@@ -81,7 +81,7 @@ of the Tomcat logs in config.sh allows you check these scripts out
 into several directories and make different nightly builds.  If you get
 really tricky, you can override sakai-dist.properties by copying it to 
 sakai.properties (which git will ignore) and change lots of things like
-switgching from MySql to Oracle.  Also you could put the ojdbc jar file
+switching from MySql to Oracle.  Also you could put the ojdbc jar file
 in the jars folder so the db.sh copies that into common/lib each time 
 you make a new Apache.  Note that db.sh does not understand oracle so 
 your might want to change MYSQL\_COMMAND to be "cat" so it does not try
@@ -90,7 +90,7 @@ to run mysql to create an Oracle database.
 db.sh
 -----
 This sets up a MySql database with an account and password based on 
-the contents of config.sh
+the configuration
 
 co.sh
 -----
@@ -119,6 +119,13 @@ jars folder - it will be copied automatically by na.sh
 
     mysql-connector-java-5.1.6-bin.jar
 
+Some clever people get their copy of the JDBC connector jar and put it up
+on an obscure URL so they can quickly curl it to a new server and put
+it in the jars folder.
+
+If you are setting up Oracle you can put the ojdbc jar in the jar folder
+so that it is automatically copied.
+
 qmv.sh
 ------
 
@@ -129,7 +136,9 @@ to compile with all unit tests.
 
 start.sh
 --------
-Start tomcat
+Start tomcat.  Actually this script calls stop.sh at the begining to 
+shut down any running tomcat on the configured port so it can aso be 
+used as a "restart" to bounce Tomcat.
 
 stop.sh
 -------

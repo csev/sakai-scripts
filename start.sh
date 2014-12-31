@@ -1,5 +1,9 @@
 #! /bin/bash
 source config-dist.sh
+if [ "$PORT" == "" ]; then 
+    echo "Bad configuration or wrong shell"; 
+    exit 
+fi
 
 source stop.sh
 

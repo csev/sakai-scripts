@@ -2,6 +2,10 @@
 #
 # This automates the steps to checkout and build Sakai.
 source config-dist.php
+if [ "$PORT" == "" ]; then 
+    echo "Bad configuration or wrong shell"; 
+    exit 
+fi
 
 # Do it all!
 # Clean out the repo so any unbuilt artifacts will need to be downloaded

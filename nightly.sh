@@ -1,5 +1,9 @@
 #! /bin/bash
 source config-dist.sh
+if [ "$PORT" == "" ]; then 
+    echo "Bad configuration or wrong shell"; 
+    exit 
+fi
 
 # bash nightly.sh 2>&1 | tee /tmp/nightly-`date '+%Y-%m-%dT%H:%M'`.out
 
