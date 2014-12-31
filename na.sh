@@ -5,6 +5,8 @@ MYPATH=`pwd`
 
 echo Setting up fresh TOMCAT Version:$TOMCAT 
 
+source stop.sh
+
 # Download Tomcat using curl if necessary
 
 if [ -d keepzips ] 
