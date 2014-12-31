@@ -7,8 +7,8 @@ This is a set of scripts to set up a developer instance
 of Sakai on your system.  Sakai can run on a 2GB RAM system
 but is a lot more comfortable with a 4GB or more app server.
 
-Make sure to add this to your .profile so your mavens and Sakai can 
-run.
+Make sure to add this to your .profile or .bashrc so your mavens 
+and Sakai can run (remove newlines):
 
     JAVA_OPTS='-server -Xms512m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=512m 
     -XX:NewSize=192m -XX:MaxNewSize=384m -Djava.awt.headless=true -Dhttp.agent=Sakai 
@@ -56,21 +56,15 @@ Checkout all of the Sakai source into the folder trunk.   This checks out
 the main Sakai source and a few projects that Sakai depends on in case you
 want to peruse the source of those projects.
 
+db.sh
+-----
+Drop the database if it is there and re-greate an empty database.
+
 na.sh
 -----
 
-Download and create a fresh instance of Tomcat.  
-After this is done, you will want to create a folder 
-
-    apache-tomcat-7.0.21/sakai/
-
-And copy the sakai.properties into the folder.  Edit as appropriate.  Likely 
-the only thing to change is to get the MySQL port fixed depending on whether 
-you use MAMP (port 8889) or MySQL (port 3306)
-
-Make a folder:
-
-    apache-tomcat-7.0.21/common/lib/
+Download and create a fresh instance of Tomcat, patch configurations, 
+and set up a sakai.properties
 
 Since we cannot include the MySQL connector, download a copy of the 
 MySQL JDBC connector from:
@@ -78,7 +72,7 @@ MySQL JDBC connector from:
     http://dev.mysql.com/downloads/connector/j/
 
 Once you download and unzip the connector copy the jar into the
-common/lib folder above.  My Jar file looks as follows:
+jars folder - it will be copied automatically by na.sh
 
     mysql-connector-java-5.1.6-bin.jar
 
@@ -90,32 +84,29 @@ of time in the initial compile.   The mv.sh will compile with unit test.
 Once things work and you need to go out for an errand, you can run a mv.sh 
 to compile with all unit tests.
 
-Starting and Re-Starting Sakai
-==============================
+start.sh
+--------
+Start tomcat
 
-Once the compile is finished, and you have MySQL installed, to start Sakai
-go into the folder:
+stop.sh
+-------
+Stop tomcat
 
-    apache-tomcat-7.0.21/logs
+tail.sh
+-------
+Tail the tomcat log.
 
-And run the following commands:
-
-    ../bin/startup.sh
-    tail -f catalina.out
-
-You should be able to watch the log as Sakai starts up.  If things
-go well you should see this in the logs:
+Using Sakai
+===========
 
 And at this point, you should be able to navigate a browser to:
 
     http://localhost:8080/portal
 
 If you need to recompile, the steps to shut down Sakai are to first
-abort your tail command with a CTRL-C and then
+abort your tail command with a CTRL-C and then run stop.sh
 
-    ../bin/shutdown.sh
-
-Usually to keep thins clean, I remove all the files in the Tomcat logs
+Usually to keep things clean, I remove all the files in the Tomcat logs
 folder before I restart Sakai.
 
 Developer Compiles

@@ -6,15 +6,15 @@ source config-dist.sh
 echo "Starting nightly build process"
 date
 
-# rm -rf ~/.m2/repository/org/sakaiproject
 rm -rf trunk
-bash na.sh
 bash co.sh
 
 bash stop.sh
-rm -f $LOG_DIRECTORY/*
 bash db.sh
+rm -f $LOG_DIRECTORY/*
+bash na.sh
 
+rm -rf ~/.m2/repository/org/sakaiproject
 bash qmv.sh
 bash start.sh
 

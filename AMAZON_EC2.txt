@@ -22,7 +22,7 @@ Once logged in, do the following:
 sudo apt-get install subversion
 svn co https://source.sakaiproject.org/contrib//csev/trunk/scripts/sakai-full/
 cd sakai-full 
-sh ubuntu.sh
+bash ubuntu.sh
 
 The ubuntu.sh does a bunch of package installs - just press 'Y'
 to get through that.
@@ -40,15 +40,15 @@ properly set.
 
 Then check out all of Sakai:
 
-sh co.sh
+bash co.sh
 
 Then make a fresh Apache Tomact:
 
-sh na.sh
+bash na.sh
 
 Then compile all of Sakai:
 
-sh qmv.sh
+bash qmv.sh
 
 Then start your Tomcat
 

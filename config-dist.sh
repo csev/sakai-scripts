@@ -3,10 +3,10 @@
 # If you want to change this file (and you should)
 # Simply copy it to config.sh and make your changes
 # there so git ignores your local copy.
-if [ -f "config.sh" ]
+if [ -f "config.sh" -a "$1" == "" ]
 then
-    source config.sh
-    exit
+    source config.sh include
+    return
 fi
 
 # Settings
