@@ -24,8 +24,7 @@ MYSQL_COMMAND='mysql -u root --password=changeme'
 MYSQL_SOURCE="jdbc:mysql://127.0.0.1:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
 
 # Make a guess if we see MAMP installed
-PROCESS_ID=`lsof -i :8889 | grep mysqld | awk '{print $2}'`
-if [ -f "/Applications/MAMP/Library/bin/mysql" -a "$PROCESS_ID" != "" ] ; then
+if [ -f "/Applications/MAMP/Library/bin/mysql" ] ; then
     MYSQL_COMMAND='/Applications/MAMP/Library/bin/mysql -S /Applications/MAMP/tmp/mysql/mysql.sock -u root --password=root'
     MYSQL_SOURCE="jdbc:mysql://127.0.0.1:8889/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
 fi
