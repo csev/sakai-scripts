@@ -11,3 +11,11 @@ echo Checking out from $GIT_REPO
 rm -rf trunk
 git clone $GIT_REPO trunk
 
+# Setting up the upstream master
+if [ "$GIT_REPO" != "https://github.com/sakaiproject/sakai.git" ]; then 
+    echo "Setting upstream master"
+    cd trunk
+    git remote add upstream https://github.com/sakaiproject/sakai
+    cd ..
+fi
+
