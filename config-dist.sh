@@ -13,7 +13,7 @@ fi
 
 # Settings
 # GIT_REPO=https://github.com/csev/sakai.git
-GIT_REPO=https://github.com/sakaiproject/sakai
+GIT_REPO=https://github.com/sakaiproject/sakai.git
 TOMCAT=7.0.21
 # Leave LOG_DIRECTORY value empty to leave the logs inside tomcat
 # LOG_DIRECTORY=/var/www/html/sakai/logs/tomcat
