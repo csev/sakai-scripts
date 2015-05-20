@@ -1,4 +1,5 @@
 #! /bin/bash
+if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 # Compile all of the Sakai source in the right order
 #
 # A good way to do this is:

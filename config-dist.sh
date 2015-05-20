@@ -1,4 +1,5 @@
 #! /bin/bash
+if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 
 # If you want to change this file (and you should)
 # Simply copy it to config.sh and make your changes
@@ -9,6 +10,9 @@ if [ -f "config.sh" -a "$1" == "" ]
 then
     source config.sh include
     return
+else
+    echo "If you want to override configuration settings, copy"
+    echo "config-dist.sh to connfig.sh and edit config.sh"
 fi
 
 # Settings
@@ -20,10 +24,10 @@ TOMCAT=7.0.21
 LOG_DIRECTORY=
 PORT=8080
 SHUTDOWN_PORT=8005
-MYSQL_DATABASE=nightly
+MYSQL_DATABASE=sakaidb
 MYSQL_USER=sakaiuser
 MYSQL_PASSWORD=sakaipass
-MYSQL_COMMAND='mysql -u root --password=changeme'
+MYSQL_COMMAND='mysql -u root --password=root'
 MYSQL_SOURCE="jdbc:mysql://127.0.0.1:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
 
 # Make a guess if we see MAMP installed

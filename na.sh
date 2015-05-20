@@ -1,4 +1,5 @@
 #! /bin/bash
+if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 source config-dist.sh
 if [ "$PORT" == "" ]; then 
     echo "Bad configuration or wrong shell"; 
@@ -6,6 +7,17 @@ if [ "$PORT" == "" ]; then
 fi
 
 MYPATH=`pwd`
+
+if [ -f "/usr/share/java/mysql.jar" ]
+then
+   echo "Found mysql jar"
+else
+   echo "Missing /usr/share/java/mysql.jar"
+   echo "Please run"
+   echo " "
+   echo "sudo apt-get install libmysql-java"
+   exit
+fi
 
 echo Setting up fresh TOMCAT Version:$TOMCAT 
 
@@ -46,8 +58,7 @@ mkdir -p apache-tomcat-$TOMCAT/shared/classes
 mkdir -p apache-tomcat-$TOMCAT/server/lib
 mkdir -p apache-tomcat-$TOMCAT/common/lib
 
-echo Copying needed jars to common/lib
-cp jars/*.jar apache-tomcat-$TOMCAT/common/lib
+cp /usr/share/java/mysql.jar apache-tomcat-$TOMCAT/common/lib
 
 mkdir -p apache-tomcat-$TOMCAT/sakai
 
