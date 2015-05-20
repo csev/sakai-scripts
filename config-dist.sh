@@ -16,9 +16,11 @@ else
 fi
 
 # Settings
-# GIT_REPO=https://github.com/csev/sakai.git
+# Change GIT_REPO and replace "sakaiproject" with your git user name
+# so that you checkout your forked sakai repository
 GIT_REPO=https://github.com/sakaiproject/sakai.git
 TOMCAT=7.0.21
+
 # Leave LOG_DIRECTORY value empty to leave the logs inside tomcat
 # LOG_DIRECTORY=/var/www/html/sakai/logs/tomcat
 LOG_DIRECTORY=
@@ -27,10 +29,12 @@ SHUTDOWN_PORT=8005
 MYSQL_DATABASE=sakaidb
 MYSQL_USER=sakaiuser
 MYSQL_PASSWORD=sakaipass
+
+# Ubuntu / normal 3306 MySQL - update password below
 MYSQL_COMMAND='mysql -u root --password=root'
 MYSQL_SOURCE="jdbc:mysql://127.0.0.1:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
 
-# Make a guess if we see MAMP installed
+# Defaults for Mac/MAMP MySQL
 if [ -f "/Applications/MAMP/Library/bin/mysql" ] ; then
     MYSQL_COMMAND='/Applications/MAMP/Library/bin/mysql -S /Applications/MAMP/tmp/mysql/mysql.sock -u root --password=root'
     MYSQL_SOURCE="jdbc:mysql://127.0.0.1:8889/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"

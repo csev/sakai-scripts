@@ -7,32 +7,101 @@ This is a set of scripts to set up a developer instance of Sakai on
 your system or set up a nighly build.  Sakai can run on a 2GB RAM system
 but is a lot more comfortable with a 4GB or more app server.
 
-Make sure to add this to your .bashrc (Linux) or 
-.bashrc\_profile (Mac) so your mavens and Sakai can run 
-(remove newlines so the JAVA\_OPTS is all on one line):
+Getting Started on Mac (as needed)
+==================================
 
-    JAVA_OPTS='-server -Xms512m -Xmx1024m  
-    -XX:NewSize=192m -XX:MaxNewSize=384m -Djava.awt.headless=true -Dhttp.agent=Sakai 
-    -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false 
-    -Dsun.lang.ClassLoader.allowArraySyntax=true'
+* Create an account on github
 
-    export JAVA_OPTS
+* Go to https://github.com/sakaiproject/sakai and "fork" a copy into 
+your github repo
 
-    MAVEN_OPTS='-Xms512m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=512m'
+* Install git using the command
 
-    export MAVEN_OPTS
+    xcode-select --install
 
-Developer Quickstart
-====================
+* Set up git with the folowing commands
 
-This is a quick series of steps to get up and running on a Macintosh:
+    git config --global user.name "John Doe"
+    git config --global user.email johndoe@example.com
 
-* Check out this directory
-* Make sure that prerequisite software is installed (see ubuntu.sh)
-* Either install MAMP (Mac) or have MySql on 3306
+* Check out sakai-scripts into some folder.   I tend to make a folder
+named "dev" in my home directory:
+
+    mkdir /home/csev/dev  (if needed)
+    cd /home/csev/dev
+    git clone https://github.com/csev/sakai-scripts
+
+* Read the instructions in profile.txt to update your login files.
+Once you update your login files, close your terminal window and 
+reopen a brand new window and type:
+
+    echo $JAVA_OPTS
+
+If you see the settings, you have edited the correct file, if not try
+another of the files.  Keep repeating this process of editing the log in file,
+opening a new terminal, and typing 'echo' until the above command shows
+the java settings.
+
+* Download the platform independent MYSQL JDBC Connector from:
+
+    http://dev.mysql.com/downloads/connector/j/
+
+You will need to create or use your Oracle account.  Download the
+ZIP version of the file and unzip the file and move the unzipped 
+folder into:
+
+    /home/csev/dev/mysql-connector-java-5.1.35
+
+(Or a similar name)
+
+* Install MAMP if you have not already done so
+
+Getting Started on ubuntu
+=========================
+
+* Create an account on github
+
+* Go to https://github.com/sakaiproject/sakai and "fork" a copy into 
+your github repo
+
+* Install git using the command
+
+    sudo apt-get -y install git
+
+* Check out sakai-scripts into some folder.   I tend to make a folder
+named "dev" in my home directory:
+
+    mkdir /home/csev/dev  (if needed)
+    cd /home/csev/dev
+    git clone https://github.com/csev/sakai-scripts
+
+* Set up git with the folowing commands
+
+    git config --global user.name "John Doe"
+    git config --global user.email johndoe@example.com
+
+* Read the instructions in sakai-scripts/profile.txt to update 
+your login files.  Once you update your login files, close 
+your terminal window and reopen your window and type:
+
+    echo $JAVA_OPTS
+
+If you see the settings, you have edited the correct file, if not try
+another of the files.
+
+* Set up the rest of the pre-requisites using the following command:
+
+    cd /home/csev/dev/sakai-scripts
+    sh ubuntu.sh
+
+Common Steps
+============
+
 * Copy config-dist.sh to config.sh
-* Edit config.sh to put in the correct repository
-* If you are not running MAMP, edit the MySql root password in config.sh
+* Edit config.sh 
+    * Change "sakaiproject" in GIT\_REPO to be your github account
+    * If you are not running MAMP, edit the MySql root password
+
 * Run bash db.sh to create a database
 * Run bash na.sh to set up the Tomcat
 * Run bash co.sh to check things out
@@ -42,7 +111,7 @@ This is a quick series of steps to get up and running on a Macintosh:
 * Run bash stop.sh to shutdown Tomcat
 
 * Copy smv.sh into a folder in your PATH so you can recompile any
-folder in Sakai that has a pom.xml by typing "smv.sh"
+sub-folder in Sakai that has a pom.xml by typing "smv.sh"
 
 Eventually you can just use the tomcat startup.sh and shutdown.sh
 and run your own tail commands if that is what you like.
@@ -60,8 +129,6 @@ for Ubuntu.  If you are running something other than Ubuntu, you can look
 at this and use whatever package manager that is on the system to 
 install the necessary pre-requisites.
 
-TODO: OS/X pre-requisite instructions.
-
 config-dist.sh
 --------------
 
@@ -70,14 +137,11 @@ need to tweak the parameters simply copy this to config.sh so git does
 not try to check it in.  If there is a config.sh, it will be used instead
 of config-dist.sh.   
 
-I think that the default config-dist.sh works without modification for 
-normal development Mac OS/X with MAMP installed and running.  For 
-normal development on a Linux/Mysql box, probably the only thing you 
-would need to change in a config.sh is the root mysql password so it
-can set up the database in db.sh
+Generally you need to change the git repo to be checked out and the
+root mysql password for non-MAMP MySQL connections.
 
 But there is a lot of flexibility here if you are setting up nightly build
-servers.   Changing things like the HTTP port, shutdown port, location 
+servers.   Changing things like the HTTP port, shutdown port, and location 
 of the Tomcat logs in config.sh allows you check these scripts out 
 into several directories and make different nightly builds.  If you get
 really tricky, you can override sakai-dist.properties by copying it to 

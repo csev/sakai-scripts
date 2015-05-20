@@ -6,6 +6,27 @@ if [ "$PORT" == "" ]; then
     exit 
 fi
 
+echo === Checking MySql configuration ===
+
+rm -f /tmp/mysql
+
+$MYSQL_COMMAND << EOF > /tmp/mysql
+SHOW DATABASES;
+EOF
+
+if grep information_schema /tmp/mysql > /dev/null
+then
+    echo "MySQL service is working..."
+else 
+    echo "MySQL is not installed or not configured correctly"
+    echo ""
+    echo $MYSQL_COMMAND
+    echo "SHOW DATABASES;"
+    echo " "
+    cat /tmp/mysql
+    exit 1
+fi
+
 echo === Creating $MYSQL_DATABASE database
 
 $MYSQL_COMMAND << EOF
@@ -18,5 +39,9 @@ GRANT ALL ON $MYSQL_DATABASE.* TO $MYSQL_USER@'127.0.0.1' IDENTIFIED BY '$MYSQL_
 EOF
 
 echo " "
-echo You might want to use the mysql command line to make sure your
-echo $MYSQL_DATABASE was created properly
+echo "Active MySQL Databases:"
+
+$MYSQL_COMMAND << EOF 
+SHOW DATABASES;
+EOF
+

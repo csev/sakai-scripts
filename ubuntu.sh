@@ -7,7 +7,15 @@ if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 
 sudo apt-get update
 sudo apt-get -y install git
+
+# For 14.04 Install Java this way
+#sudo add-apt-repository ppa:webupd8team/java -y
+#sudo apt-get update
+#sudo apt-get install oracle-java8-installer
+
+# For 14.10 and later use this
 sudo apt-get -y install openjdk-8-jdk
+
 sudo apt-get -y install maven
 sudo apt-get -y install curl
 sudo apt-get -y install unzip

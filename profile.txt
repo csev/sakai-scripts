@@ -1,0 +1,16 @@
+
+# If any of the following files exist in your home directory, add these
+# commands to the end of the files.
+#
+#    .bash_profile .profile .bashrc
+#
+# If none of the files exist in your home firector, for the Mac put these
+# commands in a file named .profile and for Linux put these commands in 
+# .bashrc
+#
+
+JAVA_OPTS='-server -Xms512m -Xmx1024m  -XX:NewSize=192m -XX:MaxNewSize=384m -Djava.awt.headless=true -Dhttp.agent=Sakai -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false -Dsun.lang.ClassLoader.allowArraySyntax=true'
+export JAVA_OPTS
+
+MAVEN_OPTS='-Xms512m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=512m'
+export MAVEN_OPTS
