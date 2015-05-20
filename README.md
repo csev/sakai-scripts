@@ -7,8 +7,9 @@ This is a set of scripts to set up a developer instance of Sakai on
 your system or set up a nighly build.  Sakai can run on a 2GB RAM system
 but is a lot more comfortable with a 4GB or more app server.
 
-Make sure to add this to your .bashrc so your mavens 
-and Sakai can run (remove newlines):
+Make sure to add this to your .bashrc (Linux) or 
+.bashrc\_profile (Mac) so your mavens and Sakai can run 
+(remove newlines so the JAVA\_OPTS is all on one line):
 
     JAVA_OPTS='-server -Xms512m -Xmx1024m  
     -XX:NewSize=192m -XX:MaxNewSize=384m -Djava.awt.headless=true -Dhttp.agent=Sakai 
