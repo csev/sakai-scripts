@@ -32,8 +32,9 @@ your github account
 * Check out sakai-scripts into some folder.   I tend to make a folder
 named "dev" in my home directory:
 
-        mkdir /home/csev/dev  (if needed)
-        cd /home/csev/dev
+	cd
+        mkdir dev  (if needed)
+        cd dev
         git clone https://github.com/csev/sakai-scripts
 
 * Read the instructions in profile.txt to update your login files.
@@ -76,8 +77,9 @@ your github account
 * Check out sakai-scripts into some folder.   I tend to make a folder
 named "dev" in my home directory:
 
-        mkdir /home/csev/dev  (if needed)
-        cd /home/csev/dev
+	cd
+        mkdir dev  (if needed)
+        cd dev
         git clone https://github.com/csev/sakai-scripts
 
 * Set up git with the folowing commands
