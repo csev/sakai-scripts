@@ -41,11 +41,12 @@ named "dev" in my home directory:
 Once you update your login files, close your terminal window and 
 reopen a brand new window and type:
 
-        cd sakai-scripts
+        cd
+        cd dev/sakai-scripts
         echo $JAVA_OPTS
 
 If you see the settings, you have edited the correct file, if not try
-another of the files.  Keep repeating this process of editing the log in file,
+another of the files.  Keep repeating this process of editing the login file,
 opening a new terminal, and typing 'echo' until the above command shows
 the java settings.
 
@@ -92,7 +93,8 @@ named "dev" in my home directory:
 your login files.  Once you update your login files, close 
 your terminal window and reopen your window and type:
 
-        cd sakai-scripts
+        cd
+        cd dev/sakai-scripts
         echo $JAVA_OPTS
 
 If you see the settings, you have edited the correct file, if not try
