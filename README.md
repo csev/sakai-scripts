@@ -32,7 +32,7 @@ your github account
 * Check out sakai-scripts into some folder.   I tend to make a folder
 named "dev" in my home directory:
 
-	cd
+        cd
         mkdir dev  (if needed)
         cd dev
         git clone https://github.com/csev/sakai-scripts
@@ -41,7 +41,7 @@ named "dev" in my home directory:
 Once you update your login files, close your terminal window and 
 reopen a brand new window and type:
 
-	cd sakai-scripts
+        cd sakai-scripts
         echo $JAVA_OPTS
 
 If you see the settings, you have edited the correct file, if not try
@@ -78,7 +78,7 @@ your github account
 * Check out sakai-scripts into some folder.   I tend to make a folder
 named "dev" in my home directory:
 
-	cd
+        cd
         mkdir dev  (if needed)
         cd dev
         git clone https://github.com/csev/sakai-scripts
@@ -92,7 +92,7 @@ named "dev" in my home directory:
 your login files.  Once you update your login files, close 
 your terminal window and reopen your window and type:
 
-	cd sakai-scripts
+        cd sakai-scripts
         echo $JAVA_OPTS
 
 If you see the settings, you have edited the correct file, if not try
