@@ -127,7 +127,8 @@ full compiles will be about 2-3 minutes and partial compiles are 30 seconds or
 less.
 * Run `bash start.sh` to start the Tomcat
 * Run `bash tail.sh` to watch the logs (Press CTRL-C to stop the tail)
-* Navigate to http://localhost:8888/portal or http://localhost/portal depending
+* 
+* Navigate to http://localhost:8080/portal or http://localhost/portal depending
 on the port where your Tomcat server is located
 * Run bash `stop.sh` to shutdown Tomcat
 
