@@ -115,21 +115,21 @@ Common Steps
     * Change "sakaiproject" in the GIT REPO  varuable to be your github account
     * If you are not running MAMP, edit the MySQL root password
 
-* Run bash db.sh to create a database
-* Run bash na.sh to set up the Tomcat
-* Run bash co.sh to check things out 
-* Run bash qmv.sh to compile it all - the first time you do this it will take
+* Run `bash db.sh` to create a database
+* Run `bash na.sh` to set up the Tomcat
+* Run `bash co.sh` to check things out 
+* Run `bash qmv.sh` to compile it all - the first time you do this it will take
 a long time and use a lot of network bandwidth as it downloads a bunch of 
 library code in maven.   The first full compile might take 20+ minutes - later
 full compiles will be about 2-3 minutes and partial compiles are 30 seconds or
 less.
-* Run bash start.sh to start the Tomcat
-* Run bash tail.sh to watch the logs (Press CTRL-C to stop the tail)
+* Run `bash start.sh` to start the Tomcat
+* Run `bash tail.sh` to watch the logs (Press CTRL-C to stop the tail)
 * Navigate to http://localhost:8888/portal or http://localhost/portal depending
 on the port where your Tomcat server is located
-* Run bash stop.sh to shutdown Tomcat
+* Run bash `stop.sh` to shutdown Tomcat
 
-* Copy smv.sh into a folder in your PATH and set execute permission
+* Copy `smv.sh` into a folder in your PATH and set execute permission
 so you can recompile any sub-folder in Sakai that has a pom.xml 
 by typing "smv.sh"
 
