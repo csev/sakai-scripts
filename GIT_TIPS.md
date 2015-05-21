@@ -5,7 +5,7 @@ https://confluence.sakaiproject.org/display/SAKDEV/Git+Setup
 
 Making a branch 
 
-    git checkout SAK-12345
+    git checkout -b SAK-12345
 
 Switching to a branch
 
