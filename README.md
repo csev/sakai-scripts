@@ -64,8 +64,10 @@ the java settings.
 
 * Install MAMP if you have not already done so
 
-Getting Started on ubuntu
-=========================
+Continue working with the Common steps below.
+
+Getting Started on ubuntu Linux
+===============================
 
 * Create an account on github
 
