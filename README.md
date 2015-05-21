@@ -12,8 +12,8 @@ Getting Started on Mac (as needed)
 
 * Make sure you have Java-8 Installed
 
-    java -version
-    javac -version
+        java -version
+        javac -version
 
 * Create an account on github
 
@@ -22,25 +22,25 @@ your github account
 
 * Install git using the command
 
-    xcode-select --install
+        xcode-select --install
 
 * Set up git with the folowing commands
 
-    git config --global user.name "John Doe"
-    git config --global user.email johndoe@example.com
+        git config --global user.name "John Doe"
+        git config --global user.email johndoe@example.com
 
 * Check out sakai-scripts into some folder.   I tend to make a folder
 named "dev" in my home directory:
 
-    mkdir /home/csev/dev  (if needed)
-    cd /home/csev/dev
-    git clone https://github.com/csev/sakai-scripts
+        mkdir /home/csev/dev  (if needed)
+        cd /home/csev/dev
+        git clone https://github.com/csev/sakai-scripts
 
 * Read the instructions in profile.txt to update your login files.
 Once you update your login files, close your terminal window and 
 reopen a brand new window and type:
 
-    echo $JAVA_OPTS
+        echo $JAVA_OPTS
 
 If you see the settings, you have edited the correct file, if not try
 another of the files.  Keep repeating this process of editing the log in file,
@@ -49,15 +49,15 @@ the java settings.
 
 * Download the platform independent MYSQL JDBC Connector from:
 
-    http://dev.mysql.com/downloads/connector/j/
+        http://dev.mysql.com/downloads/connector/j/
 
-You will need to create or use your Oracle account.  Download the
-ZIP version of the file and unzip the file and move the unzipped 
-folder into:
+    You will need to create or use your Oracle account.  Download the
+    ZIP version of the file and unzip the file and move the unzipped 
+    folder into:
 
-    /home/csev/dev/mysql-connector-java-5.1.35
+        /home/csev/dev/mysql-connector-java-5.1.35
 
-(Or a similar name)
+    (Or a similar name)
 
 * Install MAMP if you have not already done so
 
@@ -71,33 +71,35 @@ your github account
 
 * Install git using the command
 
-    sudo apt-get -y install git
+        sudo apt-get -y install git
 
 * Check out sakai-scripts into some folder.   I tend to make a folder
 named "dev" in my home directory:
 
-    mkdir /home/csev/dev  (if needed)
-    cd /home/csev/dev
-    git clone https://github.com/csev/sakai-scripts
+        mkdir /home/csev/dev  (if needed)
+        cd /home/csev/dev
+        git clone https://github.com/csev/sakai-scripts
 
 * Set up git with the folowing commands
 
-    git config --global user.name "John Doe"
-    git config --global user.email johndoe@example.com
+        git config --global user.name "John Doe"
+        git config --global user.email johndoe@example.com
 
 * Read the instructions in sakai-scripts/profile.txt to update 
 your login files.  Once you update your login files, close 
 your terminal window and reopen your window and type:
 
-    echo $JAVA_OPTS
+        echo $JAVA_OPTS
 
 If you see the settings, you have edited the correct file, if not try
 another of the files.
 
 * Set up the rest of the pre-requisites using the following command:
 
-    cd /home/csev/dev/sakai-scripts
-    sh ubuntu.sh
+        cd /home/csev/dev/sakai-scripts
+        sh ubuntu.sh
+    
+    You may need to edit this file if you are running ubuntu before 14.10
 
 Common Steps
 ============
@@ -174,30 +176,13 @@ want to peruse the source of those projects.
 
 db.sh
 -----
-Drop the database if it is there and re-greate an empty database.
+Drop the database if it is there and re-create an empty database.
 
 na.sh
 -----
 
 Download and create a fresh instance of Tomcat, patch configurations, 
 and set up a sakai.properties
-
-Since we cannot include the MySQL connector, download a copy of the 
-MySQL JDBC connector from:
-
-    http://dev.mysql.com/downloads/connector/j/
-
-Once you download and unzip the connector copy the jar into the
-jars folder - it will be copied automatically by na.sh
-
-    mysql-connector-java-5.1.6-bin.jar
-
-Some clever people get their copy of the JDBC connector jar and put it up
-on an obscure URL so they can quickly curl it to a new server and put
-it in the jars folder.
-
-If you are setting up Oracle you can put the ojdbc jar in the jar folder
-so that it is automatically copied.
 
 qmv.sh
 ------
