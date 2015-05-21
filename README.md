@@ -56,7 +56,7 @@ the java settings.
 
     You will need to create or use your Oracle account.  Download the
     ZIP version of the file and unzip the file and move the unzipped 
-    folder into:
+    folder into (change csev to your user name):
 
         /home/csev/dev/mysql-connector-java-5.1.35
 
@@ -127,10 +127,10 @@ full compiles will be about 2-3 minutes and partial compiles are 30 seconds or
 less.
 * Run `bash start.sh` to start the Tomcat
 * Run `bash tail.sh` to watch the logs (Press CTRL-C to stop the tail)
-* 
-* Navigate to http://localhost:8080/portal or http://localhost/portal depending
-on the port where your Tomcat server is located
-* Run bash `stop.sh` to shutdown Tomcat
+
+* Navigate to http://localhost:8080/portal
+
+* To shut Sakai down, in the `tail.sh` terminal window, press `CTRL-C` and run bash `stop.sh` to shutdown Tomcat
 
 * Copy `smv.sh` into a folder in your PATH and set execute permission
 so you can recompile any sub-folder in Sakai that has a pom.xml 
