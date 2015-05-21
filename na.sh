@@ -8,9 +8,27 @@ fi
 
 MYPATH=`pwd`
 
-if [ -f "/usr/share/java/mysql.jar" ]
+# Find a JDBC Connector jar or die trying...
+JAR=""
+JJ=`ls jars/*jar | head -1`
+MJ=`ls ../*/*mysql-connector-java*jar | head -1`
+OJ=`ls ../*/*ojdbc*jar | head -1`
+if [ -f "$JJ" ]
 then
-   echo "Found mysql jar"
+    echo "Found local jars"
+    JAR='jars/*jar'
+elif [ -f "/usr/share/java/mysql.jar" ]
+then
+   echo "Found linux mysql jar from apt-get install"
+   JAR="/usr/share/java/mysql.jar"
+elif [ -f "$MJ" ]
+then
+   echo "Found mysql jar $MJ"
+   JAR=$MJ
+elif [ -f "$OJ" ]
+then
+   echo "Found oracle jar $OJ"
+   JAR=$OJ
 else
    echo "Missing /usr/share/java/mysql.jar"
    echo "Please run"
@@ -20,6 +38,7 @@ else
 fi
 
 echo Setting up fresh TOMCAT Version:$TOMCAT 
+echo Using JAR: $JAR
 
 source stop.sh
 
@@ -58,7 +77,7 @@ mkdir -p apache-tomcat-$TOMCAT/shared/classes
 mkdir -p apache-tomcat-$TOMCAT/server/lib
 mkdir -p apache-tomcat-$TOMCAT/common/lib
 
-cp /usr/share/java/mysql.jar apache-tomcat-$TOMCAT/common/lib
+cp $JAR apache-tomcat-$TOMCAT/common/lib
 
 mkdir -p apache-tomcat-$TOMCAT/sakai
 
@@ -70,6 +89,7 @@ then
     PROPFILE="sakai.properties"
 fi
 
+echo "KJSKKSAJ" $MYSQL_SOURCE
 echo $PROPFILE
 sed < $PROPFILE "s'MYSQL_USER'$MYSQL_USER'" | sed "s'MYSQL_PASSWORD'$MYSQL_PASSWORD'" | sed "s'MYSQL_SOURCE'$MYSQL_SOURCE'"> apache-tomcat-$TOMCAT/sakai/sakai.properties
 

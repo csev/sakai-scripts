@@ -10,10 +10,15 @@ but is a lot more comfortable with a 4GB or more app server.
 Getting Started on Mac (as needed)
 ==================================
 
+* Make sure you have Java-8 Installed
+
+    java -version
+    javac -version
+
 * Create an account on github
 
 * Go to https://github.com/sakaiproject/sakai and "fork" a copy into 
-your github repo
+your github account
 
 * Install git using the command
 
@@ -62,7 +67,7 @@ Getting Started on ubuntu
 * Create an account on github
 
 * Go to https://github.com/sakaiproject/sakai and "fork" a copy into 
-your github repo
+your github account
 
 * Install git using the command
 
@@ -99,8 +104,8 @@ Common Steps
 
 * Copy config-dist.sh to config.sh
 * Edit config.sh 
-    * Change "sakaiproject" in GIT\_REPO to be your github account
-    * If you are not running MAMP, edit the MySql root password
+    * Change "sakaiproject" in the GIT REPO  varuable to be your github account
+    * If you are not running MAMP, edit the MySQL root password
 
 * Run bash db.sh to create a database
 * Run bash na.sh to set up the Tomcat
@@ -108,10 +113,13 @@ Common Steps
 * Run bash qmv.sh to compile it all
 * Run bash start.sh to start the Tomcat
 * Run bash tail.sh to watch the logs (Press CTRL-C to stop the tail)
+* Navigate to http://localhost:8888/portal or http://localhost/portal depending
+on the port where your Tomcat server is located
 * Run bash stop.sh to shutdown Tomcat
 
-* Copy smv.sh into a folder in your PATH so you can recompile any
-sub-folder in Sakai that has a pom.xml by typing "smv.sh"
+* Copy smv.sh into a folder in your PATH and set execute permission
+so you can recompile any sub-folder in Sakai that has a pom.xml 
+by typing "smv.sh"
 
 Eventually you can just use the tomcat startup.sh and shutdown.sh
 and run your own tail commands if that is what you like.
