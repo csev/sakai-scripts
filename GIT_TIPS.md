@@ -3,6 +3,10 @@ Sakai GIT Documentation
 
 https://confluence.sakaiproject.org/display/SAKDEV/Git+Setup
 
+Note: Local changes (i.e. what you see with "git diff") are just hanging
+around - they dont care what branch you are in - they are only local 
+until you do a commit to a particular branch.
+
 Making a branch 
 
     git checkout -b SAK-12345
