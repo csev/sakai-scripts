@@ -31,4 +31,4 @@ fi
 cd $startwd
 echo mvn -Dmaven.tomcat.home=$tomcatdir clean install sakai:deploy
 
-# mvn -Dmaven.tomcat.home=$tomcatdir clean install sakai:deploy
+mvn -Dmaven.tomcat.home=$tomcatdir clean install sakai:deploy
