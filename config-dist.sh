@@ -28,7 +28,7 @@ GIT_REPO=https://github.com/sakaiproject/sakai.git
 # is root so you can leave it alone if you are using MAMP
 MYSQL_ROOT_PASSWORD=root
 
-TOMCAT=7.0.21
+TOMCAT=8.0.23
 
 # Leave LOG_DIRECTORY value empty to leave the logs inside tomcat
 # LOG_DIRECTORY=/var/www/html/sakai/logs/tomcat

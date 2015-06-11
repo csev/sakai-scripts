@@ -1,7 +1,7 @@
 *.swp
 config.sh
 sakai.properties
-apache-tomcat-7.0.21
+apache-tomcat-*
 jars/*.jar
 keepzips
 trunk

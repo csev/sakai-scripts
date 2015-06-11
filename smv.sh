@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # This file should be copied into a folder in the PATH
-# so it can be used to compile form any point in the Sakai
+# so it can be used to compile from any point in the Sakai
 # hierarchy that has a pom.xml
 
 if [ "$MAVEN_OPTS" = "" ] ; then
@@ -13,18 +13,16 @@ if [ "$JAVA_OPTS" = "" ] ; then
   exit
 fi
 
-tomcatver=apache-tomcat-7.0.21
-
 startwd=`pwd`
 for i in `seq 1 15`; do
    newwd=`pwd`
-   if [ -d $tomcatver ] ; then
+   if [ -d keepzips ] ; then
      break
    fi
    cd ..
 done
-if [ -d $tomcatver ] ; then
-   tomcatdir=$newwd/$tomcatver
+if [ -d keepzips ] ; then
+   tomcatdir=$newwd/`ls -d apache-tomcat* | tail -1`
 else
    echo "Could not find " $tomcatver " in path"
    echo $startwd
@@ -32,4 +30,5 @@ else
 fi
 cd $startwd
 echo mvn -Dmaven.tomcat.home=$tomcatdir clean install sakai:deploy
-mvn -Dmaven.tomcat.home=$tomcatdir clean install sakai:deploy
+
+# mvn -Dmaven.tomcat.home=$tomcatdir clean install sakai:deploy

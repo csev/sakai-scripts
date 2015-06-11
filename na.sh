@@ -52,28 +52,30 @@ else
   mkdir keepzips
 fi
 
-if [ -f keepzips/tomcat-$TOMCAT.zip ] 
+if [ -f keepzips/apache-tomcat-$TOMCAT.zip ] 
 then
-  echo keepzips/tomcat-$TOMCAT.zip exists...
+  echo keepzips/apache-tomcat-$TOMCAT.zip exists...
 else 
   echo Downloading keepzips/tomcat-$TOMCAT.zip ...
   cd keepzips
-  curl -O http://source.sakaiproject.org/maven2/tomcat/tomcat/tomcat/$TOMCAT/tomcat-$TOMCAT.zip
+  curl -O http://psg.mtu.edu/pub/apache/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
   cd $MYPATH
 fi
 
 rm -rf apache-tomcat-$TOMCAT/
 
 echo Extracting Tomcat...
-unzip -q keepzips/tomcat-$TOMCAT.zip
+unzip -q keepzips/apache-tomcat-$TOMCAT.zip
 
 chmod +x apache-tomcat-$TOMCAT/bin/*.sh
 
-patch -p0 < patches/tomcat-7.0.21.patch
+patch -p0 < patches/tomcat-$TOMCAT.patch
+cp patches/apache-$TOMCAT-context.xml apache-tomcat-$TOMCAT/conf/context.xml
 
 mkdir -p apache-tomcat-$TOMCAT/common/classes
 mkdir -p apache-tomcat-$TOMCAT/server/classes
 mkdir -p apache-tomcat-$TOMCAT/shared/classes
+mkdir -p apache-tomcat-$TOMCAT/shared/lib
 mkdir -p apache-tomcat-$TOMCAT/server/lib
 mkdir -p apache-tomcat-$TOMCAT/common/lib
 
@@ -89,19 +91,21 @@ then
     PROPFILE="sakai.properties"
 fi
 
-echo "KJSKKSAJ" $MYSQL_SOURCE
 echo $PROPFILE
 sed < $PROPFILE "s'MYSQL_USER'$MYSQL_USER'" | sed "s'MYSQL_PASSWORD'$MYSQL_PASSWORD'" | sed "s'MYSQL_SOURCE'$MYSQL_SOURCE'"> apache-tomcat-$TOMCAT/sakai/sakai.properties
 
 echo "Patching server.xml"
 
+cp apache-tomcat-$TOMCAT/conf/server.xml patches/server.xml
 sed < patches/server.xml "s/8080/$PORT/" | sed "s/8005/$SHUTDOWN_PORT/" > apache-tomcat-$TOMCAT/conf/server.xml
 
 if [ "$LOG_DIRECTORY" != "" ]; then 
     echo "Logging to " $LOG_DIRECTORY
+    cp apache-tomcat-$TOMCAT/conf/logging.properties patches/logging.properties
     sed < patches/logging.properties "s'\${catalina.base}/logs'$LOG_DIRECTORY'g" > apache-tomcat-$TOMCAT/conf/logging.properties    
     echo "Setting up setenv.sh"
 cat > apache-tomcat-$TOMCAT/bin/setenv.sh << EOF
+apache-tomcat-$TOMCAT
 CATALINA_OUT=$LOG_DIRECTORY/catalina.out
 EOF
 
