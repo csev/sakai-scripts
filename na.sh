@@ -91,6 +91,7 @@ then
     PROPFILE="sakai.properties"
 fi
 
+echo $MYSQL_SOURCE
 echo $PROPFILE
 sed < $PROPFILE "s'MYSQL_USER'$MYSQL_USER'" | sed "s'MYSQL_PASSWORD'$MYSQL_PASSWORD'" | sed "s'MYSQL_SOURCE'$MYSQL_SOURCE'"> apache-tomcat-$TOMCAT/sakai/sakai.properties
 
