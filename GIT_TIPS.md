@@ -7,6 +7,12 @@ Note: Local changes (i.e. what you see with "git diff") are just hanging
 around - they dont care what branch you are in - they are only local 
 until you do a commit to a particular branch.
 
+You can limit the scope of several commands to "the current folder and below"
+as follows:
+
+    git diff .
+    git commit .
+
 Making a branch 
 
     git checkout -b SAK-12345
