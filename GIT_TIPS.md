@@ -60,3 +60,8 @@ Squashing multiple commits in a branch into one:
 I think that if you dont include the "-i master", it
 will want to catch master up.
 
+Or if you want to combine the top two
+
+    git reset —soft HEAD~2
+
+(From Zach - To be tested)
