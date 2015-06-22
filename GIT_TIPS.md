@@ -37,7 +37,19 @@ Stashing
 
 Working on a JIRA in your fork - One Commit becomes a Pull Request
 
+    git checkout master
     git checkout -b SAK-29331
+    git commit ...
+    git push origin SAK-29331
+
+Squashing several un-pushed commits before pushing them as one commit
+
+    git checkout master
+    git checkout -b SAK-29331
+    git commit ...
+    git commit ...
+    git commit ...
+    git reset --soft HEAD~3
     git commit ...
     git push origin SAK-29331
 
@@ -60,8 +72,10 @@ Squashing multiple commits in a branch into one:
 I think that if you dont include the "-i master", it
 will want to catch master up.
 
-Or if you want to combine the top two
+To delete a borked branch:
 
-    git reset —soft HEAD~2
+    git checkout master
+    git branch -d SAK-29531
+    git branch -D SAK-29531
+    git push origin :SAK-29531
 
-(From Zach - To be tested)
