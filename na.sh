@@ -8,15 +8,16 @@ fi
 
 MYPATH=`pwd`
 
+
 # Find a JDBC Connector jar or die trying...
 JAR=""
 JJ=`ls jars/*jar | head -1`
 MJ=`ls ../*/*mysql-connector-java*jar | head -1`
 OJ=`ls ../*/*ojdbc*jar | head -1`
-if [ -f "$JJ" ]
+if [ -f "$OJ" ]
 then
-    echo "Found local jars"
-    JAR='jars/*jar'
+   echo "Found oracle jar $OJ"
+   JAR=$OJ
 elif [ -f "/usr/share/java/mysql.jar" ]
 then
    echo "Found linux mysql jar from apt-get install"
@@ -25,16 +26,26 @@ elif [ -f "$MJ" ]
 then
    echo "Found mysql jar $MJ"
    JAR=$MJ
-elif [ -f "$OJ" ]
+elif [ -f "$JJ" ]
 then
-   echo "Found oracle jar $OJ"
-   JAR=$OJ
+    echo "Found local jars"
+    JAR='jars/*jar'
 else
-   echo "Missing /usr/share/java/mysql.jar"
-   echo "Please run"
-   echo " "
-   echo "sudo apt-get install libmysql-java"
-   exit
+   echo "Downloading MySQL jar from maven"
+   cd jars
+   curl -O http://repo.maven.apache.org/maven2/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar
+   cd ..
+   JJ=`ls jars/*jar | head -1`
+   if [ -f "$JJ" ]
+   then
+      echo "Found local jars"
+      JAR='jars/*jar'
+   else
+      echo "Missing /usr/share/java/mysql.jar"
+      echo "Please manually download the mysql connector and put"
+      echo "it in the jard folder"
+      exit
+   fi
 fi
 
 echo Setting up fresh TOMCAT Version:$TOMCAT 
