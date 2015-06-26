@@ -12,8 +12,13 @@ Getting Started on Mac (as needed)
 
 * Make sure you have Java-8 Installed
 
-        java -version
-        javac -version
+    java -version
+    javac -version
+
+* Make sure you have Maven (mvn) installed. Here are the instructions
+for Mac:
+
+    http://stackoverflow.com/questions/8826881/maven-install-on-mac-os-x
 
 * Create an account on github
 
