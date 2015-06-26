@@ -21,7 +21,7 @@ if [ "$GIT_REPO" != "https://github.com/sakaiproject/sakai.git" ]; then
 else
     echo " "
     echo "You checked out the Sakai Repository - you may not be able to"
-    echo "Do a git push.  You probably should for the sakai repository"
+    echo "Do a git push.  You probably should fork the sakai repository"
     echo "and set up config.sh to point to your forked repository."
 fi
 

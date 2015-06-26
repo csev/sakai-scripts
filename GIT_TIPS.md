@@ -1,6 +1,4 @@
 
-Sakai GIT Documentation
-
 https://confluence.sakaiproject.org/display/SAKDEV/Git+Setup
 
 Note: Local changes (i.e. what you see with "git diff") are just hanging
@@ -16,6 +14,14 @@ as follows:
 Making a branch 
 
     git checkout -b SAK-12345
+
+Gitting a diff from already committed changes.  Do a 
+
+    git log
+
+Find the commit sha and then:
+
+    git diff 74fb...b752^ 74fb...b752
 
 Switching to a branch
 
