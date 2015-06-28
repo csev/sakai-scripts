@@ -8,44 +8,10 @@ fi
 
 MYPATH=`pwd`
 
-
-# Find a JDBC Connector jar or die trying...
-JAR=""
-JJ=`ls jars/*jar | head -1`
-MJ=`ls ../*/*mysql-connector-java*jar | head -1`
-OJ=`ls ../*/*ojdbc*jar | head -1`
-if [ -f "$OJ" ]
+if [ "$MYSQL" = "" ]
 then
-   echo "Found oracle jar $OJ"
-   JAR=$OJ
-elif [ -f "/usr/share/java/mysql.jar" ]
-then
-   echo "Found linux mysql jar from apt-get install"
-   JAR="/usr/share/java/mysql.jar"
-elif [ -f "$MJ" ]
-then
-   echo "Found mysql jar $MJ"
-   JAR=$MJ
-elif [ -f "$JJ" ]
-then
-    echo "Found local jars"
-    JAR='jars/*jar'
-else
-   echo "Downloading MySQL jar from maven"
-   cd jars
-   curl -O http://repo.maven.apache.org/maven2/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar
-   cd ..
-   JJ=`ls jars/*jar | head -1`
-   if [ -f "$JJ" ]
-   then
-      echo "Found local jars"
-      JAR='jars/*jar'
-   else
-      echo "Missing /usr/share/java/mysql.jar"
-      echo "Please manually download the mysql connector and put"
-      echo "it in the jard folder"
-      exit
-   fi
+MYSQL=5.1.35
+   echo "Assuming MySQL Version $MYSQL"
 fi
 
 echo Setting up fresh TOMCAT Version:$TOMCAT 
@@ -73,6 +39,18 @@ else
   cd $MYPATH
 fi
 
+# Get ourselves a MySQL connector jar
+if [ -f keepzips/mysql-connector-java-$MYSQL.jar ] 
+then
+  echo keepzips/mysql-connector-java-$MYSQL.jar exists...
+else 
+  echo Downloading keepzips/mysql-connector-java-$MYSQL.jar ...
+  cd keepzips
+  curl -O http://repo.maven.apache.org/maven2/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar
+  ls -l mysql*
+  cd $MYPATH
+fi
+
 rm -rf apache-tomcat-$TOMCAT/
 
 echo Extracting Tomcat...
@@ -90,7 +68,16 @@ mkdir -p apache-tomcat-$TOMCAT/shared/lib
 mkdir -p apache-tomcat-$TOMCAT/server/lib
 mkdir -p apache-tomcat-$TOMCAT/common/lib
 
-cp $JAR apache-tomcat-$TOMCAT/common/lib
+# Copy the mysql connector jar into common/lib
+cp keepzips/*.jar apache-tomcat-$TOMCAT/common/lib
+
+# Find an OJDBC Connector jar if we can
+OJ=`ls ../*/*ojdbc*jar 2>/dev/null | head -1`
+if [ -f "$OJ" ]
+then
+   echo "Found oracle jar $OJ"
+   cp $OJ apache-tomcat-$TOMCAT/common/lib
+fi
 
 mkdir -p apache-tomcat-$TOMCAT/sakai
 
