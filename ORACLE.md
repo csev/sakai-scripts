@@ -53,7 +53,7 @@ using [HenPlus](oracle/using-henplus.txt).
 Configuring your Sakai Instance
 -------------------------------
 
-The file `sakai-dist.properties` has the oracle magic commented out but
+The file `sakai-dist.properties` has the Oracle magic commented out but
 we also include it here for reference:
 
     # VirtualBox - Linux login oracle / oracle
@@ -78,21 +78,32 @@ before starting Sakai.
 While running Sakai, you can use Oracle SQL Developer or 
 [HenPlus](oracle/using-henplus.txt) to run queries on your Oracle database.
 
-Old stuff
----------
+Resetting the Oracle Tables and Sequences
+-----------------------------------------
 
-SELECT 'DROP TABLE "' || table_name || '" CASCADE CONSTRAINTS;' FROM user_tables;
+Sometimes you want to drop all the tables in your Oracle instance.  Don't
+try todrop the `orcl` database (a.k.a. SID) or you will end up starting
+from scratch unless you are an Oracle whiz.  So do this:
 
-select instance_name from v$instance;
-xe
+    cd oracle
+    ./henplus-0.9.7/bin/henplus
+    connect jdbc:oracle:thin:@localhost:1521:orcl
+    Username: SYSTEM
+    Password: oracle
+    SYSTEM@oracle:localhost> load DROP_TABLES.sql
+    SYSTEM@oracle:localhost> load DROP_SEQUENCES.sql
 
-Turn off firewall on windows
+Now you might not get them all if new tables were created since I made those
+lists.  Here are two queries to run to see what ones you might have missed:
 
-connect jdbc:oracle:thin:@192.168.0.134:1521:xe
+    SELECT 'DROP TABLE "' || table_name || '" CASCADE CONSTRAINTS;' FROM user_tables WHERE table_name not like '%$%';
+    SELECT 'DROP SEQUENCE "' || sequence_name || '";' FROM user_sequences WHERE sequence_name not like '%$%';
 
-select * from user_objects where object_type = 'TABLE'; 
+If all is well, you should get no rows from those queries, if you get rows,
+drop the tables and sequences - and send me a Pull Request to update my
+SQL scripts with the new tables.
 
-Data types notes
+Data Types Notes
 ----------------
 
 http://technology-ameyaaloni.blogspot.com/2010/06/mysql-to-hsql-migration-tips.html
@@ -101,5 +112,7 @@ http://borkweb.com/story/oracles-auto-incrementing-with-sequences
 
 http://ss64.com/ora/syntax-datatypes.html
 
+References 
+----------
 
 [1](http://www.jochenhebbrecht.be/site/2010-05-10/database/drop-all-tables-in-oracle-db-scheme)

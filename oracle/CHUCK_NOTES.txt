@@ -1,0 +1,6 @@
+
+SELECT 'DROP TABLE "' || table_name || '" CASCADE CONSTRAINTS;' FROM user_tables WHERE table_name not like '%$%';
+
+SELECT 'DROP SEQUENCE "' || sequence_name || '";' FROM user_sequences WHERE sequence_name not like '%$%';
+
+
