@@ -87,14 +87,15 @@ from scratch unless you are an Oracle whiz.  So do this:
 
     cd oracle
     ./henplus-0.9.7/bin/henplus
-    connect jdbc:oracle:thin:@localhost:1521:orcl
+    Hen*Plus> connect jdbc:oracle:thin:@localhost:1521:orcl
     Username: SYSTEM
     Password: oracle
     SYSTEM@oracle:localhost> load DROP_TABLES.sql
     SYSTEM@oracle:localhost> load DROP_SEQUENCES.sql
 
-Now you might not get them all if new tables were created since I made those
-lists.  Here are two queries to run to see what ones you might have missed:
+Now you might not get them all if new tables were created since those
+lists were created.  Here are two queries to run to see what ones
+you might have missed:
 
     SELECT 'DROP TABLE "' || table_name || '" CASCADE CONSTRAINTS;' FROM user_tables WHERE table_name not like '%$%';
     SELECT 'DROP SEQUENCE "' || sequence_name || '";' FROM user_sequences WHERE sequence_name not like '%$%';
