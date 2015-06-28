@@ -1,0 +1,35 @@
+Ish n terminal 
+
+# To clean a fresh start in SQL developer
+bash reset_sqldev
+
+Start SQL Developer - There should be no connections.
+
+# Import a file
+Open the .sql export file from the little open folder icon
+You will see the SQL in the Worksheet - press the green
+triangle to run the sql and it will bring up a new dialog box
+to create a connection.
+
+Then you will press "+" and make a new connection
+
+Name: orcl
+Username: SYSTEM
+Password: oracle
+Tick the "Save Password"
+Leace the Hostname and port as localhost 1521
+Change the SID to orcl
+Leave the tick boxes alone.
+
+Press "Save" and then "Connect".
+
+If you want to Import
+
+Then select that connection (likely is already selected) 
+and do the import.
+
+Take a look at the tables - you should see them just peachy.
+
+Verify the connection in HenPlus following the 
+directions in that readme.
+

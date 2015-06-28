@@ -1,0 +1,45 @@
+$ ./henplus-0.9.7/bin/henplus
+no readline found (no JavaReadline in java.library.path). Using simple stdin.
+using GNU readline (Brian Fox, Chet Ramey), Java wrapper by Bernhard Bablok
+henplus config at /Users/csev/.henplus
+---------------------------------------------------------------------------
+ HenPlus II 0.9.7 Copyright(C) 1997..2006 Henner Zeller <H.Zeller@acm.org>
+ HenPlus is provided AS IS and comes with ABSOLUTELY NO WARRANTY
+ This is free software, and you are welcome to redistribute it under the
+ conditions of the GNU Public License <http://www.gnu.org/licenses/gpl.txt>
+---------------------------------------------------------------------------
+Hen*Plus> list-drivers
+loaded drivers are marked with '*' (otherwise not found in CLASSPATH)
+------------+---------------------------------+---------+---------------------------------------+
+    for     |          driver class           | Version |              sample url               |
+------------+---------------------------------+---------+---------------------------------------+
+   Adabas   | de.sag.jdbc.adabasd.ADriver     | [NULL]  | jdbc:adabasd://localhost:7200/work    |
+   DB2      | COM.ibm.db2.jdbc.net.DB2Driver  | [NULL]  | jdbc:db2://localhost:6789/foobar      |
+   MySQL    | org.gjt.mm.mysql.Driver         | [NULL]  | jdbc:mysql://localhost/foobar         |
+ * Oracle   | oracle.jdbc.driver.OracleDriver | 10.2    | jdbc:oracle:thin:@localhost:1521:ORCL |
+   Postgres | org.postgresql.Driver           | [NULL]  | jdbc:postgresql://localhost/foobar    |
+   SAP-DB   | com.sap.dbtech.jdbc.DriverSapDB | [NULL]  | jdbc:sapdb://localhost/foobar         |
+------------+---------------------------------+---------+---------------------------------------+
+nection
+Hen*Plus> connect jdbc:oracle:thin:@localhost:1521:orcl
+HenPlus II connecting 
+ url 'jdbc:oracle:thin:@localhost:1521:orcl'
+ driver version 10.2
+invalid arguments in call
+============ authorization required ===
+Username: SYSTEM
+Password:                 
+ Oracle - Oracle Database 11g Release 11.1.0.0.0 - Production
+ read committed *
+ serializable 
+SYSTEM@oracle:localhost> select * from SAKAI_USER_ID_MAP;
+--------------------------------------+------------+
+               USER_ID                |    EID     |
+--------------------------------------+------------+
+ admin                                | admin      |
+ f6b5df44-d8f3-4529-9107-57c756dcdcc5 | csev       |
+ postmaster                           | postmaster |
+--------------------------------------+------------+
+3 rows in result (first row: 13 msec; total: 13 msec)
+SYSTEM@oracle:localhost> 
+
