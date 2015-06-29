@@ -115,6 +115,11 @@ another of the files.
 
     You may need to edit this file if you are running ubuntu before 14.10
 
+Oracle
+======
+
+Developing with Oracle as your database its own [special setup](ORACLE.md).
+
 Common Steps
 ============
 
@@ -207,10 +212,10 @@ of the Tomcat logs in config.sh allows you check these scripts out
 into several directories and make different nightly builds.  If you get
 really tricky, you can override sakai-dist.properties by copying it to
 sakai.properties (which git will ignore) and change lots of things like
-switching from MySql to Oracle.  Also you could put the ojdbc jar file
-in the jars folder so the db.sh copies that into common/lib each time
-you make a new Apache.  Note that db.sh does not understand oracle so
-your might want to change MYSQL\_COMMAND to be "cat" so it does not try
+switching from MySql to Oracle.  
+
+Note that db.sh does not understand oracle so if you are running oracle,
+you might want to change MYSQL\_COMMAND to be "cat" so it does not try
 to run mysql to create an Oracle database.
 
 db.sh
@@ -270,8 +275,8 @@ abort your tail command with a CTRL-C and then run stop.sh
 Usually to keep things clean, I remove all the files in the Tomcat logs
 folder before I restart Sakai.
 
-Developer Compiles
-==================
+Developer Re-Compiles
+=====================
 
 smv.sh
 ------
