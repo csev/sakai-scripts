@@ -3,14 +3,15 @@ Sakai-Scripts
 
 Some scripts that I use to make my life as a Sakai developer easier.
 
-This is a set of scripts to set up a developer instance of Sakai on 
+This is a set of scripts to set up a developer instance of Sakai on
 your system or set up a nighly build.  Sakai can run on a 2GB RAM system
 but is a lot more comfortable with a 4GB or more app server.
 
 Getting Started on Mac (as needed)
 ==================================
 
-* Make sure you have Java-8 Installed
+* Make sure you have Java-8 Installed - don't get  rid of Java 1.7 if you
+want to work on Sakai 10.
 
     java -version
     javac -version
@@ -22,7 +23,7 @@ for Mac:
 
 * Create an account on github
 
-* Go to https://github.com/sakaiproject/sakai and "fork" a copy into 
+* Go to https://github.com/sakaiproject/sakai and "fork" a copy into
 your github account
 
 * Install git using the command
@@ -43,7 +44,7 @@ named "dev" in my home directory:
         git clone https://github.com/csev/sakai-scripts
 
 * Read the instructions in profile.txt to update your login files.
-Once you update your login files, close your terminal window and 
+Once you update your login files, close your terminal window and
 reopen a brand new window and type:
 
         cd
@@ -60,7 +61,7 @@ the java settings.
         http://dev.mysql.com/downloads/connector/j/
 
     You will need to create or use your Oracle account.  Download the
-    ZIP version of the file and unzip the file and move the unzipped 
+    ZIP version of the file and unzip the file and move the unzipped
     folder into (change csev to your user name):
 
         /home/csev/dev/mysql-connector-java-5.1.35
@@ -76,7 +77,7 @@ Getting Started on ubuntu Linux
 
 * Create an account on github
 
-* Go to https://github.com/sakaiproject/sakai and "fork" a copy into 
+* Go to https://github.com/sakaiproject/sakai and "fork" a copy into
 your github account
 
 * Install git using the command
@@ -96,8 +97,8 @@ named "dev" in my home directory:
         git config --global user.name "John Doe"
         git config --global user.email johndoe@example.com
 
-* Read the instructions in sakai-scripts/profile.txt to update 
-your login files.  Once you update your login files, close 
+* Read the instructions in sakai-scripts/profile.txt to update
+your login files.  Once you update your login files, close
 your terminal window and reopen your window and type:
 
         cd
@@ -111,26 +112,30 @@ another of the files.
 
         cd /home/csev/dev/sakai-scripts
         sh ubuntu.sh
-    
+
     You may need to edit this file if you are running ubuntu before 14.10
 
 Common Steps
 ============
 
 * Copy config-dist.sh to config.sh
-* Edit config.sh 
+* Edit config.sh
     * Change "sakaiproject" in the GIT REPO  varuable to be your github account
     * If you are not running MAMP, edit the MySQL root password
-
 * Run `bash db.sh` to create a database
+
 * Run `bash na.sh` to set up the Tomcat
-* Run `bash co.sh` to check things out 
+
+* Run `bash co.sh` to check things out
+
 * Run `bash qmv.sh` to compile it all - the first time you do this it will take
-a long time and use a lot of network bandwidth as it downloads a bunch of 
+a long time and use a lot of network bandwidth as it downloads a bunch of
 library code in maven.   The first full compile might take 20+ minutes - later
 full compiles will be about 2-3 minutes and partial compiles are 30 seconds or
 less.
+
 * Run `bash start.sh` to start the Tomcat
+
 * Run `bash tail.sh` to watch the logs (Press CTRL-C to stop the tail)
 
 * Navigate to http://localhost:8080/portal
@@ -138,11 +143,39 @@ less.
 * To shut Sakai down, in the `tail.sh` terminal window, press `CTRL-C` and run bash `stop.sh` to shutdown Tomcat
 
 * Copy `smv.sh` into a folder in your PATH and set execute permission
-so you can recompile any sub-folder in Sakai that has a pom.xml 
+so you can recompile any sub-folder in Sakai that has a pom.xml
 by typing "smv.sh"
 
 Eventually you can just use the tomcat startup.sh and shutdown.sh
 and run your own tail commands if that is what you like.
+
+Switching between Sakai 10 and Sakai 11
+=======================================
+
+Sakai 10 needs Java 1.7 and Sakai 11 needs Java 1.8.  This is what I
+have in my `.bash_profile` on my Mac to switch back and forth
+(line breaks added for readability):
+
+    # Sakai 10.x
+    JAVA_OPTS='-server -Xms512m -Xmx1024m -XX:PermSize=128m
+        -XX:MaxPermSize=512m -XX:NewSize=192m -XX:MaxNewSize=384m
+         -Djava.awt.headless=true -Dhttp.agent=Sakai
+         -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false
+         -Dsun.lang.ClassLoader.allowArraySyntax=true'
+    export JAVA_OPTS
+    MAVEN_OPTS='-Xms512m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=512m'
+    export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+
+    #Sakai 11.x
+    export JAVA_OPTS='-server -Xms512m -Xmx1024m -XX:NewSize=192m
+        -XX:MaxNewSize=384m -Djava.awt.headless=true -Dhttp.agent=Sakai
+        -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false
+        -Dsun.lang.ClassLoader.allowArraySyntax=true'
+    export MAVEN_OPTS='-Xms256m -Xmx512m'
+    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+I just flip the order of these two command sets and start a new shell
+to switch back and forth.
 
 Description of the Scripts
 ==========================
@@ -153,8 +186,8 @@ ubuntu.sh
 ---------
 
 This runs a bunch of apt-get commands to load the pre-requisites for Sakai
-for Ubuntu.  If you are running something other than Ubuntu, you can look 
-at this and use whatever package manager that is on the system to 
+for Ubuntu.  If you are running something other than Ubuntu, you can look
+at this and use whatever package manager that is on the system to
 install the necessary pre-requisites.
 
 config-dist.sh
@@ -163,26 +196,26 @@ config-dist.sh
 This is a configuration script that sets a few parameters.  If you want/
 need to tweak the parameters simply copy this to config.sh so git does
 not try to check it in.  If there is a config.sh, it will be used instead
-of config-dist.sh.   
+of config-dist.sh.
 
 Generally you need to change the git repo to be checked out and the
 root mysql password for non-MAMP MySQL connections.
 
 But there is a lot of flexibility here if you are setting up nightly build
-servers.   Changing things like the HTTP port, shutdown port, and location 
-of the Tomcat logs in config.sh allows you check these scripts out 
+servers.   Changing things like the HTTP port, shutdown port, and location
+of the Tomcat logs in config.sh allows you check these scripts out
 into several directories and make different nightly builds.  If you get
-really tricky, you can override sakai-dist.properties by copying it to 
+really tricky, you can override sakai-dist.properties by copying it to
 sakai.properties (which git will ignore) and change lots of things like
 switching from MySql to Oracle.  Also you could put the ojdbc jar file
-in the jars folder so the db.sh copies that into common/lib each time 
-you make a new Apache.  Note that db.sh does not understand oracle so 
+in the jars folder so the db.sh copies that into common/lib each time
+you make a new Apache.  Note that db.sh does not understand oracle so
 your might want to change MYSQL\_COMMAND to be "cat" so it does not try
 to run mysql to create an Oracle database.
 
 db.sh
 -----
-This sets up a MySql database with an account and password based on 
+This sets up a MySql database with an account and password based on
 the configuration
 
 co.sh
@@ -199,7 +232,7 @@ Drop the database if it is there and re-create an empty database.
 na.sh
 -----
 
-Download and create a fresh instance of Tomcat, patch configurations, 
+Download and create a fresh instance of Tomcat, patch configurations,
 and set up a sakai.properties
 
 qmv.sh
@@ -207,13 +240,13 @@ qmv.sh
 
 Compile all of the Sakai source bypassing unit tests.   This saves a lot
 of time in the initial compile.   The mv.sh will compile with unit test.
-Once things work and you need to go out for an errand, you can run a mv.sh 
+Once things work and you need to go out for an errand, you can run a mv.sh
 to compile with all unit tests.
 
 start.sh
 --------
-Start tomcat.  Actually this script calls stop.sh at the begining to 
-shut down any running tomcat on the configured port so it can aso be 
+Start tomcat.  Actually this script calls stop.sh at the begining to
+shut down any running tomcat on the configured port so it can aso be
 used as a "restart" to bounce Tomcat.
 
 stop.sh
@@ -243,14 +276,14 @@ Developer Compiles
 smv.sh
 ------
 
-This is for developers working on one or more of the elements of 
+This is for developers working on one or more of the elements of
 Sakai.  This can be run deep in the code tree at any maven node
 that can compile (i.e. has a pom.xml).   You can actually put this in your
-~/bin path and then just type ./smv.sh to do a re-compile into 
-your Tomcat.  
+~/bin path and then just type ./smv.sh to do a re-compile into
+your Tomcat.
 
 A surprising amount of Sakai development can be done without
-rebooting your Sakai.  If you are working on tool code, generally you can 
+rebooting your Sakai.  If you are working on tool code, generally you can
 recompile without a reboot.  Changes to APIs in shared or components/services
 generally require a Tomcat bounce.
 
@@ -259,11 +292,11 @@ Setting up Nightly Builds
 =========================
 
 There is a lot of flexibility inherent in creating config.sh and/or
-sakai.properties that lets you set up a bunch of nightlies running 
-on the same server and then having crontab entries to run things 
-at whatever period(s) you desire.  You can set up different databases, 
+sakai.properties that lets you set up a bunch of nightlies running
+on the same server and then having crontab entries to run things
+at whatever period(s) you desire.  You can set up different databases,
 different TCP ports, log to some Apache web space, even use Oracle
-instead of MySql with some effort.  The script nightly.sh is pretty 
+instead of MySql with some effort.  The script nightly.sh is pretty
 much ready to handle the job once the configuration is in place.
 
 You can test all the scripts separately as you are configuring things
@@ -273,11 +306,11 @@ nightly.sh
 ----------
 
 This script just calls the other scripts in the right order.  The script
-does a checkout, shuts down any tomcat (killing if nexeccary), creates a new 
+does a checkout, shuts down any tomcat (killing if nexeccary), creates a new
 empty database, creates a fresh tomcat, checks out the code you want to compile,
 compiles the code and starts Tomcat.   Since the script stops and starts the
 right Tomcat automatically, you can run this script over and over interactively
-in a cron job. 
+in a cron job.
 
 
 
