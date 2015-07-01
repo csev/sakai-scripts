@@ -71,8 +71,8 @@ mkdir -p apache-tomcat-$TOMCAT/common/lib
 # Copy the mysql connector jar into common/lib
 cp keepzips/*.jar apache-tomcat-$TOMCAT/common/lib
 
-# Find an OJDBC Connector jar if we can
-OJ=`ls ../*/*ojdbc*jar 2>/dev/null | head -1`
+# Find an OJDBC Connector jar in oracle folder if we can
+OJ=`ls oracle/*ojdbc*jar 2>/dev/null | head -1`
 if [ -f "$OJ" ]
 then
    echo "Found oracle jar $OJ"
