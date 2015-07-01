@@ -1,4 +1,5 @@
-$ ./henplus-0.9.7/bin/henplus
+
+si-csev15-mbp:oracle csev$ ./henplus-0.9.7/bin/henplus
 no readline found (no JavaReadline in java.library.path). Using simple stdin.
 using GNU readline (Brian Fox, Chet Ramey), Java wrapper by Bernhard Bablok
 henplus config at /Users/csev/.henplus
@@ -16,30 +17,30 @@ loaded drivers are marked with '*' (otherwise not found in CLASSPATH)
    Adabas   | de.sag.jdbc.adabasd.ADriver     | [NULL]  | jdbc:adabasd://localhost:7200/work    |
    DB2      | COM.ibm.db2.jdbc.net.DB2Driver  | [NULL]  | jdbc:db2://localhost:6789/foobar      |
    MySQL    | org.gjt.mm.mysql.Driver         | [NULL]  | jdbc:mysql://localhost/foobar         |
- * Oracle   | oracle.jdbc.driver.OracleDriver | 10.2    | jdbc:oracle:thin:@localhost:1521:ORCL |
+ * Oracle   | oracle.jdbc.driver.OracleDriver | 11.2    | jdbc:oracle:thin:@localhost:1521:ORCL |
    Postgres | org.postgresql.Driver           | [NULL]  | jdbc:postgresql://localhost/foobar    |
    SAP-DB   | com.sap.dbtech.jdbc.DriverSapDB | [NULL]  | jdbc:sapdb://localhost/foobar         |
 ------------+---------------------------------+---------+---------------------------------------+
-nection
-Hen*Plus> connect jdbc:oracle:thin:@localhost:1521:orcl
+Hen*Plus> connect jdbc:oracle:thin:@localhost:1521:cdb1
 HenPlus II connecting 
- url 'jdbc:oracle:thin:@localhost:1521:orcl'
- driver version 10.2
-invalid arguments in call
+ url 'jdbc:oracle:thin:@localhost:1521:cdb1'
+ driver version 11.2
+ORA-01017: invalid username/password; logon denied
+
 ============ authorization required ===
 Username: SYSTEM
 Password:                 
- Oracle - Oracle Database 11g Release 11.1.0.0.0 - Production
+ Oracle - Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production
+With the Partitioning, OLAP, Advanced Analytics and Real Application Testing options
  read committed *
  serializable 
-SYSTEM@oracle:localhost> select * from SAKAI_USER_ID_MAP;
---------------------------------------+------------+
-               USER_ID                |    EID     |
---------------------------------------+------------+
- admin                                | admin      |
- f6b5df44-d8f3-4529-9107-57c756dcdcc5 | csev       |
- postmaster                           | postmaster |
---------------------------------------+------------+
-3 rows in result (first row: 13 msec; total: 13 msec)
+SYSTEM@oracle:localhost> select * from dual;
+-------+
+ DUMMY |
+-------+
+ X     |
+-------+
+1 row in result (first row: 302 msec; total: 302 msec)
 SYSTEM@oracle:localhost> 
+
 

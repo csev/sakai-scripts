@@ -1,12 +1,6 @@
 Installation
 ------------
 
-Download the ojdbc14.jar and put it in the folder
-
-    oracle/ojdbc14.jar
-
-Also place this jar in the folder `apache-tomcat.../common/lib`
-
 Install HenPlus from:
 
     http://sourceforge.net/projects/henplus/files/
@@ -14,6 +8,13 @@ Install HenPlus from:
 Into the folder
 
     oracle/henplus-0.9.7
+
+Download the ojdbc6.jar and put it in the folders:
+
+    oracle/
+    oracle/henplus-0.9.7/lib/
+
+Also place this jar in the folder `apache-tomcat.../common/lib`
 
 Install VirtualBox and then grab the Oracle Developer Day
 appliance to get a fully-configured Linux and Oracle bundle.
@@ -24,28 +25,16 @@ appliance to get a fully-configured Linux and Oracle bundle.
 If that URL does not work, google for "oracle developer day virtual box appliance"
 It should be the first result.
 
-Of course get the virtual box running.  The login creds are oracle/oracle.
+Once you download the OVA file.  Keep it - we will need to wipe out the virtualbox
+and reinstall it from time to time and it is nice to avoid a multi-hour download.
+
+When you start the virtualbox, the login creds are oracle/oracle.
 
 It starts up beautifully - it has a terminal widow with some shell scripts
 to reset things.  Much of the work will be done 
 in [SQL Developer](oracle/making_connection.png) application or the shell.
 
-Make a Connection in Your Oracle Instance
------------------------------------------
-
-Open [SQL Developer](oracle/making_connection.png) in your VirtualBox.
-
-Press "+" to make a new connection and enter fields as follows:
-
-    Name: orcl
-    Username: SYSTEM
-    Password: oracle
-    Tick the "Save Password"
-    Leace the Hostname and port as localhost 1521
-    Change the SID to orcl
-    Leave the tick boxes alone.
-
-Once the connrection is created, it is a good idea to check that it 
+Once the connection is created, it is a good idea to check that it 
 is accessible from your mac environment 
 using [HenPlus](oracle/using-henplus.txt).
 
@@ -62,7 +51,7 @@ we also include it here for reference:
     vendor@org.sakaiproject.db.api.SqlService=oracle
     driverClassName@javax.sql.BaseDataSource=oracle.jdbc.driver.OracleDriver
     hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
-    url@javax.sql.BaseDataSource=jdbc:oracle:thin:@localhost:1521:orcl
+    url@javax.sql.BaseDataSource=jdbc:oracle:thin:@localhost:1521:cdb1
     validationQuery@javax.sql.BaseDataSource=select 1 from DUAL
     defaultTransactionIsolationString@javax.sql.BaseDataSource=TRANSACTION_READ_COMMITTED
 
@@ -81,16 +70,18 @@ While running Sakai, you can use Oracle SQL Developer or
 Resetting the Oracle Tables and Sequences
 -----------------------------------------
 
-Sometimes you want to drop all the tables in your Oracle instance.  Don't
-try todrop the `orcl` database (a.k.a. SID) or you will end up starting
+The simple way is to just blast your virtual box and reinstall from the OVA.
+But sometimes you want to drop all the tables in your Oracle instance.  Don't
+try to drop the `cdb1` database (a.k.a. SID) or you will end up starting
 from scratch unless you are an Oracle whiz.  So do this:
 
     cd oracle
     ./henplus-0.9.7/bin/henplus
-    Hen*Plus> connect jdbc:oracle:thin:@localhost:1521:orcl
+    Hen*Plus> connect jdbc:oracle:thin:@localhost:1521:cdb1
     Username: SYSTEM
     Password: oracle
     SYSTEM@oracle:localhost> load DROP_TABLES.sql
+    SYSTEM@oracle:localhost> load DROP_INDEXES.sql
     SYSTEM@oracle:localhost> load DROP_SEQUENCES.sql
 
 Now you might not get them all if new tables were created since those
@@ -99,6 +90,7 @@ you might have missed:
 
     SELECT 'DROP TABLE "' || table_name || '" CASCADE CONSTRAINTS;' FROM user_tables WHERE table_name not like '%$%';
     SELECT 'DROP SEQUENCE "' || sequence_name || '";' FROM user_sequences WHERE sequence_name not like '%$%';
+    SELECT 'DROP INDEX "' || index_name || '";' FROM user_indexes WHERE index_name not like '%$%' AND index_name not like 'SYS_%';
 
 If all is well, you should get no rows from those queries, if you get rows,
 drop the tables and sequences - and send me a Pull Request to update my
