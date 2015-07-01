@@ -80,9 +80,7 @@ from scratch unless you are an Oracle whiz.  So do this:
     Hen*Plus> connect jdbc:oracle:thin:@localhost:1521:cdb1
     Username: SYSTEM
     Password: oracle
-    SYSTEM@oracle:localhost> load DROP_TABLES.sql
-    SYSTEM@oracle:localhost> load DROP_INDEXES.sql
-    SYSTEM@oracle:localhost> load DROP_SEQUENCES.sql
+    SYSTEM@oracle:localhost> load DROP.sql
 
 Now you might not get them all if new tables were created since those
 lists were created.  Here are two queries to run to see what ones
