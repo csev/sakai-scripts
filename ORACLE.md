@@ -81,6 +81,8 @@ from scratch unless you are an Oracle whiz.  So do this:
     Username: SYSTEM
     Password: oracle
     SYSTEM@oracle:localhost> load DROP.sql
+    SYSTEM@oracle:localhost> commit;
+    SYSTEM@oracle:localhost> select table_name from user_tables;
 
 Now you might not get them all if new tables were created since those
 lists were created.  Here are two queries to run to see what ones
@@ -93,6 +95,10 @@ you might have missed:
 If all is well, you should get no rows from those queries, if you get rows,
 drop the tables and sequences - and send me a Pull Request to update my
 SQL scripts with the new tables.
+
+Be careful because Oracle drops lots of its own tables into all instances. 
+The like clauses in the above SELECT statements capture the rules as best I 
+know them but I am not an Oracle expert.
 
 Data Types Notes
 ----------------
