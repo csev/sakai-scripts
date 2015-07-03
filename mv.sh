@@ -1,5 +1,4 @@
 #! /bin/bash
-if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 # Compile all of the Sakai source in the right order
 #
 # A good way to do this is:
@@ -18,10 +17,11 @@ if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 # You should see none # if we are generating all the binary artifacts from source and things are
 # pointing to the right versions.
 
+if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 source config-dist.sh
-if [ "$PORT" == "" ]; then 
-    echo "Bad configuration or wrong shell"; 
-    exit 
+if [ "$PORT" == "" ]; then
+    echo "Bad configuration or wrong shell";
+    exit
 fi
 
 goals='clean install sakai:deploy'
@@ -30,7 +30,7 @@ if [ $# != 0 ] ; then
 fi
 
 mywd=`pwd`
-tomcatdir=$mywd/apache-tomcat-7.0.21/
+tomcatdir=$mywd/apache-tomcat-$TOMCAT/
 echo Compile Sakai from $mywd to $tomcatdir
 
 cd $mywd/trunk
