@@ -85,3 +85,7 @@ To delete a borked branch:
     git branch -D SAK-29531
     git push origin :SAK-29531
 
+To clean up old deleted branchies in origin
+
+    git remote prune origin
+
