@@ -58,7 +58,8 @@ unzip -q keepzips/apache-tomcat-$TOMCAT.zip
 
 chmod +x apache-tomcat-$TOMCAT/bin/*.sh
 
-patch -p0 < patches/tomcat-$TOMCAT.patch
+# Not needed after 22-Sep-2105
+# patch -p0 < patches/tomcat-$TOMCAT.patch
 cp patches/apache-$TOMCAT-context.xml apache-tomcat-$TOMCAT/conf/context.xml
 
 mkdir -p apache-tomcat-$TOMCAT/common/classes
