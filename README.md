@@ -43,7 +43,7 @@ named "dev" in my home directory:
         cd dev
         git clone https://github.com/csev/sakai-scripts
 
-* Read the instructions in profile.txt to update your login files.
+* Read and follow the instructions in *profile.txt* to update your login files.
 Once you update your login files, close your terminal window and
 reopen a brand new window and type:
 
@@ -111,7 +111,7 @@ another of the files.
 * Set up the rest of the pre-requisites using the following command:
 
         cd /home/csev/dev/sakai-scripts
-        sh ubuntu.sh
+        bash ubuntu.sh
 
     You may need to edit this file if you are running ubuntu before 14.10
 
