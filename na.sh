@@ -29,10 +29,8 @@ else
   mkdir keepzips
 fi
 
-
-#    http://apache.arvixe.com/tomcat/tomcat-8/v8.0.28/bin/apache-tomcat-8.0.28.zip
-echo http://apache.arvixe.com/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
-
+# http://www.us.apache.org/dist/tomcat/tomcat-8/v8.0.30/bin/apache-tomcat-8.0.30.zip
+echo http://www.us.apache.org/dist/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
 
 if [ -f keepzips/apache-tomcat-$TOMCAT.zip ] 
 then
@@ -40,7 +38,8 @@ then
 else 
   echo Downloading keepzips/tomcat-$TOMCAT.zip ...
   cd keepzips
-  curl -O http://apache.arvixe.com/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
+  # curl -O http://apache.arvixe.com/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
+  curl -O http://www.us.apache.org/dist/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
   cd $MYPATH
 fi
 
@@ -60,6 +59,19 @@ rm -rf apache-tomcat-$TOMCAT/
 
 echo Extracting Tomcat...
 unzip -q keepzips/apache-tomcat-$TOMCAT.zip
+
+if [ ! -d apache-tomcat-$TOMCAT ] ; then
+  echo "======"
+  echo "Error, unable to download Tomcat version $TOMCAT"
+  echo "You may need to switch to another version in your configuration"
+  echo "or another server n the na.sh script"
+  echo "======"
+  rm keepzips/*
+  exit
+fi
+
+# Demo setup
+echo 'export CATALINA_OPTS="-Dsakai.demo=true"' > apache-tomcat-$TOMCAT/bin/setenv.sh
 
 chmod +x apache-tomcat-$TOMCAT/bin/*.sh
 

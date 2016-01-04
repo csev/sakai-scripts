@@ -9,6 +9,7 @@ if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 if [ -f "config.sh" -a "$1" == "" ]
 then
     echo "Taking configuration from local config.sh"
+    source upgrade.sh include
     source config.sh include
     return
     exit
@@ -29,14 +30,14 @@ GIT_REPO=https://github.com/sakaiproject/sakai.git
 MYSQL_ROOT_PASSWORD=root
 
 MYSQL=5.1.35
-TOMCAT=8.0.28
+TOMCAT=8.0.30
 
 # Leave LOG_DIRECTORY value empty to leave the logs inside tomcat
 # LOG_DIRECTORY=/var/www/html/sakai/logs/tomcat
 LOG_DIRECTORY=
 PORT=8080
 SHUTDOWN_PORT=8005
-MYSQL_DATABASE=sakai10
+MYSQL_DATABASE=sakai11
 MYSQL_USER=sakaiuser
 MYSQL_PASSWORD=sakaipass
 

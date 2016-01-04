@@ -4,13 +4,12 @@
 #
 #    .bash_profile .profile .bashrc
 #
-# If none of the files exist in your home firector, for the Mac put these
+# If none of the files exist in your home directory, for the Mac put these
 # commands in a file named .profile and for Linux put these commands in 
 # .bashrc
-#
 
-JAVA_OPTS='-server -Xms512m -Xmx1024m  -XX:NewSize=192m -XX:MaxNewSize=384m -Djava.awt.headless=true -Dhttp.agent=Sakai -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false -Dsun.lang.ClassLoader.allowArraySyntax=true'
-export JAVA_OPTS
+# As of 02-Jan-2016, we need to update the JAVA_OPTS as below:
 
-MAVEN_OPTS='-Xms512m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=512m'
-export MAVEN_OPTS
+export JAVA_OPTS="-server -Xmx1028m -XX:MaxMetaspaceSize=512m -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false -Djava.awt.headless=true -Dcom.sun.management.jmxremote"
+
+export MAVEN_OPTS='-Xms512m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=512m'
