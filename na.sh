@@ -79,6 +79,10 @@ chmod +x apache-tomcat-$TOMCAT/bin/*.sh
 # patch -p0 < patches/tomcat-$TOMCAT.patch
 cp patches/apache-$TOMCAT-context.xml apache-tomcat-$TOMCAT/conf/context.xml
 
+echo Setting up webapps/ROOT
+rm apache-tomcat-$TOMCAT/webapps/ROOT/*
+cp patches/index.html apache-tomcat-$TOMCAT/webapps/ROOT
+
 mkdir -p apache-tomcat-$TOMCAT/common/classes
 mkdir -p apache-tomcat-$TOMCAT/server/classes
 mkdir -p apache-tomcat-$TOMCAT/shared/classes
