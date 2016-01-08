@@ -123,10 +123,15 @@ Developing with Oracle as your database its own [special setup](ORACLE.md).
 Common Steps
 ============
 
-* Copy config-dist.sh to config.sh
-* Edit config.sh
+* Open a teminal and navigate to the sakai-scripts directory and:
+
+    cp config-dist.sh config.sh
+
+* Edit config.sh with a text editor of your choice
+
     * Change "sakaiproject" in the GIT REPO  variable to be your github account
     * If you are not running MAMP, edit the MySQL root password
+
 * Run `bash db.sh` to create a database
 
 * Run `bash na.sh` to set up the Tomcat
