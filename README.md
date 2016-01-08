@@ -10,13 +10,13 @@ but is a lot more comfortable with a 4GB or more app server.
 Getting Started on Mac (as needed)
 ==================================
 
-* Make sure you have Java-8 Developer Kit Installed - don't get  rid of Java 1.7 if you
+* Make sure you have Java-8 JDK (not JRE) Installed - don't get  rid of Java 1.7 if you
 want to work on Sakai 10.
 
     java -version
     javac -version
 
-* Make sure you have Maven (mvn) installed. If you have Homebrew installed, you can use
+* Make sure you have Maven (mvn) 3.3 or later installed. If you have Homebrew installed, you can use
 
     brew install maven
  
@@ -119,8 +119,8 @@ another of the files.
 
     You may need to edit this file if you are running ubuntu before 14.10
 
-Oracle
-======
+Using Oracle as your Database
+=============================
 
 Developing with Oracle as your database its own [special setup](ORACLE.md).
 
@@ -320,7 +320,7 @@ nightly.sh
 ----------
 
 This script just calls the other scripts in the right order.  The script
-does a checkout, shuts down any tomcat (killing if nexeccary), creates a new
+does a checkout, shuts down any tomcat (killing if nececcary), creates a new
 empty database, creates a fresh tomcat, checks out the code you want to compile,
 compiles the code and starts Tomcat.   Since the script stops and starts the
 right Tomcat automatically, you can run this script over and over interactively
