@@ -136,11 +136,11 @@ Common Steps
     * Change "sakaiproject" in the GIT REPO  variable to be your github account
     * If you are not running MAMP, edit the MySQL root password
 
-* Run `bash db.sh` to create a database
+* Make sure your MySQL is running run `bash db.sh` to create a database
 
 * Run `bash na.sh` to set up the Tomcat
 
-* Run `bash co.sh` to check things out
+* Run `bash co.sh` to check the Sakai source code out
 
 * Run `bash qmv.sh` to compile it all - the first time you do this it will take
 a long time and use a lot of network bandwidth as it downloads a bunch of
