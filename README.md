@@ -16,7 +16,11 @@ want to work on Sakai 10.
     java -version
     javac -version
 
-* Make sure you have Maven (mvn) installed. Here are the instructions
+* Make sure you have Maven (mvn) installed. If you have Homebrew installed, you can use
+
+    brew install maven
+ 
+* If you don't have Homebrew, here are the instructions for various ways to install mvn
 for Mac:
 
     http://stackoverflow.com/questions/8826881/maven-install-on-mac-os-x
