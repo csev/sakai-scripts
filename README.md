@@ -10,7 +10,7 @@ but is a lot more comfortable with a 4GB or more app server.
 Getting Started on Mac (as needed)
 ==================================
 
-* Make sure you have Java-8 Installed - don't get  rid of Java 1.7 if you
+* Make sure you have Java-8 Developer Kit Installed - don't get  rid of Java 1.7 if you
 want to work on Sakai 10.
 
     java -version
@@ -125,7 +125,7 @@ Common Steps
 
 * Copy config-dist.sh to config.sh
 * Edit config.sh
-    * Change "sakaiproject" in the GIT REPO  varuable to be your github account
+    * Change "sakaiproject" in the GIT REPO  variable to be your github account
     * If you are not running MAMP, edit the MySQL root password
 * Run `bash db.sh` to create a database
 
