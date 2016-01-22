@@ -83,15 +83,10 @@ echo Setting up webapps/ROOT
 rm apache-tomcat-$TOMCAT/webapps/ROOT/*
 cp patches/index.html apache-tomcat-$TOMCAT/webapps/ROOT
 
-mkdir -p apache-tomcat-$TOMCAT/common/classes
-mkdir -p apache-tomcat-$TOMCAT/server/classes
-mkdir -p apache-tomcat-$TOMCAT/shared/classes
-mkdir -p apache-tomcat-$TOMCAT/shared/lib
-mkdir -p apache-tomcat-$TOMCAT/server/lib
-mkdir -p apache-tomcat-$TOMCAT/common/lib
+mkdir -p apache-tomcat-$TOMCAT/lib
 
 # Copy the mysql connector jar into common/lib
-cp keepzips/*.jar apache-tomcat-$TOMCAT/common/lib
+cp keepzips/*.jar apache-tomcat-$TOMCAT/lib
 
 # Find an OJDBC Connector jar in oracle folder if we can
 OJ=`ls oracle/*ojdbc*jar 2>/dev/null | head -1`
