@@ -88,4 +88,41 @@ To delete a borked branch:
 To clean up old deleted branchies in origin
 
     git remote prune origin
+    
+Branching Notes from Noah
+-------------------------
 
+You probably have a local clone (A) of your fork (B) of the main repository (C). These are conventionally set up as remotes called origin (B) and upstream (C).
+
+There is a new-ish feature of GitHub to synchronize a fork, which should be a button on the front page of your fork (B). But sometimes this doesn't show up (??), and you can do this the traditional way you're probably already familiar with:
+
+	git checkout master
+	git pull upstream master
+	git push
+
+Depending on a couple of settings you may also have to fetch upstream (C) to get a reference to the 11.x branch. It never hurts to do this (but you may already see the new branch because of the first pull):
+
+	git fetch upstream
+
+Then you checkout the branch locally and set it up to push to origin (B), so you can stay in sync with 11.x like you do master (first section here, just replace master with 11.x).
+
+	git checkout 11.x
+	git push -u origin 11.x
+
+Then any feature/fix branches you want to target directly to 11.x (rather than into master and "backported") just use 11.x as the starting point:
+
+	git checkout -b SAK-12345-feature-name 11.x
+	# work
+	git push -u origin SAK-12345-feature-name
+	# make pull request
+
+You can also do a sync-then-branch pattern if your muscle memory is like mine:
+
+	git checkout 11.x
+	git pull upstream 11.x
+	git push
+	git checkout -b SAK-12345-feature-name
+
+One last detail... Strictly speaking, you wouldn't *need* to push 11.x to your fork (B). You could leave it tracking upstream (C), but I find some value in maintaining the symmetry with master. That way, if you end up committing something to your local 11.x and push, we don't get accidental commits in upstream/11.x (C). It's a little bit more typing (git pull upstream 11.x instead of git pull) to stay updated, but for people who have the permissions to push to upstream but are not in the habit of doing branch management, I think it's a worthwhile investment. You can clean up your forked 11.x branch with relatively zero cost, whereas reverting commits or forcing pushes in upstream is ugly.
+
+Happy branching!
