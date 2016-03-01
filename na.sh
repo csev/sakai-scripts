@@ -29,8 +29,8 @@ else
   mkdir keepzips
 fi
 
-# http://www.us.apache.org/dist/tomcat/tomcat-8/v8.0.30/bin/apache-tomcat-8.0.30.zip
-echo http://www.us.apache.org/dist/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
+# http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.30/bin/apache-tomcat-8.0.30.zip
+echo http://archive.apache.org/dist/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
 
 if [ -f keepzips/apache-tomcat-$TOMCAT.zip ] 
 then
@@ -39,7 +39,7 @@ else
   echo Downloading keepzips/tomcat-$TOMCAT.zip ...
   cd keepzips
   # curl -O http://apache.arvixe.com/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
-  curl -O http://www.us.apache.org/dist/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
+  curl -O http://archive.apache.org/dist/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
   cd $MYPATH
 fi
 
