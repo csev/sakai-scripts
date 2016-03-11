@@ -320,11 +320,11 @@ nightly.sh
 ----------
 
 This script just calls the other scripts in the right order.  The script
-does a checkout, shuts down any tomcat (killing if nececcary), creates a new
+does a checkout, shuts down any tomcat (killing if necessary), creates a new
 empty database, creates a fresh tomcat, checks out the code you want to compile,
 compiles the code and starts Tomcat.   Since the script stops and starts the
 right Tomcat automatically, you can run this script over and over interactively
-in a cron job.
+or in a cron job.
 
 
 
