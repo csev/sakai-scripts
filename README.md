@@ -241,7 +241,7 @@ want to peruse the source of those projects.
 
 db.sh
 -----
-Drop the database if it is there and re-create an empty database.
+Check to see if a database is there and create it if necessary.
 
 na.sh
 -----
