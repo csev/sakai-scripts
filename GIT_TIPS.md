@@ -143,3 +143,8 @@ pushes in upstream is ugly.
 
 Happy branching!
 
+Pulling Tags
+
+git fetch -all
+git tag -l
+git checkout 11.0
