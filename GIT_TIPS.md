@@ -34,7 +34,7 @@ Syncing to your local repo
 
 Stashing
 
-    git stash
+    git stash save -u
     git stash list
     git show stash@{0}
     git stash apply stash

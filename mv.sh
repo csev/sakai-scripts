@@ -34,5 +34,5 @@ tomcatdir=$mywd/apache-tomcat-$TOMCAT/
 echo Compile Sakai from $mywd to $tomcatdir
 
 cd $mywd/trunk
-mvn -Dmaven.tomcat.home=$tomcatdir $goals
+mvn -e -Dmaven.tomcat.home=$tomcatdir $goals
 
