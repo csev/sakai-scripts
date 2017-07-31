@@ -92,7 +92,7 @@ from scratch unless you are an Oracle whiz.  So do this:
     SYSTEM@oracle:localhost> select table_name from user_tables;
 
 Now you might not get them all if new tables were created since those
-lists were created.  Here are two queries to run to see what ones
+lists were created.  Here are three queries to run to see what ones
 you might have missed:
 
     SELECT 'DROP TABLE "' || table_name || '" CASCADE CONSTRAINTS;' FROM user_tables WHERE table_name not like '%$%';
@@ -102,6 +102,12 @@ you might have missed:
 If all is well, you should get no rows from those queries, if you get rows,
 drop the tables and sequences - and send me a Pull Request to update my
 SQL scripts with the new tables.
+
+The following indexes are OK to leave:
+
+    LOGMNR_SESSION_PK
+    LOGMNR_SESSION_UK1
+    UNQ_PAIRS
 
 Be careful because Oracle drops lots of its own tables into all instances. 
 The like clauses in the above SELECT statements capture the rules as best I 
