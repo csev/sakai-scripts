@@ -21,7 +21,9 @@ Download the ojdbc6.jar and put it in the folders:
     oracle/
     oracle/henplus-0.9.7/lib/
 
-Also place this jar in the folder `apache-tomcat.../common/lib`
+Also place this jar in Tomcat:
+
+    cp oracle/henplus-0.9.7/lib/ojdbc6.jar apache-tomcat-8.0.30/lib/
 
 Install VirtualBox and then grab the Oracle Developer Day
 appliance to get a fully-configured Linux and Oracle bundle.
