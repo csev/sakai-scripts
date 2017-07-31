@@ -1,0 +1,44 @@
+MacBook-Pro-7:henplus-0.9.7 csev$ ant
+Buildfile: /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/build.xml
+
+prepare:
+    [mkdir] Created dir: /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/build
+    [mkdir] Created dir: /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/build/classes
+
+Version.java:
+     [copy] Copying 1 file to /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/src/henplus
+
+compile:
+    [javac] /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/build.xml:63: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+    [javac] Compiling 86 source files to /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/build/classes
+    [javac] warning: [options] bootstrap class path not set in conjunction with -source 1.3
+    [javac] warning: [options] source value 1.3 is obsolete and will be removed in a future release
+    [javac] warning: [options] target value 1.3 is obsolete and will be removed in a future release
+    [javac] warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+    [javac] /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/src/henplus/SigIntHandler.java:11: warning: Signal is internal proprietary API and may be removed in a future release
+    [javac] import sun.misc.Signal;
+    [javac]                ^
+    [javac] /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/src/henplus/SigIntHandler.java:12: warning: SignalHandler is internal proprietary API and may be removed in a future release
+    [javac] import sun.misc.SignalHandler;
+    [javac]                ^
+    [javac] /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/src/henplus/SigIntHandler.java:17: warning: SignalHandler is internal proprietary API and may be removed in a future release
+    [javac] public class SigIntHandler implements SignalHandler, InterruptHandler {
+    [javac]                                       ^
+    [javac] /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/src/henplus/SigIntHandler.java:29: warning: Signal is internal proprietary API and may be removed in a future release
+    [javac]	Signal interruptSignal = new Signal("INT"); // Interrupt: Ctrl-C
+    [javac]	^
+    [javac] /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/src/henplus/SigIntHandler.java:29: warning: Signal is internal proprietary API and may be removed in a future release
+    [javac]	Signal interruptSignal = new Signal("INT"); // Interrupt: Ctrl-C
+    [javac]	                             ^
+    [javac] /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/src/henplus/SigIntHandler.java:32: warning: Signal is internal proprietary API and may be removed in a future release
+    [javac]	Signal.handle(interruptSignal, instance);
+    [javac]	^
+    [javac] /Users/csev/dev/sakai-scripts/oracle/henplus-0.9.7/src/henplus/SigIntHandler.java:59: warning: Signal is internal proprietary API and may be removed in a future release
+    [javac]     public void handle(Signal sig) {
+    [javac]                        ^
+    [javac] 11 warnings
+
+BUILD SUCCESSFUL
+Total time: 1 second
+MacBook-Pro-7:henplus-0.9.7 csev$ 
+

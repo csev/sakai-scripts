@@ -9,6 +9,13 @@ Into the folder
 
     oracle/henplus-0.9.7
 
+Go into the folder and compile:
+
+    cd henplus-0.9.7
+    ant
+
+There will be 11 warnings - they are OK
+
 Download the ojdbc6.jar and put it in the folders:
 
     oracle/
