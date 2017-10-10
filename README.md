@@ -105,6 +105,13 @@ named "dev" in my home directory:
 your login files.  Once you update your login files, close
 your terminal window and reopen your window and type:
 
+Here is the addition to the `~bashrc` on ubuntu:
+
+    export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
+    export JAVA_OPTS="-server -Xmx1028m -XX:MaxMetaspaceSize=512m 
+    -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false 
+    -Djava.awt.headless=true -Dcom.sun.management.jmxremote"
+
         cd
         cd dev/sakai-scripts
         echo $JAVA_OPTS
@@ -201,13 +208,7 @@ ubuntu.sh
 This runs a bunch of apt-get commands to load the pre-requisites for Sakai
 for Ubuntu.  If you are running something other than Ubuntu, you can look
 at this and use whatever package manager that is on the system to
-install the necessary pre-requisites.  Here is the addition to the `~bashrc`
-on ubuntu:
-
-    export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
-    export JAVA_OPTS="-server -Xmx1028m -XX:MaxMetaspaceSize=512m 
-    -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false 
-    -Djava.awt.headless=true -Dcom.sun.management.jmxremote"
+install the necessary pre-requisites.  
 
 config-dist.sh
 --------------
