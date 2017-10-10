@@ -21,6 +21,9 @@ then
 fi
 
 # Settings start here
+# Number of mvn threads
+THREADS=2
+
 # Change GIT_REPO and replace "sakaiproject" with your git user name
 # so that you checkout your forked sakai repository
 GIT_REPO=https://github.com/sakaiproject/sakai.git
