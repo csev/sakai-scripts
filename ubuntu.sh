@@ -24,9 +24,9 @@ sudo apt-get -y install python-software-properties
 # Install mysql
 # Make the password root - or override the root password in 
 # config.sh - a copied and edited version of config-dist.php
-sudo apt-get install mysql-server
-sudo apt-get install mysql-client
-sudo apt-get install libmysql-java
+sudo apt-get -y install mysql-server
+sudo apt-get -y install mysql-client
+sudo apt-get -y install libmysql-java
 
 # for the Morpheus SASS support you need these as well
 sudo apt-get -y install ruby
