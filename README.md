@@ -181,11 +181,10 @@ have in my `.bash_profile` on my Mac to switch back and forth
     export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 
     #Sakai 11.x
-    export JAVA_OPTS='-server -Xms512m -Xmx1024m -XX:NewSize=192m
-        -XX:MaxNewSize=384m -Djava.awt.headless=true -Dhttp.agent=Sakai
-        -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false
-        -Dsun.lang.ClassLoader.allowArraySyntax=true'
-    export MAVEN_OPTS='-Xms256m -Xmx512m'
+    export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
+    export JAVA_OPTS="-server -Xmx1028m -XX:MaxMetaspaceSize=512m 
+    -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false 
+    -Djava.awt.headless=true -Dcom.sun.management.jmxremote"
     export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 I just flip the order of these two command sets and start a new shell
@@ -202,7 +201,13 @@ ubuntu.sh
 This runs a bunch of apt-get commands to load the pre-requisites for Sakai
 for Ubuntu.  If you are running something other than Ubuntu, you can look
 at this and use whatever package manager that is on the system to
-install the necessary pre-requisites.
+install the necessary pre-requisites.  Here is the addition to the `~bashrc`
+on ubuntu:
+
+    export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
+    export JAVA_OPTS="-server -Xmx1028m -XX:MaxMetaspaceSize=512m 
+    -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false 
+    -Djava.awt.headless=true -Dcom.sun.management.jmxremote"
 
 config-dist.sh
 --------------
