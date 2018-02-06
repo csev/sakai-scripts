@@ -89,6 +89,15 @@ To clean up old deleted branchies in origin
 
     git remote prune origin
     
+From Earle
+----------
+
+Do a commit of some interim stuff and then 
+
+    git commit --amend
+
+It extends the previous commit so you only have one.
+
 Branching Notes from Noah
 -------------------------
 
