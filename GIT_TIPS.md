@@ -146,7 +146,7 @@ You can also do a sync-then-branch pattern if your muscle memory is like mine:
 	git push
 	git checkout -b SAK-12345-feature-name
 
-One last detail... Strictly speaking, you wouldn't *need* to push 11.x to your fork (B). 
+One last detail... Strictly speaking, you would not *need* to push 11.x to your fork (B). 
 You could leave it tracking upstream (C), but I find some value in maintaining the 
 symmetry with master. That way, if you end up committing something to your local 11.x and 
 push, we don't get accidental commits in upstream/11.x (C). It's a little bit more typing 
