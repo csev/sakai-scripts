@@ -147,6 +147,8 @@ Common Steps
 
 * Run `bash na.sh` to set up the Tomcat
 
+* If you have not already done so, clone the Sakai repository to your account in the browser
+
 * Run `bash co.sh` to check the Sakai source code out
 
 * Run `bash qmv.sh` to compile it all - the first time you do this it will take
