@@ -51,7 +51,7 @@ if [ -f "/Applications/MAMP/Library/bin/mysql" ] ; then
 
 # Ubuntu / normal 3306 MySQL 
 else
-    MYSQL_COMMAND="mysql -u root --password=$MYSQL_ROOT_PASSWORD"
+    MYSQL_COMMAND="mysql -u root --host=127.0.0.1 --password=$MYSQL_ROOT_PASSWORD"
     MYSQL_SOURCE="jdbc:mysql://127.0.0.1:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
 fi
 
