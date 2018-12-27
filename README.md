@@ -105,16 +105,15 @@ named "dev" in my home directory:
 your login files.  Once you update your login files, close
 your terminal window and reopen your window and type:
 
-Here is the addition to the `~bashrc` on ubuntu:
+Here is the addition to the `~/.bashrc` on ubuntu:
 
     export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
-    export JAVA_OPTS="-server -Xmx1028m -XX:MaxMetaspaceSize=512m 
-    -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false 
-    -Djava.awt.headless=true -Dcom.sun.management.jmxremote"
+    export JAVA_OPTS="-server -Xmx1028m -XX:MaxMetaspaceSize=512m -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false -Djava.awt.headless=true -Dcom.sun.management.jmxremote"
 
-        cd
-        cd dev/sakai-scripts
-        echo $JAVA_OPTS
+Note that the second line is very long. Then run these commands:
+
+    source ~/.bashrc
+     echo $JAVA_OPTS
 
 If you see the settings, you have edited the correct file, if not try
 another of the files.
@@ -131,8 +130,8 @@ Using Oracle as your Database
 
 Developing with Oracle as your database its own [special setup](ORACLE.md).
 
-Common Steps
-============
+Common Steps For Ubuntu and Mac
+===============================
 
 * Open a teminal and navigate to the sakai-scripts directory and:
 
