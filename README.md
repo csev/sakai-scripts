@@ -47,6 +47,11 @@ named "dev" in my home directory:
         cd dev
         git clone https://github.com/csev/sakai-scripts
 
+* Install OpenJDK (if needed) from https://github.com/AdoptOpenJDK/homebrew-openjdk
+
+	brew tap AdoptOpenJDK/openjdk
+	brew cask install adoptopenjdk10
+
 * Read and follow the instructions in *profile.txt* to update your login files.
 Once you update your login files, close your terminal window and
 reopen a brand new window and type:
