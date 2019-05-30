@@ -10,11 +10,20 @@ but is a lot more comfortable with a 4GB or more app server.
 Getting Started on Mac (as needed)
 ==================================
 
+* Install git using the command
+
+        xcode-select --install
+
 * Make sure you have Java-8 JDK (not JRE) Installed - don't get  rid of Java 1.7 if you
 want to work on Sakai 10.
 
     java -version
     javac -version
+
+* Install OpenJDK (if needed) from https://github.com/AdoptOpenJDK/homebrew-openjdk
+
+	brew tap AdoptOpenJDK/openjdk
+	brew cask install adoptopenjdk10
 
 * Make sure you have Maven (mvn) 3.3 or later installed. If you have Homebrew installed, you can use
 
@@ -30,10 +39,6 @@ for Mac:
 * Go to https://github.com/sakaiproject/sakai and "fork" a copy into
 your github account
 
-* Install git using the command
-
-        xcode-select --install
-
 * Set up git with the folowing commands
 
         git config --global user.name "John Doe"
@@ -46,11 +51,6 @@ named "dev" in my home directory:
         mkdir dev  (if needed)
         cd dev
         git clone https://github.com/csev/sakai-scripts
-
-* Install OpenJDK (if needed) from https://github.com/AdoptOpenJDK/homebrew-openjdk
-
-	brew tap AdoptOpenJDK/openjdk
-	brew cask install adoptopenjdk10
 
 * Read and follow the instructions in *profile.txt* to update your login files.
 Once you update your login files, close your terminal window and
