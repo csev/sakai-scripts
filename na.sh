@@ -39,7 +39,7 @@ else
   echo Downloading keepzips/tomcat-$TOMCAT.zip ...
   cd keepzips
   # curl -O http://apache.arvixe.com/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
-  curl -O http://archive.apache.org/dist/tomcat/tomcat-8/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
+  curl -O http://archive.apache.org/dist/tomcat/tomcat-${TOMCAT:0:1}/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
   cd $MYPATH
 fi
 
