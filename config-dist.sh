@@ -40,19 +40,21 @@ TOMCAT=8.0.30
 LOG_DIRECTORY=
 PORT=8080
 SHUTDOWN_PORT=8005
-MYSQL_DATABASE=sakai11
+MYSQL_DATABASE=sakai21
+# MYSQL_HOST=localhost
+MYSQL_HOST=127.0.0.1
 MYSQL_USER=sakaiuser
 MYSQL_PASSWORD=sakaipass
 
 # Defaults for Mac/MAMP MySQL
 if [ -f "/Applications/MAMP/Library/bin/mysql" ] ; then
-    MYSQL_SOURCE="jdbc:mysql://127.0.0.1:8889/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
+    MYSQL_SOURCE="jdbc:mysql://$MYSQL_HOST:8889/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
     MYSQL_COMMAND="/Applications/MAMP/Library/bin/mysql -S /Applications/MAMP/tmp/mysql/mysql.sock -u root --password=$MYSQL_ROOT_PASSWORD"
 
 # Ubuntu / normal 3306 MySQL 
 else
-    MYSQL_COMMAND="mysql -u root --host=127.0.0.1 --password=$MYSQL_ROOT_PASSWORD"
-    MYSQL_SOURCE="jdbc:mysql://127.0.0.1:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
+    MYSQL_COMMAND="mysql -u root --host=$MYSQL_HOST --password=$MYSQL_ROOT_PASSWORD"
+    MYSQL_SOURCE="jdbc:mysql://$MYSQL_HOST:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
 fi
 
 # Do some sanity checking...
