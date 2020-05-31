@@ -163,3 +163,60 @@ Pulling Tags
 git fetch -all
 git tag -l
 git checkout 11.0
+
+
+Long Lived Development Branches
+-------------------------------
+
+How to work for a while in a development branch while staying in touch
+with master so the merge always works and so you can pause for a moment
+and fix a bug in master and get that merged.
+
+In this example SAK-42 will be the development branch.
+
+Prepare - catch local and fork up with master:
+
+git checkout master
+git pull upstream master
+git push origin master
+
+Lets start the dev branch:
+
+get checkout -b SAK-42
+# Start your work
+git commit
+git push origin SAK-42
+# Do more work
+git commit
+git push origin SAK-42
+
+Time passes - lets stay current with master:
+
+git checkout master
+git pull upstream master
+git push origin master
+
+git checkout SAK-42
+git pull upstream master
+git push origin SAK-42
+
+Need to pause and fix SAK-1000:
+
+git checkout master
+git checkout -b SAK-1000
+# Make fixes
+git commit -a
+git push origin SAK-1000
+
+Once SAK-1000 it approved and merged into master - catch
+both origin SAK-42 and origin master up using the
+above commands.
+
+Go back to working on SAK-42:
+
+git checkout SAK-42
+# Do more work
+git commit
+git push origin SAK-42
+
+
