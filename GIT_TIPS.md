@@ -233,11 +233,16 @@ git fetch --all
 
 # Now attempt to rebase my feature branch with the upstream changes
 # I may need to resolve conflicts if someone else is editing the same files
-git rebase upstream master
+git rebase upstream/master
 
 # If all is good, I can update Github against with my changes
 # This needs --force per Noah
 git push origin feature-branch
+
+# Added by Chuck
+git checkout master
+git push origin master
+git checkout feature-branch
 
 
 Noah Notes
@@ -250,5 +255,3 @@ My rule of thumb is that if I'm messing with a rebase for more than 10 minutes, 
 
 I prefer to rebase but I bail out pretty quickly if it goes wacky.
 
-
-m 
