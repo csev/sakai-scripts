@@ -80,7 +80,7 @@ chmod +x apache-tomcat-$TOMCAT/bin/*.sh
 cp patches/apache-$TOMCAT-context.xml apache-tomcat-$TOMCAT/conf/context.xml
 
 echo Setting up webapps/ROOT
-rm apache-tomcat-$TOMCAT/webapps/ROOT/*
+rm -r apache-tomcat-$TOMCAT/webapps/ROOT/*
 cp patches/index.html apache-tomcat-$TOMCAT/webapps/ROOT
 
 mkdir -p apache-tomcat-$TOMCAT/lib
