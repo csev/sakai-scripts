@@ -33,7 +33,8 @@ GIT_REPO=https://github.com/sakaiproject/sakai.git
 MYSQL_ROOT_PASSWORD=root
 
 MYSQL=5.1.35
-TOMCAT=8.0.30
+# TOMCAT=8.0.30
+TOMCAT=9.0.21
 
 # Leave LOG_DIRECTORY value empty to leave the logs inside tomcat
 # LOG_DIRECTORY=/var/www/html/sakai/logs/tomcat
