@@ -34,5 +34,13 @@ tomcatdir=$mywd/apache-tomcat-$TOMCAT/
 echo Compile Sakai from $mywd to $tomcatdir
 
 cd $mywd/trunk
+
 mvn -e -Dmaven.tomcat.home=$tomcatdir $goals
 
+if [[ "$THREADS" > 3 ]] ; then
+    echo Compiling with $THREADS threads
+    mvn -T $THREADS -e -Dmaven.tomcat.home=$tomcatdir $goals
+else
+    echo Compiling with 3 threads
+    mvn -T 3 -e -Dmaven.tomcat.home=$tomcatdir $goals
+fi
