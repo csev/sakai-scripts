@@ -28,6 +28,11 @@ sudo apt-get -y install mysql-server
 sudo apt-get -y install mysql-client
 sudo apt-get -y install libmysql-java
 
+# for chrome headless you need this
+sudo apt-get install -y libgbm-dev
+sudo apt-get install -y libxkbcommon-x11-0
+sudo apt-get install -y libgtk-3-0
+
 # for the Morpheus SASS support you need these as well
 sudo apt-get -y install ruby
 sudo apt-get -y install ruby-dev
