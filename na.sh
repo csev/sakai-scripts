@@ -50,7 +50,7 @@ then
 else 
   echo Downloading keepzips/mysql-connector-java-$MYSQL.jar ...
   cd keepzips
-  curl -O https://repo.maven.apache.org/maven2/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar
+  curl -O https://repo.maven.apache.org/maven2/mysql/mysql-connector-java/$MYSQL/mysql-connector-java-$MYSQL.jar
   ls -l mysql*
   cd $MYPATH
 fi
