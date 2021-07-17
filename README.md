@@ -14,8 +14,7 @@ Getting Started on Mac (as needed)
 
         xcode-select --install
 
-* Make sure you have Java-8 JDK (not JRE) Installed - don't get  rid of Java 1.7 if you
-want to work on Sakai 10.
+* Make sure you have Java-8 JDK (not JRE) Installed 
 
     java -version
     javac -version
@@ -64,18 +63,6 @@ If you see the settings, you have edited the correct file, if not try
 another of the files.  Keep repeating this process of editing the login file,
 opening a new terminal, and typing 'echo' until the above command shows
 the java settings.
-
-* Download the platform independent MYSQL JDBC Connector from:
-
-        http://dev.mysql.com/downloads/connector/j/
-
-    You will need to create or use your Oracle account.  Download the
-    ZIP version of the file and unzip the file and move the unzipped
-    folder into (change csev to your user name):
-
-        /home/csev/dev/mysql-connector-java-5.1.35
-
-    (Or a similar name)
 
 * Install MAMP if you have not already done so
 
@@ -144,8 +131,9 @@ Common Steps For Ubuntu and Mac
 
 * Edit config.sh with a text editor of your choice
 
+    * Start at "Settings start here"
     * Change "sakaiproject" in the GIT REPO  variable to be your github account
-    * If you are not running MAMP, edit the MySQL root password
+    * If you are not running MAMP, edit the MySQL root password, urls, ports, etc
 
 * Make sure your MySQL is running run `bash db.sh` to create a database
 
@@ -159,7 +147,7 @@ Common Steps For Ubuntu and Mac
 a long time and use a lot of network bandwidth as it downloads a bunch of
 library code in maven.   The first full compile might take 20+ minutes - later
 full compiles will be about 2-3 minutes and partial compiles are 30 seconds or
-less.
+less.  If the compile fails due to a download - just run `bash qmv.sh` again
 
 * Run `bash start.sh` to start the Tomcat
 
@@ -175,33 +163,6 @@ by typing "smv.sh"
 
 Eventually you can just use the tomcat startup.sh and shutdown.sh
 and run your own tail commands if that is what you like.
-
-Switching between Sakai 10 and Sakai 11
-=======================================
-
-Sakai 10 needs Java 1.7 and Sakai 11 needs Java 1.8.  This is what I
-have in my `.bash_profile` on my Mac to switch back and forth
-(line breaks added for readability):
-
-    # Sakai 10.x
-    JAVA_OPTS='-server -Xms512m -Xmx1024m -XX:PermSize=128m
-        -XX:MaxPermSize=512m -XX:NewSize=192m -XX:MaxNewSize=384m
-         -Djava.awt.headless=true -Dhttp.agent=Sakai
-         -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false
-         -Dsun.lang.ClassLoader.allowArraySyntax=true'
-    export JAVA_OPTS
-    MAVEN_OPTS='-Xms512m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=512m'
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-
-    #Sakai 11.x
-    export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
-    export JAVA_OPTS="-server -Xmx1028m -XX:MaxMetaspaceSize=512m 
-    -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false 
-    -Djava.awt.headless=true -Dcom.sun.management.jmxremote"
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-
-I just flip the order of these two command sets and start a new shell
-to switch back and forth.
 
 Description of the Scripts
 ==========================

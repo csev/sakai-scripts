@@ -20,7 +20,7 @@ then
     echo "config-dist.sh to config.sh and edit config.sh"
 fi
 
-# Settings start here
+# ======== Settings start here ===============
 # Number of mvn threads
 THREADS=2
 
@@ -32,7 +32,8 @@ GIT_REPO=https://github.com/sakaiproject/sakai.git
 # is root so you can leave it alone if you are using MAMP
 MYSQL_ROOT_PASSWORD=root
 
-MYSQL=5.1.35
+# MYSQL=5.1.35
+MYSQL=8.0.25
 # TOMCAT=8.0.30
 TOMCAT=9.0.21
 
