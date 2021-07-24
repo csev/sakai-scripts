@@ -167,7 +167,7 @@ an `mvn` command like the following:
     mvn -Dmaven.tomcat.home=/Users/csev/dev/sakai-scripts/apache-tomcat-9.0.21 clean install sakai:deploy
 
 The `smv.sh` command simply looks through your path to find the correct
-calue for `maven.tomcat.home`.
+value for `maven.tomcat.home`.
 
 Eventually you can just use the tomcat startup.sh and shutdown.sh
 and run your own tail commands if that is what you like.
