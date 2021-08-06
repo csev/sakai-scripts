@@ -29,6 +29,9 @@ else
    exit
 fi
 cd $startwd
+
+echo "Running this maven command:"
+echo " "
 echo mvn -Dmaven.tomcat.home=$tomcatdir clean install sakai:deploy
 
 mvn -Dmaven.tomcat.home=$tomcatdir clean install sakai:deploy
