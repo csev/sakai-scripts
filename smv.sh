@@ -4,15 +4,6 @@
 # so it can be used to compile from any point in the Sakai
 # hierarchy that has a pom.xml
 
-if [ "$MAVEN_OPTS" = "" ] ; then
-  echo "Please set your MAVEN_OPTS per the README"
-  exit
-fi
-if [ "$JAVA_OPTS" = "" ] ; then
-  echo "Please set your JAVA_OPTS per the README"
-  exit
-fi
-
 startwd=`pwd`
 for i in `seq 1 15`; do
    newwd=`pwd`

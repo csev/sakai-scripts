@@ -7,6 +7,36 @@ This is a set of scripts to set up a developer instance of Sakai on
 your system or set up a nighly build.  Sakai can run on a 2GB RAM system
 but is a lot more comfortable with a 4GB or more app server.
 
+Getting started on ubuntu in Docker
+======================================
+
+A quick way to test all this if you have this is to just make a ubuntu in your docker:
+
+    docker run -it ubuntu
+
+You might want to give your Ubuntu 4GB
+
+Getting Started on ubuntu Linux
+===============================
+
+* Create an account on github
+
+* Go to https://github.com/sakaiproject/sakai and "fork" a copy into
+your github account
+
+* Install git using the command
+
+        sudo apt-get -y install git
+
+* Check out sakai-scripts into some folder and then install the rest of the pre-reqs
+
+        cd
+        git clone https://github.com/csev/sakai-scripts
+        cd sakai-scripts
+        bash ubuntu.sh
+
+Continue with the common steps below.
+
 Getting Started on Mac (as needed)
 ==================================
 
@@ -63,59 +93,6 @@ the java settings.
 
 Continue working with the Common steps below.
 
-Getting Started on ubuntu Linux
-===============================
-
-* Create an account on github
-
-* Go to https://github.com/sakaiproject/sakai and "fork" a copy into
-your github account
-
-* Install git using the command
-
-        sudo apt-get -y install git
-
-* Check out sakai-scripts into some folder.   I tend to make a folder
-named "dev" in my home directory:
-
-        cd
-        mkdir dev  (if needed)
-        cd dev
-        git clone https://github.com/csev/sakai-scripts
-
-* Set up git with the folowing commands
-
-        git config --global user.name "John Doe"
-        git config --global user.email johndoe@example.com
-
-* Read the instructions in sakai-scripts/profile.txt to update
-your login files.  Once you update your login files, close
-your terminal window and reopen your window and type:
-
-Add the commands from `profile.txt` to the `~/.bashrc` on ubuntu:
-
-    export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
-    export JAVA_OPTS="-server -Xmx1028m -XX:MaxMetaspaceSize=512m -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false -Djava.awt.headless=true -Dcom.sun.management.jmxremote"
-
-Note that the second line is very long. Then run these commands:
-
-    source ~/.bashrc
-     echo $JAVA_OPTS
-
-If you see the settings, you have edited the correct file, if not try
-another of the files.
-
-* Set up the rest of the pre-requisites using the following command:
-
-        cd /home/csev/dev/sakai-scripts
-        bash ubuntu.sh
-
-    You may need to edit this file if you are running ubuntu before 14.10
-
-Using Oracle as your Database
-=============================
-
-Developing with Oracle as your database its own [special setup](ORACLE.md).
 
 Common Steps For Ubuntu and Mac
 ===============================
