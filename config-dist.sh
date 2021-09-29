@@ -23,7 +23,7 @@ fi
 # Settings start here
 # Change GIT_REPO and replace "sakaiproject" with your git user name
 # so that you checkout your forked sakai repository
-GIT_REPO=https://github.com/csev/sakai.git
+GIT_REPO=https://github.com/sakaiproject/sakai.git
 
 # Set this to the MYSQL root passsword.  MAMP's default
 # is root so you can leave it alone if you are using MAMP
