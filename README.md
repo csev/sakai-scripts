@@ -14,25 +14,20 @@ Getting Started on Mac (as needed)
 
         xcode-select --install
 
-* Make sure you have Java-8 JDK (not JRE) Installed 
+* Make sure you have Java-11 JDK (not JRE) Installed 
 
     java -version
     javac -version
 
-* Install OpenJDK (if needed) from https://github.com/AdoptOpenJDK/homebrew-openjdk
+* If you need a JDK-11 is is easiest to use using https://sdkman.io/
 
-	brew tap AdoptOpenJDK/openjdk
-	brew cask install adoptopenjdk10
+    curl -s "https://get.sdkman.io" | bash
+    sdk install java 11.0.12-tem
+    
+* Make sure you have Maven (mvn) 3.8 or later installed. If you have Homebrew installed, you can use
 
-* Make sure you have Maven (mvn) 3.3 or later installed. If you have Homebrew installed, you can use
-
-    brew install maven
+    sdk install maven
  
-* If you don't have Homebrew, here are the instructions for various ways to install mvn
-for Mac:
-
-    http://stackoverflow.com/questions/8826881/maven-install-on-mac-os-x
-
 * Create an account on github
 
 * Go to https://github.com/sakaiproject/sakai and "fork" a copy into
@@ -97,7 +92,7 @@ named "dev" in my home directory:
 your login files.  Once you update your login files, close
 your terminal window and reopen your window and type:
 
-Here is the addition to the `~/.bashrc` on ubuntu:
+Add the commands from `profile.txt` to the `~/.bashrc` on ubuntu:
 
     export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
     export JAVA_OPTS="-server -Xmx1028m -XX:MaxMetaspaceSize=512m -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false -Djava.awt.headless=true -Dcom.sun.management.jmxremote"

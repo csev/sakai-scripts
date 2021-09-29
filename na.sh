@@ -43,18 +43,6 @@ else
   cd $MYPATH
 fi
 
-# Get ourselves a MySQL connector jar
-if [ -f keepzips/mysql-connector-java-$MYSQL.jar ] 
-then
-  echo keepzips/mysql-connector-java-$MYSQL.jar exists...
-else 
-  echo Downloading keepzips/mysql-connector-java-$MYSQL.jar ...
-  cd keepzips
-  curl -O https://repo.maven.apache.org/maven2/mysql/mysql-connector-java/$MYSQL/mysql-connector-java-$MYSQL.jar
-  ls -l mysql*
-  cd $MYPATH
-fi
-
 rm -rf apache-tomcat-$TOMCAT/
 
 echo Extracting Tomcat...

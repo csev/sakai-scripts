@@ -5,36 +5,26 @@ if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 # will have installed git by hand to get this script
 # in the first place
 
-sudo apt-get update
-sudo apt-get -y install git
+apt-get update
+apt-get -y install git curl unzip python-software-properties 
 
-# For 14.04 Install Java this way
-#sudo add-apt-repository ppa:webupd8team/java -y
-#sudo apt-get update
-#sudo apt-get install oracle-java8-installer
+# Install sdkman
+curl -s "https://get.sdkman.io" | bash
 
-# For 14.10 and later use this
-sudo apt-get -y install openjdk-8-jdk
-
-sudo apt-get -y install maven
-sudo apt-get -y install curl
-sudo apt-get -y install unzip
-sudo apt-get -y install python-software-properties
+sdk install java 11.0.12-tem
+sdk install maven
 
 # Install mysql
 # Make the password root - or override the root password in 
 # config.sh - a copied and edited version of config-dist.php
-sudo apt-get -y install mysql-server
-sudo apt-get -y install mysql-client
-sudo apt-get -y install libmysql-java
+apt-get -y install mariadb-server
+apt-get -y install mysql-client
+apt-get -y install libmysql-java
 
 # for chrome headless you need this
-sudo apt-get install -y libgbm-dev
-sudo apt-get install -y libxkbcommon-x11-0
-sudo apt-get install -y libgtk-3-0
+apt-get install -y libgbm-dev libxkbcommon-x11-0 libgtk-3-0
 
 # for the Morpheus SASS support you need these as well
-sudo apt-get -y install ruby
-sudo apt-get -y install ruby-dev
-sudo apt-get -y install make
+# Is this needed for Sakai 22 / JDK 11
+apt-get -y install ruby ruby-dev install make
 
