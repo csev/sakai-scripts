@@ -1,12 +1,20 @@
 
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 
-# git should be there - but lets double check - most
-# will have installed git by hand to get this script
-# in the first place
+# If you have git, 
+
+# git clone	https://github.com/csev/sakai-scripts.git
+# cd sakai-scripts 
+# bash ubuntu.sh
+
+# If you don't have git - type these two commands and then
 
 apt-get update
 apt-get -y install git curl unzip zip vim
+
+# git clone	https://github.com/csev/sakai-scripts.git
+# cd sakai-scripts 
+# bash ubuntu.sh
 
 # Install sdkman
 curl -s "https://get.sdkman.io" | bash
