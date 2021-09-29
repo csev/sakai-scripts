@@ -1,6 +1,6 @@
 #! /bin/bash
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
-source config.sh
+source config-dist.sh
 if [ "$PORT" == "" ]; then 
     echo "Bad configuration or wrong shell"; 
     exit 
@@ -36,8 +36,10 @@ DROP DATABASE IF EXISTS $MYSQL_DATABASE;
 
 CREATE DATABASE $MYSQL_DATABASE DEFAULT CHARACTER SET UTF8;
 
-GRANT ALL ON $MYSQL_DATABASE.* TO $MYSQL_USER@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';
-GRANT ALL ON $MYSQL_DATABASE.* TO $MYSQL_USER@'127.0.0.1' IDENTIFIED BY '$MYSQL_PASSWORD';
+GRANT ALL ON $MYSQL_DATABASE.* TO $MYSQL_USER@'localhost';
+GRANT ALL ON $MYSQL_DATABASE.* TO $MYSQL_USER@'127.0.0.1';
+ALTER USER $MYSQL_USER@'localhost' IDENTIFIED BY '$MYSQL_PASSWORD';
+ALTER USER $MYSQL_USER@'127.0.0.1' IDENTIFIED BY '$MYSQL_PASSWORD';
 EOF
 
 echo " "
