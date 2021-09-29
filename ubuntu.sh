@@ -6,7 +6,7 @@ if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 # in the first place
 
 apt-get update
-apt-get -y install git curl unzip zip
+apt-get -y install git curl unzip zip vim
 
 # Install sdkman
 curl -s "https://get.sdkman.io" | bash
@@ -21,10 +21,12 @@ sdk install maven
 apt-get -y install mariadb-server
 apt-get -y install mariadb-client
 
+service mysql start
+
 # for chrome headless you need this
-apt-get install -y libgbm-dev libxkbcommon-x11-0 libgtk-3-0
+## apt-get install -y libgbm-dev libxkbcommon-x11-0 libgtk-3-0
 
 # for the Morpheus SASS support you need these as well
 # Is this needed for Sakai 22 / JDK 11
-apt-get -y install ruby ruby-dev install make
+## apt-get -y install ruby ruby-dev install make
 

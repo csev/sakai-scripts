@@ -30,6 +30,8 @@ else
 fi
 cd $startwd
 
+export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
+
 echo "Running this maven command:"
 echo " "
 echo mvn -Dmaven.tomcat.home=$tomcatdir clean install sakai:deploy

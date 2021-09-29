@@ -1,6 +1,6 @@
 #! /bin/bash
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
-source config-dist.sh
+source config.sh
 if [ "$PORT" == "" ]; then 
     echo "Bad configuration or wrong shell"; 
     exit 
@@ -9,6 +9,8 @@ fi
 echo === Checking MySql configuration ===
 
 rm -f /tmp/mysql
+
+echo $MYSQL_COMMAND
 
 $MYSQL_COMMAND << EOF > /tmp/mysql
 SHOW DATABASES;
@@ -44,4 +46,5 @@ echo "Active MySQL Databases:"
 $MYSQL_COMMAND << EOF 
 SHOW DATABASES;
 EOF
+
 

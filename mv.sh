@@ -35,6 +35,8 @@ echo Compile Sakai from $mywd to $tomcatdir
 
 cd $mywd/trunk
 
+export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
+
 mvn -e -Dmaven.tomcat.home=$tomcatdir $goals
 
 if [[ "$THREADS" > 3 ]] ; then
