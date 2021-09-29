@@ -23,6 +23,8 @@ source "/root/.sdkman/bin/sdkman-init.sh"
 sdk install java 11.0.12-tem
 sdk install maven
 
+source "/root/.sdkman/bin/sdkman-init.sh"
+
 # Install mysql
 # Make the password root - or override the root password in 
 # config.sh - a copied and edited version of config-dist.php
