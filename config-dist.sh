@@ -30,9 +30,8 @@ GIT_REPO=https://github.com/csev/sakai.git
 MYSQL_ROOT_PASSWORD=root
 
 MYSQL=5.1.35
-TOMCAT=8.0.30
-# TOMCAT=8.5.42
 TOMCAT=9.0.21
+THREADS=1
 
 # Leave LOG_DIRECTORY value empty to leave the logs inside tomcat
 # LOG_DIRECTORY=/var/www/html/sakai/logs/tomcat
@@ -45,13 +44,11 @@ MYSQL_PASSWORD=sakaipass
 
 # Defaults for Mac/MAMP MySQL
 if [ -f "/Applications/MAMP/Library/bin/mysql" ] ; then
-    echo "MAMP"
     MYSQL_SOURCE="jdbc:mysql://127.0.0.1:8889/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
     MYSQL_COMMAND="/Applications/MAMP/Library/bin/mysql -S /Applications/MAMP/tmp/mysql/mysql.sock -u root --password=$MYSQL_ROOT_PASSWORD"
 
 # Ubuntu / normal 3306 MariaDB 
 else
-    echo "MARIA"
     MYSQL_COMMAND="mysql -u root"
     MYSQL_SOURCE="jdbc:mysql://127.0.0.1:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
 fi

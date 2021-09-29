@@ -37,11 +37,11 @@ cd $mywd/trunk
 
 export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
 
-if [[ "$THREADS" > 2 ]] ; then
+if [[ "$THREADS" > 1 ]] ; then
     echo Compiling with $THREADS threads
     mvn -T $THREADS e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir $goals
 else
-    echo Compiling with 2 threads
-    mvn -T 2 -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir $goals
+    echo Compiling with 1 threads
+    mvn -T 1 -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir $goals
 fi
 
