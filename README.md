@@ -99,11 +99,6 @@ your github account
         git config --global user.name "John Doe"
         git config --global user.email johndoe@example.com
 
-Tweaking Your Configuration
----------------------------
-
-This section is optional if you want to just get Sakai up and running from the main Repo.
-
 * Open a teminal and navigate to the sakai-scripts directory and:
 
     cp config-dist.sh config.sh
@@ -113,6 +108,11 @@ This section is optional if you want to just get Sakai up and running from the m
     * Start at "Settings start here"
     * Change "sakaiproject" in the GIT REPO  variable to be your github account if you want to run your fork
     * If you are not running MAMP or MariaDB, edit the MySQL root password, urls, ports, etc
+
+Tweaking Your Configuration
+---------------------------
+
+This section is optional if you want to just get Sakai up and running from the main Repo.
 
 * If you want to do a custom `sakai.properties` (perhaps to change the server name) make a copy of the ditributed
 sakai.properties and edit with the editor of your choice.
