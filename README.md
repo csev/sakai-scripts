@@ -119,6 +119,11 @@ sakai.properties and edit with the editor of your choice.
 
     cp sakai-dist.properties sakai.properties
 
+Compiling and Running Sakai
+---------------------------
+
+After the configuration is set up, these steps do the real build and deploy work:
+
 * Run `bash na.sh` to set up the Tomcat
 
 * Run `bash co.sh` to check the Sakai source code out (which repo is checked out
