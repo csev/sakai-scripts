@@ -118,7 +118,7 @@ a database configuration that many are using post Java-11.  Adapt for the port a
         username@javax.sql.BaseDataSource=sakaiuser
         password@javax.sql.BaseDataSource=sakaipass
         vendor@org.sakaiproject.db.api.SqlService=mysql
-        driverClassName@javax.sql.BaseDataSource=com.mariadb.jdbc.Driver
+        driverClassName@javax.sql.BaseDataSource=org.mariadb.jdbc.Driver
         url@javax.sql.BaseDataSource=jdbc:mariadb://127.0.0.1:3306/sakai21?useUnicode=true&characterEncoding=UTF-8
         # url@javax.sql.BaseDataSource=jdbc:mariadb://127.0.0.1:8889/sakai21?useUnicode=true&characterEncoding=UTF-8
         hibernate.dialect=org.hibernate.dialect.MariaDB103Dialect
