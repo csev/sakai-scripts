@@ -14,6 +14,23 @@ MYSQL=5.1.35
    echo "Assuming MySQL Version $MYSQL"
 fi
 
+PROPFILE="sakai-dist.properties"
+if [ -f "sakai.properties" ]
+then
+    echo "Using local sakai.properties"
+    PROPFILE="sakai.properties"
+else
+    echo
+    echo Using $PROPFILE for sakai.properties
+    echo You can create your own sakai.properties if you want
+    echo You could start by making a copy of the default properties
+    echo
+    echo cp $PROPFILE sakai.properties
+    echo
+    echo and edit that file to customize it
+    echo
+fi
+
 echo Setting up fresh TOMCAT Version:$TOMCAT 
 echo Using JAR: $JAR
 
@@ -87,16 +104,10 @@ fi
 mkdir -p apache-tomcat-$TOMCAT/sakai
 
 echo Patching sakai.properties
-PROPFILE="sakai-dist.properties"
-if [ -f "sakai.properties" ]
-then
-    echo "Using local sakai.properties"
-    PROPFILE="sakai.properties"
-fi
 
 echo $MYSQL_SOURCE
 echo $PROPFILE
-sed < $PROPFILE "s'MYSQL_USER'$MYSQL_USER'" | sed "s'MYSQL_PASSWORD'$MYSQL_PASSWORD'" | sed "s'MYSQL_SOURCE'$MYSQL_SOURCE'"> apache-tomcat-$TOMCAT/sakai/sakai.properties
+sed < $PROPFILE "s'MYSQL_USER'$MYSQL_USER'" | sed "s'MYSQL_PASSWORD'$MYSQL_PASSWORD'" | sed "s'MYSQL_SOURCE'$MYSQL_SOURCE'" | sed "s'username@javax.sql.BaseDataSource=sakaiuser'username@javax.sql.BaseDataSource=$MYSQL_USER'" | sed "s'password@javax.sql.BaseDataSource=sakaipass'password@javax.sql.BaseDataSource=$MYSQL_PASSWORD'" > apache-tomcat-$TOMCAT/sakai/sakai.properties
 
 echo "Patching server.xml"
 

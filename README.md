@@ -12,7 +12,7 @@ Getting started on ubuntu in Docker
 
 A quick way to test all this if you have this is to just make a ubuntu in your docker:
 
-    docker run -it ubuntu
+    docker run -it -p 8080:8081 ubuntu
 
 You might want to give your docker images 4GB - ubuntu + Sakai does not fit into 2GB.
 

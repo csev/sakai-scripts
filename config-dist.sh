@@ -14,9 +14,11 @@ then
     exit
 elif [ "$1" == "" ]
 then
-    echo "Using defaults from config-dist.php."
+    echo 
+    echo "Using setup defaults from config-dist.php."
     echo "If you want to override configuration settings, copy"
     echo "config-dist.sh to config.sh and edit config.sh"
+    echo
 fi
 
 # Settings start here
