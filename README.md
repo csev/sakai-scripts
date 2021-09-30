@@ -99,8 +99,10 @@ your github account
         git config --global user.name "John Doe"
         git config --global user.email johndoe@example.com
 
-Compiling and Running Sakai
+Tweaking Your Configuration
 ---------------------------
+
+This section is optional if you want to just get Sakai up and running from the main Repo.
 
 * Open a teminal and navigate to the sakai-scripts directory and:
 
@@ -112,27 +114,15 @@ Compiling and Running Sakai
     * Change "sakaiproject" in the GIT REPO  variable to be your github account if you want to run your fork
     * If you are not running MAMP or MariaDB, edit the MySQL root password, urls, ports, etc
 
-* Optional: Set up a `sakai.properties` file with the sakai configuration you would like to use.  Here is
-a database configuration that many are using post Java-11.  Adapt for the port and database name as needed.
+* If you want to do a custom `sakai.properties` (perhaps to change the server name) make a copy of the ditributed
+sakai.properties and edit with the editor of your choice.
 
-        username@javax.sql.BaseDataSource=sakaiuser
-        password@javax.sql.BaseDataSource=sakaipass
-        vendor@org.sakaiproject.db.api.SqlService=mysql
-        driverClassName@javax.sql.BaseDataSource=org.mariadb.jdbc.Driver
-        url@javax.sql.BaseDataSource=jdbc:mariadb://127.0.0.1:3306/sakai21?useUnicode=true&characterEncoding=UTF-8
-        # url@javax.sql.BaseDataSource=jdbc:mariadb://127.0.0.1:8889/sakai21?useUnicode=true&characterEncoding=UTF-8
-        hibernate.dialect=org.hibernate.dialect.MariaDB103Dialect
+    cp sakai-dist.properties sakai.properties
 
 * Run `bash na.sh` to set up the Tomcat
 
 * Run `bash co.sh` to check the Sakai source code out (which repo is checked out
 is in `config.sh`)
-
-* Run `bash qmv.sh` to compile it all - the first time you do this it will take
-a long time and use a lot of network bandwidth as it downloads a bunch of
-library code in maven.   The first full compile might take 20+ minutes - later
-full compiles will be about 2-3 minutes and partial compiles are 30 seconds or
-less.  If the compile fails due to a download - just run `bash qmv.sh` again
 
 * If you don't already have a database set up, make sure your MariaDB or MAMP is running
 and run `bash db.sh` to create a database. This script lists the databases so you should
@@ -145,6 +135,12 @@ see `sakai21` as one of the databases if things work.  **Note**: If you run
         mysql
         performance_schema
         sakai21
+
+* Run `bash qmv.sh` to compile it all - the first time you do this it will take
+a long time and use a lot of network bandwidth as it downloads a bunch of
+library code in maven.   The first full compile might take 20+ minutes - later
+full compiles will be about 2-3 minutes and partial compiles are 30 seconds or
+less.  If the compile fails due to a download - just run `bash qmv.sh` again
 
 * Run `bash start.sh` to start the Tomcat
 
