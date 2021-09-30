@@ -124,11 +124,6 @@ Compiling and Running Sakai
 
 After the configuration is set up, these steps do the real build and deploy work:
 
-* Run `bash na.sh` to set up the Tomcat
-
-* Run `bash co.sh` to check the Sakai source code out (which repo is checked out
-is in `config.sh`)
-
 * If you don't already have a database set up, make sure your MariaDB or MAMP is running
 and run `bash db.sh` to create a database. This script lists the databases so you should
 see `sakai21` as one of the databases if things work.  **Note**: If you run
@@ -140,6 +135,11 @@ see `sakai21` as one of the databases if things work.  **Note**: If you run
         mysql
         performance_schema
         sakai21
+
+* Run `bash na.sh` to set up the Tomcat
+
+* Run `bash co.sh` to check the Sakai source code out (which repo is checked out
+is in `config.sh`)
 
 * Run `bash qmv.sh` to compile it all - the first time you do this it will take
 a long time and use a lot of network bandwidth as it downloads a bunch of
