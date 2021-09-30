@@ -45,11 +45,11 @@ MYSQL_PASSWORD=sakaipass
 
 # Defaults for Mac/MAMP MySQL
 if [ -f "/Applications/MAMP/Library/bin/mysql" ] ; then
-    MYSQL_SOURCE="jdbc:mysql://127.0.0.1:8889/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
+    MYSQL_SOURCE="jdbc:mariadb://127.0.0.1:8889/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
     MYSQL_COMMAND="/Applications/MAMP/Library/bin/mysql -S /Applications/MAMP/tmp/mysql/mysql.sock -u root --password=$MYSQL_ROOT_PASSWORD"
 
 # Ubuntu / normal 3306 MariaDB 
 else
     MYSQL_COMMAND="mysql -u root"
-    MYSQL_SOURCE="jdbc:mysql://127.0.0.1:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
+    MYSQL_SOURCE="jdbc:mariadb://127.0.0.1:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
 fi
