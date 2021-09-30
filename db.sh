@@ -6,7 +6,7 @@ if [ "$PORT" == "" ]; then
     exit 
 fi
 
-echo === Checking MySql configuration ===
+echo === Checking MariaDB/MySql configuration ===
 
 rm -f /tmp/mysql
 
@@ -18,9 +18,9 @@ EOF
 
 if grep information_schema /tmp/mysql > /dev/null
 then
-    echo "MySQL service is working..."
+    echo "MariaDB/MySQL service is working..."
 else 
-    echo "MySQL is not installed or not configured correctly"
+    echo "MariaDB/MySQL is not installed or not configured correctly"
     echo ""
     echo $MYSQL_COMMAND
     echo "SHOW DATABASES;"
@@ -43,7 +43,7 @@ ALTER USER $MYSQL_USER@'127.0.0.1' IDENTIFIED BY '$MYSQL_PASSWORD';
 EOF
 
 echo " "
-echo "Active MySQL Databases:"
+echo "Active MariaDB/MySQL Databases:"
 
 $MYSQL_COMMAND << EOF 
 SHOW DATABASES;

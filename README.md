@@ -110,6 +110,13 @@ Compiling and Running Sakai
 This script lists the databases so you should see `sakai21` as one of the databases if
 things work.
 
+    Active MySQL Databases:
+    Database
+    information_schema
+    mysql
+    performance_schema
+    sakai21
+
 * Run `bash na.sh` to set up the Tomcat
 
 * Run `bash co.sh` to check the Sakai source code out (which repo is checked out
