@@ -21,7 +21,7 @@ curl -s "https://get.sdkman.io" | bash
 source "/root/.sdkman/bin/sdkman-init.sh"
 
 sdk install java 11.0.12-tem
-sdk install maven
+sdk install maven 3.8.1
 
 source "/root/.sdkman/bin/sdkman-init.sh"
 
