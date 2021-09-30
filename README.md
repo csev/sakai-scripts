@@ -19,14 +19,10 @@ You might want to give your Ubuntu 4GB
 Getting Started on ubuntu Linux
 ===============================
 
-* Create an account on github
-
-* Go to https://github.com/sakaiproject/sakai and "fork" a copy into
-your github account
-
 * Install git using the command
 
-        sudo apt-get -y install git
+        apt-get update
+        apt-get -y install git curl unzip zip vim
 
 * Check out sakai-scripts into some folder and then install the rest of the pre-reqs
 
@@ -42,7 +38,7 @@ Getting Started on Mac (as needed)
 
 * Install git using the command
 
-        xcode-select --install
+    xcode-select --install
 
 * Make sure you have Java-11 JDK (not JRE) Installed 
 
@@ -58,16 +54,6 @@ Getting Started on Mac (as needed)
 
     sdk install maven
  
-* Create an account on github
-
-* Go to https://github.com/sakaiproject/sakai and "fork" a copy into
-your github account
-
-* Set up git with the folowing commands
-
-        git config --global user.name "John Doe"
-        git config --global user.email johndoe@example.com
-
 * Check out sakai-scripts into some folder.   I tend to make a folder
 named "dev" in my home directory:
 
@@ -97,6 +83,15 @@ Continue working with the Common steps below.
 Common Steps For Ubuntu and Mac
 ===============================
 
+* If you want to run your own fork, create an account on github 
+and go to https://github.com/sakaiproject/sakai and "fork" a copy into
+your github account
+
+* Set up git with the folowing commands
+
+        git config --global user.name "John Doe"
+        git config --global user.email johndoe@example.com
+
 * Open a teminal and navigate to the sakai-scripts directory and:
 
     cp config-dist.sh config.sh
@@ -104,16 +99,15 @@ Common Steps For Ubuntu and Mac
 * Edit config.sh with a text editor of your choice
 
     * Start at "Settings start here"
-    * Change "sakaiproject" in the GIT REPO  variable to be your github account
-    * If you are not running MAMP, edit the MySQL root password, urls, ports, etc
+    * Change "sakaiproject" in the GIT REPO  variable to be your github account if you want to run your fork
+    * If you are not running MAMP or MariaDB, edit the MySQL root password, urls, ports, etc
 
-* Make sure your MySQL is running run `bash db.sh` to create a database
+* Make sure your MariaDB is running run `bash db.sh` to create a database
 
 * Run `bash na.sh` to set up the Tomcat
 
-* If you have not already done so, clone the Sakai repository to your account in the browser
-
-* Run `bash co.sh` to check the Sakai source code out
+* Run `bash co.sh` to check the Sakai source code out (which repo is checked out
+is in `config.sh`)
 
 * Run `bash qmv.sh` to compile it all - the first time you do this it will take
 a long time and use a lot of network bandwidth as it downloads a bunch of
@@ -131,18 +125,9 @@ less.  If the compile fails due to a download - just run `bash qmv.sh` again
 
 * Copy `smv.sh` into a folder in your PATH and set execute permission
 so you can recompile any sub-folder in Sakai that has a pom.xml
-by typing "smv.sh" 
-
-Alternately you can just recompile a portion of the source tree using 
-an `mvn` command like the following:
-
-    mvn -Dmaven.tomcat.home=/Users/csev/dev/sakai-scripts/apache-tomcat-9.0.21 clean install sakai:deploy
-
-The `smv.sh` command simply looks through your path to find the correct
-value for `maven.tomcat.home`.
-
-Eventually you can just use the tomcat startup.sh and shutdown.sh
-and run your own tail commands if that is what you like.
+by typing "smv.sh".  The `smv.sh` command simply looks through your
+path to find the correct value for `maven.tomcat.home` and sets up some
+JAVA environment variables.
 
 Description of the Scripts
 ==========================
