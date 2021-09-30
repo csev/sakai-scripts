@@ -115,8 +115,3 @@ EOF
 
 fi
 
-echo 
-echo Make sure to include this when running your Tomcat
-echo
-echo -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false
-echo
