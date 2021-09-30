@@ -30,6 +30,7 @@ Getting Started on ubuntu Linux
         git clone https://github.com/csev/sakai-scripts
         cd sakai-scripts
         bash ubuntu.sh
+        source ~/.sdkman/bin/sdkman-init.sh
 
 Continue with the common steps below.
 
@@ -48,11 +49,14 @@ Getting Started on Mac (as needed)
 * If you need a JDK-11 is is easiest to use using https://sdkman.io/
 
     curl -s "https://get.sdkman.io" | bash
+    source ~/.sdkman/bin/sdkman-init.sh
+
     sdk install java 11.0.12-tem
     
 * Make sure you have Maven (mvn) 3.8 or later installed. If you have Homebrew installed, you can use
 
     sdk install maven
+    source ~/.sdkman/bin/sdkman-init.sh
  
 * Check out sakai-scripts into some folder.   I tend to make a folder
 named "dev" in my home directory:
@@ -62,19 +66,6 @@ named "dev" in my home directory:
         cd dev
         git clone https://github.com/csev/sakai-scripts
 
-* Read and follow the instructions in *profile.txt* to update your login files.
-Once you update your login files, close your terminal window and
-reopen a brand new window and type:
-
-        cd
-        cd dev/sakai-scripts
-        echo $JAVA_OPTS
-
-If you see the settings, you have edited the correct file, if not try
-another of the files.  Keep repeating this process of editing the login file,
-opening a new terminal, and typing 'echo' until the above command shows
-the java settings.
-
 * Install MAMP if you have not already done so
 
 Continue working with the Common steps below.
@@ -83,11 +74,21 @@ Continue working with the Common steps below.
 Common Steps For Ubuntu and Mac
 ===============================
 
+Yu can either run your own fork of Sakai, if you want to make PR's or run your
+own branches.   But if you are just getting started you can just checkout the Sakai
+repo and run it - skip straight to "Compiling and Running Sakai".
+
+Running Your Fork
+-----------------
+
+Skip this section if you just want to checkout the main Sakai repository and
+get it running.
+
 * If you want to run your own fork, create an account on github 
 and go to https://github.com/sakaiproject/sakai and "fork" a copy into
 your github account
 
-* Set up git with the folowing commands
+* Is you want to push commits to your fork, set up git with the folowing commands
 
         git config --global user.name "John Doe"
         git config --global user.email johndoe@example.com
@@ -102,7 +103,12 @@ your github account
     * Change "sakaiproject" in the GIT REPO  variable to be your github account if you want to run your fork
     * If you are not running MAMP or MariaDB, edit the MySQL root password, urls, ports, etc
 
-* Make sure your MariaDB is running run `bash db.sh` to create a database
+Compiling and Running Sakai
+---------------------------
+
+* Make sure your MariaDB or MAMP is running and run `bash db.sh` to create a database
+This script lists the databases so you should see `sakai21` as one of the databases if
+things work.
 
 * Run `bash na.sh` to set up the Tomcat
 
