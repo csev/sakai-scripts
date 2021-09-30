@@ -9,7 +9,6 @@ if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 if [ -f "config.sh" -a "$1" == "" ]
 then
     echo "Taking configuration from local config.sh"
-    source upgrade.sh include
     source config.sh include
     return
     exit
