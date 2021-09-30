@@ -14,7 +14,7 @@ A quick way to test all this if you have this is to just make a ubuntu in your d
 
     docker run -it ubuntu
 
-You might want to give your Ubuntu 4GB
+You might want to give your docker images 4GB - ubuntu + Sakai does not fit into 2GB.
 
 Getting Started on ubuntu Linux
 ===============================
