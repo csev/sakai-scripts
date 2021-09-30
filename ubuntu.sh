@@ -25,18 +25,3 @@ sdk install maven 3.8.1
 
 source "/root/.sdkman/bin/sdkman-init.sh"
 
-# Install mysql
-# Make the password root - or override the root password in 
-# config.sh - a copied and edited version of config-dist.php
-apt-get -y install mariadb-server
-apt-get -y install mariadb-client
-
-service mysql start
-
-# for chrome headless you need this
-## apt-get install -y libgbm-dev libxkbcommon-x11-0 libgtk-3-0
-
-# for the Morpheus SASS support you need these as well
-# Is this needed for Sakai 22 / JDK 11
-## apt-get -y install ruby ruby-dev install make
-

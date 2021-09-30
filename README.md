@@ -32,6 +32,12 @@ Getting Started on ubuntu Linux
         bash ubuntu.sh
         source ~/.sdkman/bin/sdkman-init.sh
 
+* If this is a fresh setup and you have no database you can do the following:
+
+        apt-get -y install mariadb-server
+        apt-get -y install mariadb-client
+        service mysql start
+
 Continue with the common steps below.
 
 Getting Started on Mac (as needed)
@@ -66,7 +72,7 @@ named "dev" in my home directory:
         cd dev
         git clone https://github.com/csev/sakai-scripts
 
-* Install MAMP if you have not already done so
+* If you need a database, install MAMP or something else if you have not already done so
 
 Continue working with the Common steps below.
 
@@ -93,6 +99,9 @@ your github account
         git config --global user.name "John Doe"
         git config --global user.email johndoe@example.com
 
+Compiling and Running Sakai
+---------------------------
+
 * Open a teminal and navigate to the sakai-scripts directory and:
 
     cp config-dist.sh config.sh
@@ -103,19 +112,16 @@ your github account
     * Change "sakaiproject" in the GIT REPO  variable to be your github account if you want to run your fork
     * If you are not running MAMP or MariaDB, edit the MySQL root password, urls, ports, etc
 
-Compiling and Running Sakai
----------------------------
+* Optional: Set up a `sakai.properties` file with the sakai configuration you would like to use.  Here is
+a database configuration that many are using post Java-11.  Adapt for the port and database name as needed.
 
-* Make sure your MariaDB or MAMP is running and run `bash db.sh` to create a database
-This script lists the databases so you should see `sakai21` as one of the databases if
-things work.
-
-        Active MySQL Databases:
-        Database
-        information_schema
-        mysql
-        performance_schema
-        sakai21
+        username@javax.sql.BaseDataSource=sakaiuser
+        password@javax.sql.BaseDataSource=sakaipass
+        vendor@org.sakaiproject.db.api.SqlService=mysql
+        driverClassName@javax.sql.BaseDataSource=com.mariadb.jdbc.Driver
+        url@javax.sql.BaseDataSource=jdbc:mariadb://127.0.0.1:3306/sakai21?useUnicode=true&characterEncoding=UTF-8
+        # url@javax.sql.BaseDataSource=jdbc:mariadb://127.0.0.1:8889/sakai21?useUnicode=true&characterEncoding=UTF-8
+        hibernate.dialect=org.hibernate.dialect.MariaDB103Dialect
 
 * Run `bash na.sh` to set up the Tomcat
 
@@ -127,6 +133,18 @@ a long time and use a lot of network bandwidth as it downloads a bunch of
 library code in maven.   The first full compile might take 20+ minutes - later
 full compiles will be about 2-3 minutes and partial compiles are 30 seconds or
 less.  If the compile fails due to a download - just run `bash qmv.sh` again
+
+* If you don't already have a database set up, make sure your MariaDB or MAMP is running
+and run `bash db.sh` to create a database. This script lists the databases so you should
+see `sakai21` as one of the databases if things work.  **Note**: If you run
+`bash db.sh`  more than once it will drop and re-create the database.
+
+        Active MySQL Databases:
+        Database
+        information_schema
+        mysql
+        performance_schema
+        sakai21
 
 * Run `bash start.sh` to start the Tomcat
 
