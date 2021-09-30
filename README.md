@@ -74,12 +74,12 @@ Continue working with the Common steps below.
 Common Steps For Ubuntu and Mac
 ===============================
 
-Yu can either run your own fork of Sakai, if you want to make PR's or run your
+You can either run your own fork of Sakai, if you want to make PR's or run your
 own branches.   But if you are just getting started you can just checkout the Sakai
 repo and run it - skip straight to "Compiling and Running Sakai".
 
-Running Your Fork
------------------
+Using Your Fork
+---------------
 
 Skip this section if you just want to checkout the main Sakai repository and
 get it running.
@@ -110,12 +110,12 @@ Compiling and Running Sakai
 This script lists the databases so you should see `sakai21` as one of the databases if
 things work.
 
-    Active MySQL Databases:
-    Database
-    information_schema
-    mysql
-    performance_schema
-    sakai21
+        Active MySQL Databases:
+        Database
+        information_schema
+        mysql
+        performance_schema
+        sakai21
 
 * Run `bash na.sh` to set up the Tomcat
 
