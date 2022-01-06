@@ -90,15 +90,17 @@ cp patches/index.html apache-tomcat-$TOMCAT/webapps/ROOT
 
 mkdir -p apache-tomcat-$TOMCAT/lib
 
-# Copy the mysql connector jar into common/lib
-cp keepzips/*.jar apache-tomcat-$TOMCAT/lib
-
 # Find an OJDBC Connector jar in oracle folder if we can
 OJ=`ls oracle/*ojdbc*jar 2>/dev/null | head -1`
 if [ -f "$OJ" ]
 then
    echo "Found oracle jar $OJ"
    cp $OJ apache-tomcat-$TOMCAT/common/lib
+else
+   # Copy the connector jars into common/lib
+   # For example: keepzips/mariadb-java-client-2.7.3.jar
+   echo keepzips/*.jar
+   cp keepzips/*.jar apache-tomcat-$TOMCAT/lib
 fi
 
 mkdir -p apache-tomcat-$TOMCAT/sakai

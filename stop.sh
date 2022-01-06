@@ -7,9 +7,29 @@ if [ "$PORT" == "" ]; then
     exit 
 fi
 
-PROCESS_ID=`lsof -i :$PORT | grep java | awk '{print $2}'`
+# lsof -i 4tcp:8080 -sTCP:LISTEN
+PROCESS_ID=`lsof -i :$PORT | grep -v PID | awk '{print $2}'`
 if [ "$PROCESS_ID" == "" ]; then
-    echo There is no process on $PORT
+    echo There is no process on $PORT checking for hung tomcat processes
+    # Try a second time
+    PROCESS_ID=`ps -a | grep tomcat | grep sakai |  awk '{print $1}'`
+    if [ "$PROCESS_ID" == "" ]; then
+        echo Did not find tomcat processes. Checking for any process on $PORT ...
+        # lsof -i 4tcp:8080 -sTCP:LISTEN
+        PROCESS_ID=`lsof -i :$PORT | grep -v PID | awk '{print $2}'`
+        if [ "$PROCESS_ID" == "" ]; then
+            echo Did not find any process on 8080...
+            return 2>/dev/null || exit
+        else
+            echo Found process on $PORT
+            lsof -i 4tcp:8080 -sTCP:LISTEN
+            echo Shutting down non-tomcat process on $PROCESS_ID
+            kill $PROCESS_ID
+        fi
+    else
+        echo Shutting down process $PROCESS_ID
+        kill $PROCESS_ID
+    fi
     return 2>/dev/null || exit
 fi
 
@@ -20,7 +40,7 @@ fi
 
 # wait 2 seconds and see if we are down
 sleep 2
-PROCESS_ID=`lsof -i :$PORT | grep java | awk '{print $2}'`
+PROCESS_ID=`lsof -i :$PORT | grep -v PID | awk '{print $2}'`
 if [ "$PROCESS_ID" == "" ]; then
     return 2>/dev/null || exit
 else
@@ -30,7 +50,7 @@ else
 fi
 
 # Try a second time
-PROCESS_ID=`lsof -i :$PORT | grep java | awk '{print $2}'`
+PROCESS_ID=`lsof -i :$PORT | grep -v PID | awk '{print $2}'`
 if [ "$PROCESS_ID" == "" ]; then
     return 2>/dev/null || exit
 else
@@ -39,4 +59,5 @@ else
     echo Shutting down process $PROCESS_ID
     kill -9 $PROCESS_ID
 fi
+
 
