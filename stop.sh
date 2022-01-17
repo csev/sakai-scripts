@@ -12,7 +12,7 @@ PROCESS_ID=`lsof -i :$PORT | grep -v PID | awk '{print $2}'`
 if [ "$PROCESS_ID" == "" ]; then
     echo There is no process on $PORT checking for hung tomcat processes
     # Try a second time
-    PROCESS_ID=`ps -a | grep tomcat | grep sakai |  awk '{print $1}'`
+    PROCESS_ID=`ps -a | grep tomcat | grep sakai | grep -v sakai:deploy |  awk '{print $1}'`
     if [ "$PROCESS_ID" == "" ]; then
         echo Did not find tomcat processes. Checking for any process on $PORT ...
         # lsof -i 4tcp:8080 -sTCP:LISTEN
@@ -28,6 +28,7 @@ if [ "$PROCESS_ID" == "" ]; then
         fi
     else
         echo Shutting down process $PROCESS_ID
+        ps -a | grep tomcat | grep sakai  | grep -v sakai:deploy
         kill $PROCESS_ID
     fi
     return 2>/dev/null || exit
@@ -45,6 +46,7 @@ if [ "$PROCESS_ID" == "" ]; then
     return 2>/dev/null || exit
 else
     echo Stopping process $PROCESS_ID
+    lsof -i :$PORT | grep -v PID
     kill $PROCESS_ID
     sleep 2
 fi
@@ -54,6 +56,7 @@ PROCESS_ID=`lsof -i :$PORT | grep -v PID | awk '{print $2}'`
 if [ "$PROCESS_ID" == "" ]; then
     return 2>/dev/null || exit
 else
+    lsof -i :$PORT | grep -v PID
     echo Waiting for process $PROCESS_ID
     sleep 5
     echo Shutting down process $PROCESS_ID
