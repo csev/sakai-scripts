@@ -7,16 +7,14 @@ if [ "$PORT" == "" ]; then
     exit 
 fi
 
-# lsof -i 4tcp:8080 -sTCP:LISTEN
-PROCESS_ID=`lsof -i :$PORT | grep -v PID | awk '{print $2}'`
+PROCESS_ID=`lsof -i :$PORT | grep -v firefox | grep -v PID | awk '{print $2}'`
 if [ "$PROCESS_ID" == "" ]; then
     echo There is no process on $PORT checking for hung tomcat processes
     # Try a second time
     PROCESS_ID=`ps -a | grep tomcat | grep sakai | grep -v sakai:deploy |  awk '{print $1}'`
     if [ "$PROCESS_ID" == "" ]; then
         echo Did not find tomcat processes. Checking for any process on $PORT ...
-        # lsof -i 4tcp:8080 -sTCP:LISTEN
-        PROCESS_ID=`lsof -i :$PORT | grep -v PID | awk '{print $2}'`
+        PROCESS_ID=`lsof -i :$PORT | grep -v firefox | grep -v PID | awk '{print $2}'`
         if [ "$PROCESS_ID" == "" ]; then
             echo Did not find any process on 8080...
             return 2>/dev/null || exit
@@ -41,18 +39,18 @@ fi
 
 # wait 2 seconds and see if we are down
 sleep 2
-PROCESS_ID=`lsof -i :$PORT | grep -v PID | awk '{print $2}'`
+PROCESS_ID=`lsof -i :$PORT | grep -v firefox | grep -v PID | awk '{print $2}'`
 if [ "$PROCESS_ID" == "" ]; then
     return 2>/dev/null || exit
 else
     echo Stopping process $PROCESS_ID
-    lsof -i :$PORT | grep -v PID
+    lsof -i :$PORT | grep -v firefox | grep -v PID
     kill $PROCESS_ID
     sleep 2
 fi
 
 # Try a second time
-PROCESS_ID=`lsof -i :$PORT | grep -v PID | awk '{print $2}'`
+PROCESS_ID=`lsof -i :$PORT | grep -v firefox | grep -v PID | awk '{print $2}'`
 if [ "$PROCESS_ID" == "" ]; then
     return 2>/dev/null || exit
 else
