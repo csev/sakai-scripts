@@ -76,7 +76,7 @@ if [ ! -d apache-tomcat-$TOMCAT ] ; then
 fi
 
 # Demo setup
-echo 'export CATALINA_OPTS="-Dsakai.demo=true"' > apache-tomcat-$TOMCAT/bin/setenv.sh
+echo 'export CATALINA_OPTS="-Dsakai.demo=false"' > apache-tomcat-$TOMCAT/bin/setenv.sh
 
 chmod +x apache-tomcat-$TOMCAT/bin/*.sh
 

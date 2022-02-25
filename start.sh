@@ -20,7 +20,7 @@ echo $SAKAI_HOME
 export TIMEZONE="America/Detroit"
 
 export JMX_REMOTE="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8089 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
-export SAKAI_DEMO="-Dsakai.demo=true"
+export SAKAI_DEMO="-Dsakai.demo=false"
 
 export JMX_REMOTE=""
 export SAKAI_DEMO=""
