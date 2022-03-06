@@ -255,3 +255,12 @@ My rule of thumb is that if I'm messing with a rebase for more than 10 minutes, 
 
 I prefer to rebase but I bail out pretty quickly if it goes wacky.
 
+Notes on merges
+---------------
+
+git reset --hard origin/master
+
+git merge -s recursive -X ours
+git merge -s recursive -X theirs
+
+

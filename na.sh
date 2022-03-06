@@ -125,6 +125,20 @@ cat > apache-tomcat-$TOMCAT/bin/setenv.sh << EOF
 apache-tomcat-$TOMCAT
 CATALINA_OUT=$LOG_DIRECTORY/catalina.out
 EOF
-
 fi
+
+cat << EOF
+
+If you are running this Tomcat behind a load balancer or proxy, make sure
+to have the correct port and add the "secure" and "scheme" options
+in apache-tomcat-$TOMCAT/conf/server.xml
+
+    <Connector port="$PORT" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               secure="true"
+               scheme="https"
+               redirectPort="8443" />
+
+EOF
+
 
