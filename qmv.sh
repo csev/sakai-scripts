@@ -41,7 +41,9 @@ if [[ "$THREADS" > 1 ]] ; then
     echo Compiling with $THREADS threads
     mvn -T $THREADS -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir $goals
 else
-    echo Compiling with 1 threads
-    mvn -T 1 -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir $goals
+    echo Compiling with 1 thread
+    # Given how we register log4j - even 1 thread parallel messes up
+    # mvn -T 1 -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir $goals
+    mvn -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir $goals
 fi
 
