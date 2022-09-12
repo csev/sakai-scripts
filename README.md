@@ -53,8 +53,9 @@ Getting Started on Mac (as needed)
     javac -version
 
 * If you need a JDK-11 is is easiest to use using https://sdkman.io/
-
+    
     curl -s "https://get.sdkman.io" | bash
+   
     source ~/.sdkman/bin/sdkman-init.sh
 
     sdk install java 11.0.12-tem
