@@ -58,7 +58,7 @@ Getting Started on Mac (as needed)
    
     source ~/.sdkman/bin/sdkman-init.sh
 
-    sdk install java 11.0.12-tem
+    sdk install java 11.0.16-tem
     
 * Make sure you have Maven (mvn) 3.8 or later installed. If you have Homebrew installed, you can use
 
