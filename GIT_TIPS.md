@@ -235,6 +235,9 @@ git fetch --all
 # I may need to resolve conflicts if someone else is editing the same files
 git rebase upstream/master
 
+# to prefer upstream master use this
+git rebase -Xours upstream/master
+
 # If all is good, I can update Github against with my changes
 # This needs --force per Noah
 git push --force origin SAK-xxx
