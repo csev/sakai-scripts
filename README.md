@@ -45,25 +45,23 @@ Getting Started on Mac (as needed)
 
 * Install git using the command
 
-    xcode-select --install
+        xcode-select --install
 
 * Make sure you have Java-11 JDK (not JRE) Installed 
 
-    java -version
-    javac -version
+        java -version
+        javac -version
 
 * If you need a JDK-11 is is easiest to use using https://sdkman.io/
     
-    curl -s "https://get.sdkman.io" | bash
-   
-    source ~/.sdkman/bin/sdkman-init.sh
-
-    sdk install java 11.0.16-tem
+        curl -s "https://get.sdkman.io" | bash
+        source ~/.sdkman/bin/sdkman-init.sh
+        sdk install java 11.0.16-tem
     
 * Make sure you have Maven (mvn) 3.8 or later installed. If you have Homebrew installed, you can use
 
-    sdk install maven
-    source ~/.sdkman/bin/sdkman-init.sh
+        sdk install maven
+        source ~/.sdkman/bin/sdkman-init.sh
  
 * Check out sakai-scripts into some folder.   I tend to make a folder
 named "dev" in my home directory:
@@ -102,7 +100,7 @@ your github account
 
 * Open a teminal and navigate to the sakai-scripts directory and:
 
-    cp config-dist.sh config.sh
+        cp config-dist.sh config.sh
 
 * Edit config.sh with a text editor of your choice
 
@@ -118,7 +116,7 @@ This section is optional if you want to just get Sakai up and running from the m
 * If you want to do a custom `sakai.properties` (perhaps to change the server name) make a copy of the ditributed
 sakai.properties and edit with the editor of your choice.
 
-    cp sakai-dist.properties sakai.properties
+        cp sakai-dist.properties sakai.properties
 
 Compiling and Running Sakai
 ---------------------------
