@@ -14,23 +14,6 @@ MYSQL=5.1.35
    echo "Assuming MySQL Version $MYSQL"
 fi
 
-PROPFILE="sakai-dist.properties"
-if [ -f "sakai.properties" ]
-then
-    echo "Using local sakai.properties"
-    PROPFILE="sakai.properties"
-else
-    echo
-    echo Using $PROPFILE for sakai.properties
-    echo You can create your own sakai.properties if you want
-    echo You could start by making a copy of the default properties
-    echo
-    echo cp $PROPFILE sakai.properties
-    echo
-    echo and edit that file to customize it
-    echo
-fi
-
 echo Setting up fresh TOMCAT Version:$TOMCAT 
 echo Using JAR: $JAR
 
@@ -105,16 +88,38 @@ fi
 
 mkdir -p apache-tomcat-$TOMCAT/sakai
 
-echo Patching sakai.properties
+PROPFILE="sakai-dist.properties"
+if [ -f "sakai.properties" ]
+then
+    echo "Using local sakai.properties"
+    PROPFILE="sakai.properties"
+else
+    echo
+    echo Using $PROPFILE for sakai.properties
+    echo You can create your own sakai.properties if you want
+    echo You could start by making a copy of the default properties
+    echo
+    echo cp $PROPFILE sakai.properties
+    echo
+    echo and edit that file to customize it
+    echo
+fi
+
+echo Patching sakai.properties with SQL access information if needed
 
 echo $MYSQL_SOURCE
 echo $PROPFILE
 sed < $PROPFILE "s'MYSQL_USER'$MYSQL_USER'" | sed "s'MYSQL_PASSWORD'$MYSQL_PASSWORD'" | sed "s'MYSQL_SOURCE'$MYSQL_SOURCE'" | sed "s'username@javax.sql.BaseDataSource=sakaiuser'username@javax.sql.BaseDataSource=$MYSQL_USER'" | sed "s'password@javax.sql.BaseDataSource=sakaipass'password@javax.sql.BaseDataSource=$MYSQL_PASSWORD'" > apache-tomcat-$TOMCAT/sakai/sakai.properties
 
-echo "Patching server.xml"
-
-cp apache-tomcat-$TOMCAT/conf/server.xml patches/server.xml
-sed < patches/server.xml "s/8080/$PORT/" | sed "s/8005/$SHUTDOWN_PORT/" > apache-tomcat-$TOMCAT/conf/server.xml
+if [ -f "server.xml" ]
+then
+    echo "Using local server.xml"
+    cp server.xml apache-tomcat-$TOMCAT/conf/server.xml
+else
+    echo "Patching server.xml"
+    cp apache-tomcat-$TOMCAT/conf/server.xml patches/server.xml
+    sed < patches/server.xml "s/8080/$PORT/" | sed "s/8005/$SHUTDOWN_PORT/" > apache-tomcat-$TOMCAT/conf/server.xml
+fi
 
 if [ "$LOG_DIRECTORY" != "" ]; then 
     echo "Logging to " $LOG_DIRECTORY
@@ -128,6 +133,12 @@ EOF
 fi
 
 cat << EOF
+
+If you are running 23.x or master after 20-Sep-2022, add this listener to 
+apache-tomcat-$TOMCAT/conf/server.xml - this is optional until 23.0 
+is released at which point this will be required.
+
+    <Listener className="org.sakaiproject.modi.SakaiStartListener" />
 
 If you are running this Tomcat behind a load balancer or proxy, make sure
 to have the correct port and add the "secure" and "scheme" options
