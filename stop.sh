@@ -7,6 +7,11 @@ if [ "$PORT" == "" ]; then
     exit 
 fi
 
+echo 
+echo If the server refuses to go down with this script, you might want to use
+echo '   ' pgrep java
+echo 
+
 PROCESS_ID=`lsof -i :$PORT | grep -v firefox | grep -v PID | awk '{print $2}'`
 if [ "$PROCESS_ID" == "" ]; then
     echo There is no process on $PORT checking for hung tomcat processes
