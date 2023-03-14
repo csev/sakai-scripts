@@ -23,7 +23,7 @@ Here are my notes on putting Sakai behind Cloudflare.
     *.sakaicloud.com/imsblis/*
     Browser Integrity Check: Off, Always Online: Off, Security Level: Essentially Off, Cache Level: Bypas
 
-- In the Sakai server in the file ./apache-tomcat-8.0.30/conf/server.xml set up the connector like this
+- In the Sakai server in the file ./apache-tomcat-9.0.21/conf/server.xml set up the connector like this
 
 <Connector port="80" 
     protocol="HTTP/1.1"   
