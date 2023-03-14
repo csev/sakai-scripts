@@ -11,6 +11,7 @@ if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 
 apt-get update
 apt-get -y install git curl unzip zip vim
+apt install mariadb-client-core-10.3
 
 # git clone	https://github.com/csev/sakai-scripts.git
 # cd sakai-scripts 
