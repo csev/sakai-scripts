@@ -13,9 +13,10 @@ apt-get update
 apt-get -y install git curl unzip zip vim
 apt install mariadb-client-core-10.3
 
-# git clone	https://github.com/csev/sakai-scripts.git
-# cd sakai-scripts 
-# bash ubuntu.sh
+# In Ubuntu 20 the fonts may not get installed out of the box
+# https://github.com/adoptium/adoptium-support/issues/70
+apt-get install cabextract fonts-liberation libfontenc1 x11-common xfonts-encodings xfonts-utils
+apt-get install fontconfig
 
 # Install sdkman
 curl -s "https://get.sdkman.io" | bash
