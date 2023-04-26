@@ -13,7 +13,12 @@ fi
 
 echo >> /tmp/shellout
 echo ==== Starting $1 at `date` >> /tmp/shellout
-stdbuf -i0 -o0 -e0 bash $1 2>> /tmp/shellout >> /tmp/shellout
+if ! [ -x "$(command -v stdbuf)" ]; then
+  bash $1 2>> /tmp/shellout >> /tmp/shellout
+else
+  stdbuf -i0 -o0 -e0 bash $1 2>> /tmp/shellout >> /tmp/shellout
+fi
+
 echo ==== Finished $1 at `date` >> /tmp/shellout
 
 
