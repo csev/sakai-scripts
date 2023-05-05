@@ -1,5 +1,7 @@
 date
-echo "Hello world"
+echo "Hello world wraptest.sh"
+pwd
+echo "Parameters: " $@
 
 echo "Sleeping for 10 seconds to test buffer flushing in shell scripts..."
 sleep 10

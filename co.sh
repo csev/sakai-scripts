@@ -6,11 +6,27 @@ if [ "$PORT" == "" ]; then
     exit 
 fi
 
-echo Checking out from $GIT_REPO
+if [ $# -eq 1 ]
+  then
+    GIT_REPO=$1
+fi
 
 # Do a full check out of all of the source
-rm -rf trunk
+
+if [ -d "trunk" ]; then
+  tfile="$(mktemp -d /tmp/old-trunk-XXXXXXXXX)"
+  echo "Removing trunk folder...."
+  mv trunk $tfile
+  rm -rf trunk
+  rm -rf /tmp/old-trunk-* &
+fi
+
+echo Checking out from $GIT_REPO ...
 git clone $GIT_REPO trunk
+if [ ! -d "trunk" ]; then
+   echo "Checkout failed."
+   exit
+fi
 
 # Setting up the upstream master
 if [ "$GIT_REPO" != "https://github.com/sakaiproject/sakai.git" ]; then 
