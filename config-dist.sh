@@ -53,3 +53,11 @@ else
     MYSQL_COMMAND="mysql -u root"
     MYSQL_SOURCE="jdbc:mariadb://127.0.0.1:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
 fi
+
+# Make sure sdkman is setup - even if we are running disconnected from a terminal
+
+echo Setting up sdkman
+export HOME=~
+unset SDKMAN_DIR
+[ -f ~/.sdkman/bin/sdkman-init.sh ] && source ~/.sdkman/bin/sdkman-init.sh
+echo JAVA_HOME $JAVA_HOME

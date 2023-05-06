@@ -29,6 +29,7 @@ export SAKAI_DEMO=""
 export JAVA_OPTS="-server -Xms1g -Xmx2g -Djava.awt.headless=true -XX:+UseCompressedOops -Dhttp.agent=Sakai -Dorg.apache.jasper.compiler.Parser.STRICT_QUOTE_ESCAPING=false -Dsakai.home=${SAKAI_HOME} -Duser.timezone=${TIMEZONE} -Dsakai.cookieName=SAKAI2SESSIONID ${SAKAI_DEMO} ${JMX_REMOTE} -Dwicket.configuration=${WICKET_CONFIG} ${JDK11_OPTS} ${JDK11_GC}"
 
 # export JAVA_OPTS="$JAVA_OPTS -verbose:class"
+echo JAVA_OPTS:
 echo $JAVA_OPTS
 
 if [ -f apache-tomcat-$TOMCAT/bin/startup.sh ]; then 

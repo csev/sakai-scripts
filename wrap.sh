@@ -1,6 +1,7 @@
 #! /bin/bash
 
-source ~/.bash_profile
+[ -f ~/.bashrc ] && source ~/.bashrc
+[ -f ~/.bash_profile ] && source ~/.bash_profile
 
 if [ $# -eq 0 ]
   then
@@ -20,13 +21,13 @@ for word in "${words[@]}"; do
 
 if [[ $word == *sh ]] # * is used for pattern matching
 then
-  if ! [ -x "$(command -v stdbuf)" ]; then
+  ## if ! [ -x "$(command -v stdbuf)" ]; then
     echo "calling bash $word" >> /tmp/shellout
     bash $word 2>> /tmp/shellout >> /tmp/shellout
-  else
-    echo "stdbuf $word" >> /tmp/shellout
-    stdbuf -i0 -o0 -e0 bash $word 2>> /tmp/shellout >> /tmp/shellout
-  fi
+  ## else
+    ## echo "stdbuf $word" >> /tmp/shellout
+    ## stdbuf -i0 -o0 -e0 bash $word 2>> /tmp/shellout >> /tmp/shellout
+  ## fi
 else
   echo "Executing directly $word" >> /tmp/shellout
   $word 2>> /tmp/shellout >> /tmp/shellout
