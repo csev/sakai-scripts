@@ -55,9 +55,11 @@ else
 fi
 
 # Make sure sdkman is setup - even if we are running disconnected from a terminal
+if [ "$JAVA_HOME" = "" ] ;then
+        echo "Setting up sdkman..."
+        export HOME=~
+        unset SDKMAN_DIR
+        [ -f ~/.sdkman/bin/sdkman-init.sh ] && source ~/.sdkman/bin/sdkman-init.sh
+        echo JAVA_HOME $JAVA_HOME
+fi
 
-echo Setting up sdkman
-export HOME=~
-unset SDKMAN_DIR
-[ -f ~/.sdkman/bin/sdkman-init.sh ] && source ~/.sdkman/bin/sdkman-init.sh
-echo JAVA_HOME $JAVA_HOME
