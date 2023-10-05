@@ -150,6 +150,15 @@ in apache-tomcat-$TOMCAT/conf/server.xml
                scheme="https"
                redirectPort="8443" />
 
+There are several sample server.xml files for various scenarios:
+
+    server-localhost.xml
+    server-internal-https.xml  (i.e. using certbot)
+    server-external-https.xml  (i.e. like CloudFlare)
+
+You can copy one of these to server.xml so that it is always installed into
+your fresh Tomcat.
+
 EOF
 
 
