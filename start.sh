@@ -17,7 +17,8 @@ export WICKET_CONFIG="development"
 # Define where you sakai home is
 export SAKAI_HOME="`pwd`/apache-tomcat-$TOMCAT/sakai"
 echo $SAKAI_HOME
-export TIMEZONE="America/Detroit"
+
+echo Timezone can be set in config.sh.  Currently:  $TIMEZONE
 
 export JMX_REMOTE="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=8089 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
 export SAKAI_DEMO="-Dsakai.demo=false"

@@ -26,6 +26,8 @@ fi
 # so that you checkout your forked sakai repository
 GIT_REPO=https://github.com/sakaiproject/sakai.git
 
+TIMEZONE="US/Eastern"
+
 # Set this to the MYSQL root passsword.  MAMP's default
 # is root so you can leave it alone if you are using MAMP
 MYSQL_ROOT_PASSWORD=root
