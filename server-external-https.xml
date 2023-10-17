@@ -35,7 +35,9 @@
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
 
+  <!-- As of 17-Oct-23 this is still on hold per Earle.
   <Listener className="org.sakaiproject.modi.SakaiStartListener" />
+  -->
 
   <!-- Global JNDI resources
        Documentation at /docs/jndi-resources-howto.html
