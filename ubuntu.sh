@@ -12,6 +12,7 @@ if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 apt-get update
 apt-get -y install git curl unzip zip vim
 apt install mariadb-client-core-10.3
+apt-get install -y nfs-common
 
 # In Ubuntu 20 the fonts may not get installed out of the box
 # https://github.com/adoptium/adoptium-support/issues/70

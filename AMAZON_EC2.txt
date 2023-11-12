@@ -1,69 +1,26 @@
-If you want to do this on Amazon EC2 and Ubuntu
 
-Pick a ami from this page:
-http://uec-images.ubuntu.com/releases/10.04/release/
-Matt suggested this ami for me:  ami-3e02f257
+https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-mount-helper-ec2-linux.html
+https://docs.aws.amazon.com/efs/latest/ug/nfs-automount-efs.html
 
-Once you have built your instance through Quick Start, 
-you will want to open port 8080.  It seems as though
-you cannot open anything other than the default ports
-during Quick Start.  But you can add port 8080 later
-in your EC2 dashboard - go to "Security Groups", select 
-the one you use for the instance and you will be able to 
-allow 8080 in through that.
+EFS
 
-Then to connect in, use SSH with the pem file you just 
-downloaded.   Here is my ssh command:
+sudo bash
+mkdir /efs
 
-ssh -i si791.pem ubuntu@ec2-55-15-154-55.compute-1.amazonaws.com
+fs-0b7ab45fed5635ba2.efs.us-east-2.amazonaws.com
 
-Once logged in, do the following:
+mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 fs-0b7ab45fed5635ba2.efs.us-east-2.amazonaws.com:/ /efs
 
-sudo apt-get install subversion
-svn co https://source.sakaiproject.org/contrib//csev/trunk/scripts/sakai-full/
-cd sakai-full 
-bash ubuntu.sh
+mkdir /efs/plus.sakiacloud.com/
+/efs/plus.sakiacloud.com/blobs
 
-The ubuntu.sh does a bunch of package installs - just press 'Y'
-to get through that.
+Edit /etc/fstab and add the auto mount entry to whatever entries are there
 
-Then fix your .profile and .bashrc files (just to be safe) with the 
-JAVA_OPTS and MAVEN_OPTS from the readme and add:
+LABEL=cloudimg-rootfs   /        ext4   defaults,discard        0 1
+fs-0b7ab45fed5635ba2.efs.us-east-2.amazonaws.com:/ /efs nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,_netdev,noresvport 0 0
 
-JAVA_HOME=/usr/lib/jvm/java-6-openjdk ; export JAVA_HOME
+In sakai.properties:
 
-Since we just put in a new, JDK
+bodyPath@org.sakaiproject.content.api.ContentHostingService=/efs/plus.sakiacloud.com/blobs/
 
-You may want to log out and then log back in to check your
-JAVA_HOME, MAVEN_OPTS, and JAVA_OPTS variables are 
-properly set.
-
-Then check out all of Sakai:
-
-bash co.sh
-
-Then make a fresh Apache Tomact:
-
-bash na.sh
-
-Then compile all of Sakai:
-
-bash qmv.sh
-
-Then start your Tomcat
-
-cd apache-tomcat-7.0.21
-cd logs
-rm *
-../bin/startup.sh
-tail -f catalina.out
-
-When you are done....
-
-../bin/shutdown.sh
-
-Thanks to Matt for his mentoring on this.
-
-/Chuck
-Sat Feb  5 16:34:32 EST 2011
 
