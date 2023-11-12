@@ -133,13 +133,6 @@ EOF
 fi
 
 cat << EOF
-
-If you are running 23.x or master after 20-Sep-2022, add this listener to 
-apache-tomcat-$TOMCAT/conf/server.xml - this is optional until 23.0 
-is released at which point this will be required.
-
-    <Listener className="org.sakaiproject.modi.SakaiStartListener" />
-
 If you are running this Tomcat behind a load balancer or proxy, make sure
 to have the correct port and add the "secure" and "scheme" options
 in apache-tomcat-$TOMCAT/conf/server.xml
