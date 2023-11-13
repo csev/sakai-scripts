@@ -20,9 +20,8 @@
      Documentation at /docs/config/server.html
  -->
 <!--
-    (Under construction)
-    This is a server.xml for an internally terminated https where you
-    need to acquire a certificate (i.e. like from Certbot).
+    This is a server.xml for a internally terminated https where you
+    use a self-signed certificate.
 -->
 <Server port="8005" shutdown="SHUTDOWN">
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
@@ -98,16 +97,16 @@
          Either JSSE or OpenSSL style configuration may be used regardless of
          the SSLImplementation selected. JSSE style configuration is used below.
 
-	 keytool -genkey -keyalg RSA -noprompt -alias tomcat -dname "CN=localhost, OU=NA, O=NA, L=NA, S=NA, C=NA" -keystore keystore.jks -validity 9999 -storepass changeme -keypass changeme
-         keytool -list -v -keystore keystore.jks
-	 cp keytool.jks apache-tomcat.../conf/keytool.jks
+	 keytool -genkey -keyalg RSA -noprompt -alias tomcat -dname "CN=localhost, OU=NA, O=NA, L=NA, S=NA, C=NA" -keystore keystore-self.jks -validity 9999 -storepass changeme -keypass changeme
+         keytool -list -v -keystore keystore-self.jks
+	 cp keystore-self.jks apache-tomcat.../conf/keystore-self.jks
 
     -->
     <Connector port="443" protocol="org.apache.coyote.http11.Http11NioProtocol"
                maxThreads="150" SSLEnabled="true">
         <SSLHostConfig>
 	    <Certificate 
-	        certificateKeystoreFile="conf/keystore.jks"
+	        certificateKeystoreFile="conf/keystore-self.jks"
 		certificateKeyAlias="tomcat"
 		certificateKeystorePassword="changeme"
 	        type="RSA"
