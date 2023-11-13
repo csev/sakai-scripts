@@ -28,3 +28,10 @@ sdk install maven 3.8.1
 
 source "/root/.sdkman/bin/sdkman-init.sh"
 
+# Installing certbot - https://certbot.eff.org/lets-encrypt/ubuntufocal-apache
+snap install core
+snap refresh core
+snap install --classic certbot
+ln -s /snap/bin/certbot /usr/bin/certbot
+
+
