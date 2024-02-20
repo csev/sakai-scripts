@@ -33,7 +33,7 @@ mywd=`pwd`
 tomcatdir=$mywd/apache-tomcat-$TOMCAT/
 echo Compile Sakai from $mywd to $tomcatdir
 
-cd $mywd/trunk
+cd "$mywd/trunk"
 
 export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
 
