@@ -179,9 +179,13 @@ see `sakai21` as one of the databases if things work.  **Note**: If you run
         performance_schema
         sakai21
 
-The `db.sh` script will tell you the correct settings for the SQL values in `sakai.properties`
-since it created the Sakai database and set up the user that can access it.  Make sure to edit your copy of
-`sakai.properties` befor creating the Tomcat
+        You will need add / update these lines in your sakai.properties
+
+        username@javax.sql.BaseDataSource=sakaiuser
+        password@javax.sql.BaseDataSource=sakaipass
+        url@javax.sql.BaseDataSource=jdbc:mariadb://DESKTOP-HCO3S3K.local:3306/sakai21?useUnicode=true\&characterEncoding=UTF-8
+
+Make sure to edit your copy of `sakai.properties` and edit/update the database strings before creating the Tomcat
 
 * Run `bash na.sh` to set up the Tomcat
 

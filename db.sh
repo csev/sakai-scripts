@@ -53,7 +53,7 @@ EOF
 
 echo " "
 echo "You will need add / update these lines in your sakai.properties"
-
+echo " "
 echo username@javax.sql.BaseDataSource=$MYSQL_USER
 echo password@javax.sql.BaseDataSource=$MYSQL_PASSWORD
 echo url@javax.sql.BaseDataSource=$MYSQL_SOURCE
