@@ -16,7 +16,7 @@ A quick way to test all this if you have this is to just make a ubuntu in your d
 
 You might want to give your docker images 4GB - ubuntu + Sakai does not fit into 2GB.
 
-Getting Started on ubuntu Linux
+Getting Started on Ubuntu Linux
 ===============================
 
 * Install git using the command
@@ -39,6 +39,7 @@ Getting Started on ubuntu Linux
         service mysql start
 
 Continue with the common steps below.
+
 
 Getting Started on Mac (as needed)
 ==================================
@@ -75,9 +76,49 @@ named "dev" in my home directory:
 
 Continue working with the Common steps below.
 
+Getting Started with WSL (Windows Subsystem for Linux)
+======================================================
 
-Common Steps For Ubuntu and Mac
-===============================
+Install WSL and Ubuntu.  There are lots of good sources on the Internet
+on how to do this but there are some sticking points where you might get
+stuck:
+
+* Make sure Virtualization is enabled in your BIOS - it usually is off to
+be more secure - but if it is not on WSL2 will break with lots of cryptic
+messages - just boot into the BIOS and enable it.
+
+* Go into Control Panel -> Programs and Features and enable `Virtual
+Machine Platform` and `Windows Subsystem for Linux` - The WSL option
+might only show up after you install WSL.
+
+You can install WSL and Ubuntu from the Windows Application Store or
+using the `wsl` command in the command line.  Once you fix the bios
+and WIndows features settings, it runs pretty smoothly.
+
+Then install a SQL/PHP server like XAMPP.  It will give you a nice way
+to use Windows to so SQL things.  It will be on port 3306.
+
+Since the WSL system and the Linux systemm have different addresses,
+you need a second root-like user so we make one in the XAMPP SQL UI:
+
+    CREATE USER 'super'@'%' IDENTIFIED BY 'super';
+    GRANT ALL PRIVILEGES ON *.* TO 'super'@'%' WITH GRANT OPTION;
+
+Yes - don't do this on a system connected to the Internet :)
+
+Once WSL and Ubuntu are installed, start Ubuntu and then install
+the required dependencies:
+
+    git clone https://github.com/csev/sakai-scripts
+    cd sakai-scripts
+    sudo bash
+    bash ubuntu.sh
+    source ~/.sdkman/bin/sdkman-init.sh
+
+Continue with the common steps below.
+
+Common Steps For Ubuntu, WSL, and Mac
+=====================================
 
 You can either run your own fork of Sakai, if you want to make PR's or run your
 own branches.   But if you are just getting started you can just checkout the Sakai
@@ -108,6 +149,9 @@ your github account
     * Change "sakaiproject" in the GIT REPO  variable to be your github account if you want to run your fork
     * If you are not running MAMP or MariaDB, edit the MySQL root password, urls, ports, etc
 
+The configuration knows about WSL and the `super` account so if you followed those
+instructions above `config.sh` auto-detects WSL and follows that convention.
+
 Tweaking Your Configuration
 ---------------------------
 
@@ -134,6 +178,10 @@ see `sakai21` as one of the databases if things work.  **Note**: If you run
         mysql
         performance_schema
         sakai21
+
+The `db.sh` script will tell you the correct settings for the SQL values in `sakai.properties`
+since it created the Sakai database and set up the user that can access it.  Make sure to edit your copy of
+`sakai.properties` befor creating the Tomcat
 
 * Run `bash na.sh` to set up the Tomcat
 

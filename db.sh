@@ -1,9 +1,9 @@
 #! /bin/bash
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 source config-dist.sh
-if [ "$PORT" == "" ]; then 
-    echo "Bad configuration or wrong shell"; 
-    exit 
+if [ "$PORT" == "" ]; then
+    echo "Bad configuration or wrong shell";
+    exit
 fi
 
 echo === Checking MariaDB/MySql configuration ===
@@ -19,7 +19,7 @@ EOF
 if grep information_schema /tmp/mysql > /dev/null
 then
     echo "MariaDB/MySQL service is working..."
-else 
+else
     echo "MariaDB/MySQL is not installed or not configured correctly"
     echo ""
     echo $MYSQL_COMMAND
@@ -47,8 +47,15 @@ EOF
 echo " "
 echo "Active MariaDB/MySQL Databases:"
 
-$MYSQL_COMMAND << EOF 
+$MYSQL_COMMAND << EOF
 SHOW DATABASES;
 EOF
+
+echo " "
+echo "You will need add / update these lines in your sakai.properties"
+
+echo username@javax.sql.BaseDataSource=$MYSQL_USER
+echo password@javax.sql.BaseDataSource=$MYSQL_PASSWORD
+echo url@javax.sql.BaseDataSource=$MYSQL_SOURCE
 
 
