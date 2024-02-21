@@ -99,11 +99,11 @@ You can install WSL and Ubuntu from the Windows Application Store or
 using the `wsl` command in the command line.  Once you fix the bios
 and WIndows features settings, it runs pretty smoothly.
 
-Then install a SQL/PHP server like XAMPP.  It will give you a nice way
+Then install a SQL/PHP server like XAMPP on Windows.  It will give you a nice way
 to use Windows to so SQL things.  It will be on port 3306.
 
-Since the WSL system and the Linux systemm have different addresses,
-you need a second root-like user so we make one in the XAMPP SQL UI:
+Since the WSL system and the Linux system have different IP addresses,
+you need a second root-like user so we make one in the Windows SQL UI:
 
     CREATE USER 'super'@'%' IDENTIFIED BY 'super';
     GRANT ALL PRIVILEGES ON *.* TO 'super'@'%' WITH GRANT OPTION;
@@ -119,10 +119,8 @@ the required dependencies:
     bash ubuntu.sh
     source ~/.sdkman/bin/sdkman-init.sh
 
-You should be able to exit from the super user shell and run
-the remaining commands as your egular user.
-
-Continue with the common steps below.
+Continue with the common steps below.  Note we are doing all the steps
+below in WSL as root.
 
 Common Steps For Ubuntu, WSL, and Mac
 =====================================
