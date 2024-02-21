@@ -7,6 +7,10 @@ This is a set of scripts to set up a developer instance of Sakai on
 your system or set up a nighly build.  Sakai can run on a 2GB RAM system
 but is a lot more comfortable with a 4GB or more app server.
 
+The outlie of this document is that you jump to the setup for Docker,
+Ubuntu, Mac, or WSL and do some pre-steps and then continue with the
+common steps, below.
+
 Getting started on ubuntu in Docker
 ======================================
 
