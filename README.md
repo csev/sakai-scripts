@@ -93,7 +93,7 @@ get it running.
 and go to https://github.com/sakaiproject/sakai and "fork" a copy into
 your github account
 
-* Is you want to push commits to your fork, set up git with the folowing commands
+* If you want to push commits to your fork, set up git with the folowing commands
 
         git config --global user.name "John Doe"
         git config --global user.email johndoe@example.com
