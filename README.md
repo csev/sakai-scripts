@@ -152,24 +152,16 @@ your github account
 The configuration knows about WSL and the `super` account so if you followed those
 instructions above `config.sh` auto-detects WSL and follows that convention.
 
-Tweaking Your Configuration
----------------------------
-
-This section is optional if you want to just get Sakai up and running from the main Repo.
-
-* If you want to do a custom `sakai.properties` (perhaps to change the server name) make a copy of the ditributed
-sakai.properties and edit with the editor of your choice.
-
-        cp sakai-dist.properties sakai.properties
-
 Compiling and Running Sakai
 ---------------------------
 
-After the configuration is set up, these steps do the real build and deploy work:
+* Make a copy of the ditributed `sakai.properties` and edit with the editor of your choice.
 
-* If you don't already have a database set up, make sure your MariaDB or MAMP is running
+    cp sakai-dist.properties sakai.properties
+
+* If you don't already have a database set up, make sure your MariaDB, MAMP or XAMPP is running
 and run `bash db.sh` to create a database. This script lists the databases so you should
-see `sakai21` as one of the databases if things work.  **Note**: If you run
+see `sakai23` as one of the databases if things work.  **Note**: If you run
 `bash db.sh`  more than once it will drop and re-create the database.
 
         Active MySQL Databases:
@@ -177,13 +169,13 @@ see `sakai21` as one of the databases if things work.  **Note**: If you run
         information_schema
         mysql
         performance_schema
-        sakai21
+        sakai23
 
         You will need add / update these lines in your sakai.properties
 
         username@javax.sql.BaseDataSource=sakaiuser
         password@javax.sql.BaseDataSource=sakaipass
-        url@javax.sql.BaseDataSource=jdbc:mariadb://DESKTOP-HCO3S3K.local:3306/sakai21?useUnicode=true\&characterEncoding=UTF-8
+        url@javax.sql.BaseDataSource=jdbc:mariadb://DESKTOP-HCO3S3K.local:3306/sakai23?useUnicode=true\&characterEncoding=UTF-8
 
 Make sure to edit your copy of `sakai.properties` and edit/update the database strings before creating the Tomcat
 
