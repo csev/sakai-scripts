@@ -34,6 +34,7 @@ MYSQL_ROOT_PASSWORD=root
 MYSQL_ROOT_USER=root
 MYSQL_HOST=localhost
 MYSQL_PORT=3306
+LOCAL_HOST_ACCESS=localhost
 
 # For WSL, we can't use root because our IP is different
 # than the Windows IP.  So we make a new user as powerful as root.
@@ -47,6 +48,7 @@ if [[ $(grep -i Microsoft /proc/version) ]]; then
     MYSQL_ROOT_PASSWORD=super
     MYSQL_ROOT_USER=super
     MYSQL_HOST=`hostname`.local
+    LOCAL_HOST_ACCESS='%'
 fi
 
 MYSQL=5.1.35
