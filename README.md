@@ -119,6 +119,9 @@ the required dependencies:
     bash ubuntu.sh
     source ~/.sdkman/bin/sdkman-init.sh
 
+You should be able to exit from the super user shell and run
+the remaining commands as your egular user.
+
 Continue with the common steps below.
 
 Common Steps For Ubuntu, WSL, and Mac
