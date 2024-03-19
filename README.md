@@ -180,9 +180,11 @@ see `sakai23` as one of the databases if things work.  **Note**: If you run
 
         You will need add / update these lines in your sakai.properties
 
-        username@javax.sql.BaseDataSource=sakaiuser
-        password@javax.sql.BaseDataSource=sakaipass
-        url@javax.sql.BaseDataSource=jdbc:mariadb://DESKTOP-HCO3S3K.local:3306/sakai23?useUnicode=true\&characterEncoding=UTF-8
+        username@javax.sql.....
+        password@javax.sql.....
+        url@javax.sql....
+
+At the end of `db.sh` it prints out three lines that need to insert into `sakai.properties`.
 
 Make sure to edit your copy of `sakai.properties` and edit/update the database strings before creating the Tomcat
 
