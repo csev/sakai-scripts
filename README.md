@@ -160,6 +160,8 @@ instructions above `config.sh` auto-detects WSL and follows that convention.
 Compiling and Running Sakai
 ---------------------------
 
+(If you are in WSL make sure to be runnning as root with an `sudo bash`)
+
 * Make a copy of the ditributed `sakai.properties` and edit with the editor of your choice.
 
     cp sakai-dist.properties sakai.properties
