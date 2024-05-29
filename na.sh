@@ -69,6 +69,7 @@ cp patches/apache-$TOMCAT-context.xml apache-tomcat-$TOMCAT/conf/context.xml
 echo Setting up webapps/ROOT
 rm -r apache-tomcat-$TOMCAT/webapps/ROOT/*
 cp patches/index.html apache-tomcat-$TOMCAT/webapps/ROOT
+cp patches/favicon.ico apache-tomcat-$TOMCAT/webapps/ROOT
 
 mkdir -p apache-tomcat-$TOMCAT/lib
 
@@ -130,6 +131,21 @@ apache-tomcat-$TOMCAT
 CATALINA_OUT=$LOG_DIRECTORY/catalina.out
 EOF
 fi
+
+
+echo "Setting up root redirect to /portal in apache-tomcat-$TOMCAT/conf/Catalina/localhost"
+echo
+mkdir apache-tomcat-$TOMCAT/conf/Catalina
+mkdir apache-tomcat-$TOMCAT/conf/Catalina/localhost
+cp patches/rewrite.config apache-tomcat-$TOMCAT/conf/Catalina/localhost/rewrite.config
+
+echo Rewrite rules in apache-tomcat-$TOMCAT/conf/Catalina/localhost/rewrite.config
+echo
+cat apache-tomcat-$TOMCAT/conf/Catalina/localhost/rewrite.config
+echo
+echo "If your Host entry in server.xml is different than localhost you might need some manual configuration"
+echo
+
 
 cat << EOF
 If you are running this Tomcat behind a load balancer or proxy, make sure
