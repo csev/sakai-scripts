@@ -86,6 +86,11 @@ else
    cp keepzips/*.jar apache-tomcat-$TOMCAT/lib
 fi
 
+if ls -d *.jks 1>/dev/null 2>/dev/null; then
+    echo Copied keystores into apache-tomcat-$TOMCAT/conf: *.jks
+    cp *.jks apache-tomcat-$TOMCAT/conf
+fi
+
 mkdir -p apache-tomcat-$TOMCAT/sakai
 
 PROPFILE="sakai-dist.properties"
