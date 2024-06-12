@@ -127,7 +127,9 @@ Then in a Windows browser navigate to:
 
     http://localhost/phpMyAdmin
 
-Login as `root` / `root` And verify there is a `tsugi` database.
+Login as `root` / `root` And verify there is a `tsugi` database.  You can use this to do
+MySQL maintenance and queries - because the port is shared between WSL and Windows, this
+can be done from Windows.
 
 Navigate to 
 
@@ -187,9 +189,6 @@ your github account
     * Start at "Settings start here"
     * Change "sakaiproject" in the GIT REPO  variable to be your github account if you want to run your fork
     * If you are not running MAMP or MariaDB, edit the MySQL root password, urls, ports, etc
-
-The configuration knows about WSL and the `super` account so if you followed those
-instructions above `config.sh` auto-detects WSL and follows that convention.
 
 Compiling and Running Sakai
 ---------------------------

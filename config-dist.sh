@@ -36,21 +36,6 @@ MYSQL_HOST=localhost
 MYSQL_PORT=3306
 LOCAL_HOST_ACCESS=localhost
 
-# For WSL, we can't use root because our IP is different
-# than the Windows IP.  So we make a new user as powerful as root.
-#
-# CREATE USER 'super'@'%' IDENTIFIED BY 'super';
-# GRANT ALL PRIVILEGES ON *.* TO 'super'@'%' WITH GRANT OPTION;
-#
-
-if [[ $(grep -i Microsoft /proc/version) ]]; then
-    echo "Bash is running on WSL"
-    MYSQL_ROOT_PASSWORD=super
-    MYSQL_ROOT_USER=super
-    MYSQL_HOST=`hostname`.local
-    LOCAL_HOST_ACCESS='%'
-fi
-
 MYSQL=5.1.35
 TOMCAT=9.0.21
 THREADS=1
