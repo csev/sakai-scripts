@@ -234,10 +234,16 @@ less.  If the compile fails due to a download - just run `bash qmv.sh` again
 
 * Run `bash start.sh` to start the Tomcat
 
-* Run `bash tail.sh` to watch the logs (Press CTRL-C to stop the tail).  Watch for tracebacks as the tail
-goes by.   You can always take a look at `apache-tomcat-*version*/loga/catalina.out` if the tail output
+* Run `bash tail.sh` to watch the logs (Press CTRL-C to stop the tail).  Watch for tracebacks as the `tail`
+goes by.   You can always take a look at `apache-tomcat-*version*/logs/catalina.out` if the tail output
 goes by too quickly.  One the first start up on a fresh database, you might want to take a look at the
 tables in the `sakai23` database to see Sakai add all the tables on the first start.
+
+    Sakai is up when you see a message in the log that looks as follows:
+
+        ... AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+
+
 
 * Navigate to http://localhost:8080/portal
 
