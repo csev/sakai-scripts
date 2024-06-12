@@ -123,25 +123,35 @@ a localhost only setup with no access to port 3306 from the Internet.
     source ubuntu-env.sh
     bash /usr/local/bin/tsugi-dev-configure.sh return
     
-Then install a SQL/PHP server like XAMPP on Windows.  It will give you a nice way
-to use Windows to so SQL things.  It will be on port 3306.
+Then in a Windows browser navigate to:
 
-Since the WSL system and the Linux system have different IP addresses,
-you need a second root-like user so we make one in the Windows SQL UI:
+    http://localhost/phpMyAdmin
 
-    CREATE USER 'super'@'%' IDENTIFIED BY 'super';
-    GRANT ALL PRIVILEGES ON *.* TO 'super'@'%' WITH GRANT OPTION;
+Login as `root` / `root` And verify there is a `tsugi` database.
 
-Yes - don't do this on a system connected to the Internet :)
+Navigate to 
 
-Once WSL and Ubuntu are installed, start Ubuntu and then install
-the required dependencies:
+    http://localhost/tsugi/admin
 
+The admin unlock is `tsugi` - you should see the Tsugi Administration Console.  This verifies
+the PHP, MySQL, Tsugi, PHPMyAdmin, and Apache installs are working and accessible from Windows.
+
+Our next step is to install the Sakai scripts and dependencies.
+
+    sudo bash
+    cd /root
     git clone https://github.com/csev/sakai-scripts
     cd sakai-scripts
-    sudo bash
     bash ubuntu.sh
     source ~/.sdkman/bin/sdkman-init.sh
+
+Verify that Java is installed with:
+
+    java --version
+
+It should respond with something like:
+
+    openjdk 11.0.12 2021-07-20
 
 Continue with the common steps below.  Note we are doing all the steps
 below in WSL as root.
