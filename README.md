@@ -80,8 +80,8 @@ named "dev" in my home directory:
 
 Continue working with the Common steps below.
 
-Getting Started with WSL (Windows Subsystem for Linux)
-======================================================
+Getting Started with WSL for Sakai Developers
+=============================================
 
 Install WSL and Ubuntu.  There are lots of good sources on the Internet
 on how to do this but there are some sticking points where you might get
@@ -91,14 +91,38 @@ stuck:
 be more secure - but if it is not on WSL2 will break with lots of cryptic
 messages - just boot into the BIOS and enable it.
 
-* Go into Control Panel -> Programs and Features and enable `Virtual
-Machine Platform` and `Windows Subsystem for Linux` - The WSL option
+* Go into Start -> Control Panel -> Programs -> Programs and Features and enable `Virtual
+Machine Platform`, `Hyber-V` (Win11), and `Windows Subsystem for Linux` - The WSL option
 might only show up after you install WSL.
 
 You can install WSL and Ubuntu from the Windows Application Store or
-using the `wsl` command in the command line.  Once you fix the bios
-and WIndows features settings, it runs pretty smoothly.
+using the `wsl` command in the command line (Start -> cmd).  
 
+    wsl --install
+
+You may need to restart your system, then do Start -> WSL - the first time
+after install you will need to make a Linux User and Password.  Don't forget these.
+Once you can log into WSL and see a prompt like:
+
+    csev@WSLSakaiger:~$
+
+You are in.  We are going to install Tsugi in order to get Apache, PHP, MySQL,
+and PHPMyAdmin installed into your WSL.
+
+    sudo bash
+    cd /root
+    git clone https://github.com/tsugiproject/tsugi-build.git
+    cd tsugi-build
+    bash ubuntu/build-dev.sh
+
+Once the software has been installed you need to configure the installation.  This will be
+a localhost only setup with no access to port 3306 from the Internet.
+
+    cd /root
+    cp tsugi-build/ubuntu/ubuntu-env-dev.sh ubuntu-env.sh
+    source ubuntu-env.sh
+    bash /usr/local/bin/tsugi-dev-configure.sh return
+    
 Then install a SQL/PHP server like XAMPP on Windows.  It will give you a nice way
 to use Windows to so SQL things.  It will be on port 3306.
 
