@@ -61,7 +61,7 @@ elif [ -f "/Applications/XAMPP/xamppfiles/bin/mysql" ] ; then
     echo "You are using XAMPP..."
     MYSQL_ROOT_PASSWORD=
     MYSQL_SOURCE="jdbc:mariadb://$MYSQL_HOST:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
-    MYSQL_COMMAND="/Applications/XAMPP/xamppfiles/bin/mysql  --port=$MYSQL_PORT
+    MYSQL_COMMAND="/Applications/XAMPP/xamppfiles/bin/mysql  --port=$MYSQL_PORT"
 
 # Ubuntu / normal 3306 MariaDB
 else
