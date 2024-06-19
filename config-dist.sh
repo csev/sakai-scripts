@@ -51,8 +51,15 @@ MYSQL_PASSWORD=sakaipass
 
 # Defaults for Mac/MAMP MySQL
 if [ -f "/Applications/MAMP/Library/bin/mysql" ] ; then
+    echo "You are using MAMP..."
     MYSQL_SOURCE="jdbc:mariadb://127.0.0.1:8889/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
     MYSQL_COMMAND="/Applications/MAMP/Library/bin/mysql -S /Applications/MAMP/tmp/mysql/mysql.sock -u $MYSQL_SUPER_USER --password=$MYSQL_ROOT_PASSWORD"
+
+# Defaults for Mac/MAMP MySQL
+elif [ -f "/Applications/XAMPP/xamppfiles/bin/mysql" ] ; then
+    echo "You are using XAMPP..."
+    MYSQL_SOURCE="jdbc:mariadb://$MYSQL_HOST:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
+    MYSQL_COMMAND="/Applications/XAMPP/xamppfiles/bin/mysql -S /Applications/MAMP/tmp/mysql/mysql.sock -u root --password=$MYSQL_ROOT_PASSWORD"
 
 # Ubuntu / normal 3306 MariaDB
 else
