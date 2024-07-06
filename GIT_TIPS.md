@@ -11,17 +11,14 @@ as follows:
     git diff .
     git commit .
 
+
 Making a branch 
 
     git checkout -b SAK-12345
 
-Gitting a diff from already committed changes.  Do a 
+Getting a diff of the most recent(1) commit
 
-    git log
-
-Find the commit sha and then:
-
-    git diff 74fb...b752^ 74fb...b752
+    git diff HEAD~1
 
 Switching to a branch
 
