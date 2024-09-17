@@ -37,11 +37,7 @@ else
     packaging="You probably need to restart your Tomcat after building this folder"
 fi
 
-export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
-
 echo "Running these commands:"
-echo " "
-echo export MAVEN_OPTS='-Xms512m -Xmx1024m -Djava.util.Arrays.useLegacyMergeSort=true'
 echo " "
 echo mvn -Dmaven.tomcat.home=$tomcatdir clean install sakai:deploy
 echo " "
