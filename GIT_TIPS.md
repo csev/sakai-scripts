@@ -264,3 +264,44 @@ git merge -s recursive -X ours
 git merge -s recursive -X theirs
 
 
+Switching from 25.x to 23.x (From Sharadhi and Shivangi)
+--------------------------------------------------------
+
+1. sakai-scripts/trunk — bash stop.sh (ctrl +c on the tail and stop the server)
+2. sakai-scripts/trunk — git status
+3. sakai-scripts/trunk — git fetch - -all
+4. sakai-scripts/trunk — git checkout 23.x
+5. sakai-scripts/trunk — git log
+6. Exit git log with “q”
+7. Go to GitHub on your forked Sakai repository, and check for the 23.x branch under the
+branches tab. Your repo now is up-to-date 23.x with Sakai’s 23.x
+
+sakai-scripts/trunk — git remote -v
+9. sakai-scripts/trunk — git push origin 23.x
+10. sakai-scripts/trunk — Do a cd ../ to go to sakai-scripts repo
+   
+11. sakai-scripts — diff sakai.properties apache-tomcat-9.0.2/sakai/sakai.properties
+(just to check if there’s been any misalignment between your sakai.properties and the one in Apache)
+12. sakai-scripts — bash na.sh (to start a fresh Tomcat instance)
+13. sakai-scripts — bash qmv.sh (to recompile everything and fill up your Tomcat)
+14. sakai-scripts — bash start.sh and bash tail.sh
+15. sakai-scripts/trunk — git status (You should be on 23.x with the message “Your branch is
+up to date with upstream/23.x”. If you don’t see this, do a git checkout 23.x)
+16. Make your code changes and then create a new branch as mentioned in step 18.
+17. sakai-scripts/trunk — smv (to compile your changes)
+18. sakai-scripts/trunk — git checkout -b SAK-number
+19. sakai-scripts/trunk — git commit -am “SAK-number with a message”
+20. sakai-scripts/trunk — git push origin SAK-number
+21. Now go to GitHub, go to the branches tab, and find your new branch.
+22. Click on Contribute and open a pull request.
+
+23. Change base: master to 23.x
+
+Switching from 23.x to 25.x
+1. sakai-scripts/trunk — git checkout SAK-number (This SAK-number can be anything that you were previously working on 25.x. You don’t have to switch to master first.)
+2. sakai-scripts/trunk — git status (to verify you have switched to your previous 25.x branch)
+3. sakai-scripts/ —- Stop the tail with ctrl + c and stop the server with bash stop.sh.
+4. sakai-scripts/ — bash na.sh
+5. sakai-scripts/ — bash qmv.sh (after everything compiles, your Apache and codebase will
+now switch back to 25.x)
+
