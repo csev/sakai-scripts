@@ -110,7 +110,12 @@ else
     echo
 fi
 
+echo Cleaning up folders from the Tomcat distro
+
+rm -r apache-tomcat-$TOMCAT/webapps/docs/ apache-tomcat-$TOMCAT/webapps/examples/ apache-tomcat-$TOMCAT/webapps/host-manager/ apache-tomcat-$TOMCAT/webapps/manager/
+
 echo Patching sakai.properties with SQL access information if needed
+
 
 echo $MYSQL_SOURCE
 echo $PROPFILE
