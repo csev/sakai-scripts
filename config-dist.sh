@@ -37,12 +37,7 @@ MYSQL_PORT=3306
 LOCAL_HOST_ACCESS=localhost
 
 MYSQL=5.1.35
-
-fetch_latest_tomcat_version() {
-  curl -s "https://tomcat.apache.org/download-90.cgi" | grep -oP 'v9\.\d+\.\d+' | head -1 | tr -d 'v'
-}
-TOMCAT=$(fetch_latest_tomcat_version)
-
+TOMCAT=9.0.21
 THREADS=1
 
 # Leave LOG_DIRECTORY value empty to leave the logs inside tomcat
