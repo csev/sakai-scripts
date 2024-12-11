@@ -1,6 +1,15 @@
 #! /bin/bash
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 
+INSTALLED_JAVA_VER=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}' | awk -F '.' '{sub("^$", "0", $2); print $1$2}')
+
+if [[ $INSTALLED_JAVA_VER -lt 170 ]];
+then
+    echo These scripts expect Java 17.0 or higher
+    java --version
+    exit
+fi
+
 # If you want to change this file (and you should)
 # Simply copy it to config.sh and make your changes
 # there so git ignores your local copy.
