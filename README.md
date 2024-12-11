@@ -52,22 +52,22 @@ Getting Started on Mac (as needed)
 
         xcode-select --install
 
-* Make sure you have Java-11 JDK (not JRE) Installed 
+* Make sure you have Java-11 JDK (not JRE) Installed
 
         java -version
         javac -version
 
 * If you need a JDK-11 is is easiest to use using https://sdkman.io/
-    
+
         curl -s "https://get.sdkman.io" | bash
         source ~/.sdkman/bin/sdkman-init.sh
         sdk install java 11.0.16-tem
-    
+
 * Make sure you have Maven (mvn) 3.8 or later installed. If you have Homebrew installed, you can use
 
         sdk install maven
         source ~/.sdkman/bin/sdkman-init.sh
- 
+
 * Check out sakai-scripts into some folder.   I tend to make a folder
 named "dev" in my home directory:
 
@@ -96,7 +96,7 @@ Machine Platform`, `Hyber-V` (Win11), and `Windows Subsystem for Linux` - The WS
 might only show up after you install WSL.
 
 You can install WSL and Ubuntu from the Windows Application Store or
-using the `wsl` command in the command line (Start -> cmd).  
+using the `wsl` command in the command line (Start -> cmd).
 
     wsl --install
 
@@ -122,7 +122,7 @@ a localhost only setup with no access to port 3306 from the Internet.
     cp tsugi-build/ubuntu/ubuntu-env-dev.sh ubuntu-env.sh
     source ubuntu-env.sh
     bash /usr/local/bin/tsugi-dev-configure.sh return
-    
+
 Then in a Windows browser navigate to:
 
     http://localhost/phpMyAdmin
@@ -131,7 +131,7 @@ Login as `root` / `root` And verify there is a `tsugi` database.  You can use th
 MySQL maintenance and queries - because the port is shared between WSL and Windows, this
 can be done from Windows.
 
-Navigate to 
+Navigate to
 
     http://localhost/tsugi/admin
 
@@ -171,7 +171,7 @@ Using Your Fork
 Skip this section if you just want to checkout the main Sakai repository and
 get it running.
 
-* If you want to run your own fork, create an account on github 
+* If you want to run your own fork, create an account on github
 and go to https://github.com/sakaiproject/sakai and "fork" a copy into
 your github account
 
@@ -266,7 +266,7 @@ ubuntu.sh
 This runs a bunch of apt-get commands to load the pre-requisites for Sakai
 for Ubuntu.  If you are running something other than Ubuntu, you can look
 at this and use whatever package manager that is on the system to
-install the necessary pre-requisites.  
+install the necessary pre-requisites.
 
 config-dist.sh
 --------------
@@ -285,7 +285,7 @@ of the Tomcat logs in config.sh allows you check these scripts out
 into several directories and make different nightly builds.  If you get
 really tricky, you can override sakai-dist.properties by copying it to
 sakai.properties (which git will ignore) and change lots of things like
-switching from MySql to Oracle.  
+switching from MySql to Oracle.
 
 Note that db.sh does not understand oracle so if you are running oracle,
 you might want to change MYSQL\_COMMAND to be "cat" so it does not try
@@ -391,7 +391,24 @@ right Tomcat automatically, you can run this script over and over interactively
 or in a cron job.
 
 
+Java Versions and Sakai
+=======================
 
+There are a number of branches for this set of scripts.
 
+* SDK-8 For Sakai 21 and earlier
+* SDK-11 For Sakai 22 and Sakai 23
+* SDK-17 For Sakai 25 and later
 
+The master branch will be the current under Sakai version in active development.
+
+You can switch back and forth between JDK-17 and JDK-11 as follows:
+
+    git checkout JDK-11
+    sdk use java 11.0.12-tem
+
+or:
+
+    git checkout JDK-17
+    sdk use java 17.0.13-tem
 
