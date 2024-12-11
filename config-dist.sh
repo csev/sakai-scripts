@@ -5,7 +5,7 @@ INSTALLED_JAVA_VER=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}' | aw
 
 if [[ $INSTALLED_JAVA_VER -lt 170 ]];
 then
-    echo These scripts expect Java 17.0 or higher
+    echo 'These scripts expect Java 17.0 or higher (Sakai-25 and later)'
     java --version
 
     echo Try these commands:
