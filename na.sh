@@ -1,9 +1,9 @@
 #! /bin/bash
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 source config-dist.sh
-if [ "$PORT" == "" ]; then 
-    echo "Bad configuration or wrong shell"; 
-    exit 
+if [ "$PORT" == "" ]; then
+    echo "Bad configuration or wrong shell";
+    exit
 fi
 
 MYPATH=`pwd`
@@ -14,14 +14,14 @@ MYSQL=5.1.35
    echo "Assuming MySQL Version $MYSQL"
 fi
 
-echo Setting up fresh TOMCAT Version:$TOMCAT 
+echo Setting up fresh TOMCAT Version:$TOMCAT
 echo Using JAR: $JAR
 
 source stop.sh
 
 # Download Tomcat using curl if necessary
 
-if [ -d keepzips ] 
+if [ -d keepzips ]
 then
   echo keepzips directory exists...
 else
@@ -32,10 +32,10 @@ fi
 TOMCATURL=https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT:0:1}/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
 echo $TOMCATURL
 
-if [ -f keepzips/apache-tomcat-$TOMCAT.zip ] 
+if [ -f keepzips/apache-tomcat-$TOMCAT.zip ]
 then
   echo keepzips/apache-tomcat-$TOMCAT.zip exists...
-else 
+else
   echo Downloading keepzips/tomcat-$TOMCAT.zip ...
   cd keepzips
   curl -O $TOMCATURL
@@ -62,9 +62,31 @@ echo 'export CATALINA_OPTS="-Dsakai.demo=false"' > apache-tomcat-$TOMCAT/bin/set
 
 chmod +x apache-tomcat-$TOMCAT/bin/*.sh
 
-# Not needed after 22-Sep-2105
-# patch -p0 < patches/tomcat-$TOMCAT.patch
-cp patches/apache-$TOMCAT-context.xml apache-tomcat-$TOMCAT/conf/context.xml
+if [ -f  patches/apache-$TOMCAT-context.xml ]
+then
+    cp patches/apache-$TOMCAT-context.xml apache-tomcat-$TOMCAT/conf/context.xml
+else
+    echo "ERROR: You need a patch for apache-$TOMCAT-context.xml"
+    exit
+fi
+
+FROMFILE="patches/apache-$TOMCAT-jdk17-setenv.sh"
+if [ -f  $FROMFILE ]
+then
+    cp $FROMFILE apache-tomcat-$TOMCAT/bin/setenv.sh
+else
+    echo "ERROR: You need a patch for $FROMFILE"
+    exit
+fi
+
+FROMFILE="patches/apache-$TOMCAT-jdk17-catalina.properties"
+if [ -f  $FROMFILE ]
+then
+    cp $FROMFILE apache-tomcat-$TOMCAT/conf/catalina.properties
+else
+    echo "ERROR: You need a patch for $FROMFILE"
+    exit
+fi
 
 echo Setting up webapps/ROOT
 rm -r apache-tomcat-$TOMCAT/webapps/ROOT/*
@@ -131,10 +153,10 @@ else
     sed < patches/server.xml "s/8080/$PORT/" | sed "s/8005/$SHUTDOWN_PORT/" > apache-tomcat-$TOMCAT/conf/server.xml
 fi
 
-if [ "$LOG_DIRECTORY" != "" ]; then 
+if [ "$LOG_DIRECTORY" != "" ]; then
     echo "Logging to " $LOG_DIRECTORY
     cp apache-tomcat-$TOMCAT/conf/logging.properties patches/logging.properties
-    sed < patches/logging.properties "s'\${catalina.base}/logs'$LOG_DIRECTORY'g" > apache-tomcat-$TOMCAT/conf/logging.properties    
+    sed < patches/logging.properties "s'\${catalina.base}/logs'$LOG_DIRECTORY'g" > apache-tomcat-$TOMCAT/conf/logging.properties
     echo "Setting up setenv.sh"
 cat > apache-tomcat-$TOMCAT/bin/setenv.sh << EOF
 apache-tomcat-$TOMCAT
