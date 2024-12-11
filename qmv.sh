@@ -35,13 +35,18 @@ echo Compile Sakai from $mywd to $tomcatdir
 
 cd "$mywd/trunk"
 
-if [[ "$THREADS" > 1 ]] ; then
+if command -v mvnd >/dev/null 2>&1; then
+    echo mvnd -e -Dmaven.test.skip=true -Dmaven.tomcat.home=/Users/csev/sakai/scripts/apache-tomcat-9.0.21/ -Dsakai.cleanup=true clean install sakai:deploy
+    mvnd -e -Dmaven.test.skip=true -Dmaven.tomcat.home=/Users/csev/sakai/scripts/apache-tomcat-9.0.21/ -Dsakai.cleanup=true clean install sakai:deploy
+elif [[ "$THREADS" > 1 ]] ; then
     echo Compiling with $THREADS threads
+    echo mvn -T $THREADS -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true $goals
     mvn -T $THREADS -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true $goals
 else
     echo Compiling with 1 thread
     # Given how we register log4j - even 1 thread parallel messes up
     # mvn -T 1 -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir $goals
+    echo mvn -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true $goals
     mvn -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true $goals
 fi
 

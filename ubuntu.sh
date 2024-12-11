@@ -23,8 +23,9 @@ apt-get install fontconfig
 curl -s "https://get.sdkman.io" | bash
 source "/root/.sdkman/bin/sdkman-init.sh"
 
-sdk install java 11.0.12-tem
+sdk install java 17.0.13-tem
 sdk install maven 3.8.1
+sdk install mvnd
 
 source "/root/.sdkman/bin/sdkman-init.sh"
 
