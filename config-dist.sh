@@ -1,6 +1,22 @@
 #! /bin/bash
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 
+INSTALLED_JAVA_VER=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}' | awk -F '.' '{sub("^$", "0", $2); print $1$2}')
+
+
+if [[ $INSTALLED_JAVA_VER -lt 110 || $INSTALLED_JAVA_VER -ge 120 ]];
+then
+    echo These scripts expect Java 11.0
+    java --version
+    echo
+    echo Try these commands:
+    echo
+    echo sdk install java 11.0.12-tem
+    echo sdk use java 11.0.12-tem
+    echo
+    exit
+fi
+
 # If you want to change this file (and you should)
 # Simply copy it to config.sh and make your changes
 # there so git ignores your local copy.
