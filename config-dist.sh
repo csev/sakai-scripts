@@ -7,6 +7,12 @@ if [[ $INSTALLED_JAVA_VER -lt 170 ]];
 then
     echo These scripts expect Java 17.0 or higher
     java --version
+
+    echo Try these commands:
+    echo
+    echo sdk install java 17.0.13-tem
+    echo sdk use java 17.0.13-tem 
+    echo
     exit
 fi
 
