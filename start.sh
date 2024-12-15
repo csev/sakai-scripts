@@ -46,4 +46,10 @@ if [ -f apache-tomcat-$TOMCAT/bin/startup.sh ]; then
     echo "Starting Tomcat"
     rm ./apache-tomcat-$TOMCAT/logs/*
     ./apache-tomcat-$TOMCAT/bin/startup.sh
+
+    # Display logs if -logs flag is passed
+    if [ "$1" == "-logs" ]; then
+        echo "Displaying logs..."
+        bash tail.sh
+    fi
 fi

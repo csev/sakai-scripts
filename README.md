@@ -42,6 +42,8 @@ Getting Started on Ubuntu Linux
         apt-get -y install mariadb-client
         service mysql start
 
+        Note: Update MySQL commands with `sudo` if required.
+
 Continue with the common steps below.
 
 
@@ -238,6 +240,8 @@ less.  If the compile fails due to a download - just run `bash qmv.sh` again
 goes by.   You can always take a look at `apache-tomcat-*version*/logs/catalina.out` if the tail output
 goes by too quickly.  One the first start up on a fresh database, you might want to take a look at the
 tables in the `sakai23` database to see Sakai add all the tables on the first start.
+
+* You can also run `bash start.sh -logs` to start Tomcat and immediately watch the logs
 
     Sakai is up when you see a message in the log that looks as follows:
 
