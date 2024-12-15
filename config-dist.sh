@@ -36,7 +36,7 @@ MYSQL_HOST=localhost
 MYSQL_PORT=3306
 LOCAL_HOST_ACCESS=localhost
 
-MYSQL=5.1.35
+MYSQL=$(mysql --version | grep -oP '\d+\.\d+\.\d+' | head -1)
 TOMCAT=9.0.21
 THREADS=1
 
