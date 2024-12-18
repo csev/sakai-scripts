@@ -52,16 +52,16 @@ Getting Started on Mac (as needed)
 
         xcode-select --install
 
-* Make sure you have Java-11 JDK (not JRE) Installed
+* Make sure you have Java-17 JDK (not JRE) Installed
 
         java -version
         javac -version
 
-* If you need a JDK-11 is is easiest to use using https://sdkman.io/
+* If you need a JDK-17 is is easiest to use using https://sdkman.io/
 
         curl -s "https://get.sdkman.io" | bash
         source ~/.sdkman/bin/sdkman-init.sh
-        sdk install java 11.0.16-tem
+        sdk install java 17.0.13-tem
 
 * Make sure you have Maven (mvn) 3.8 or later installed. If you have Homebrew installed, you can use
 
@@ -398,9 +398,9 @@ There are a number of branches for this set of scripts.
 
 * SDK-8 For Sakai 21 and earlier
 * SDK-11 For Sakai 22 and Sakai 23
-* SDK-17 For Sakai 25 and later
+* main For Sakai 25 and later
 
-The master branch will be the current under Sakai version in active development.
+The main branch will be the current under Sakai version in active development.
 
 You can switch back and forth between JDK-17 and JDK-11 as follows:
 
@@ -409,6 +409,6 @@ You can switch back and forth between JDK-17 and JDK-11 as follows:
 
 or:
 
-    git checkout JDK-17
+    git checkout main
     sdk use java 17.0.13-tem
 

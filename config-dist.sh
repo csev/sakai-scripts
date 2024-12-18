@@ -1,6 +1,21 @@
 #! /bin/bash
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 
+INSTALLED_JAVA_VER=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}' | awk -F '.' '{sub("^$", "0", $2); print $1$2}')
+
+if [[ $INSTALLED_JAVA_VER -lt 170 ]];
+then
+    echo 'These scripts expect Java 17.0 or higher (Sakai-25 and later)'
+    java --version
+
+    echo Try these commands:
+    echo
+    echo sdk install java 17.0.13-tem
+    echo sdk use java 17.0.13-tem 
+    echo
+    exit
+fi
+
 # If you want to change this file (and you should)
 # Simply copy it to config.sh and make your changes
 # there so git ignores your local copy.
@@ -36,7 +51,8 @@ MYSQL_HOST=localhost
 MYSQL_PORT=3306
 LOCAL_HOST_ACCESS=localhost
 
-MYSQL=5.1.35
+MYSQL=8.0.25
+MYSQL=maria
 TOMCAT=9.0.21
 THREADS=1
 
@@ -45,16 +61,16 @@ THREADS=1
 LOG_DIRECTORY=
 PORT=8080
 SHUTDOWN_PORT=8005
-MYSQL_DATABASE=sakai23
+MYSQL_DATABASE=sakai25
 MYSQL_USER=sakaiuser
 MYSQL_PASSWORD=sakaipass
 
 # Defaults for Mac/MAMP MySQL
-if [ -f "/Applications/MAMP/Library/bin/mysql" ] ; then
+if [ -f "/Applications/MAMP/Library/bin/mysql80/bin/mysql" ] ; then
     echo "You are using MAMP..."
     MYSQL_PORT=8889
     MYSQL_SOURCE="jdbc:mariadb://127.0.0.1:8889/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
-    MYSQL_COMMAND="/Applications/MAMP/Library/bin/mysql -S /Applications/MAMP/tmp/mysql/mysql.sock -u $MYSQL_SUPER_USER --password=$MYSQL_ROOT_PASSWORD"
+    MYSQL_COMMAND="/Applications/MAMP/Library/bin/mysql80/bin/mysql -S /Applications/MAMP/tmp/mysql/mysql.sock -u $MYSQL_ROOT_USER --password=$MYSQL_ROOT_PASSWORD"
 
 # Defaults for Mac/MAMP MySQL on 3306
 elif [ -f "/Applications/XAMPP/xamppfiles/bin/mysql" ] ; then
@@ -65,6 +81,7 @@ elif [ -f "/Applications/XAMPP/xamppfiles/bin/mysql" ] ; then
 
 # Ubuntu / normal 3306 MariaDB
 else
+    echo "Using command line SQL"
     MYSQL_COMMAND="mysql -u $MYSQL_ROOT_USER --host=$MYSQL_HOST --port=$MYSQL_PORT --password=$MYSQL_ROOT_PASSWORD"
     MYSQL_SOURCE="jdbc:mariadb://$MYSQL_HOST:$MYSQL_PORT/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
 fi
