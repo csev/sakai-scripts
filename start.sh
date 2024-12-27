@@ -1,9 +1,9 @@
 #! /bin/bash
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 source config-dist.sh
-if [ "$PORT" == "" ]; then 
-    echo "Bad configuration or wrong shell"; 
-    exit 
+if [ "$PORT" == "" ]; then
+    echo "Bad configuration or wrong shell";
+    exit
 fi
 
 source stop.sh
@@ -35,15 +35,37 @@ export CATALINA_OPTS="-server -Xms1g -Xmx2g -Djava.awt.headless=true -XX:+UseCom
 echo JAVA_OPTS:
 echo $JAVA_OPTS
 
-if [ -f apache-tomcat-$TOMCAT/bin/startup.sh ]; then 
+if [ -f apache-tomcat-$TOMCAT/bin/startup.sh ]; then
     echo "Removing logs"
     if [ "$LOG_DIRECTORY" != "" ]; then
         rm -f $LOG_DIRECTORY/*
-    else 
+    else
         rm -f apache-tomcat-$TOMCAT/logs/*
     fi
 
     echo "Starting Tomcat"
     rm ./apache-tomcat-$TOMCAT/logs/*
     ./apache-tomcat-$TOMCAT/bin/startup.sh
+fi
+
+echo
+echo Starting tail of catalina.out...
+sleep 5
+
+if [ "$LOG_DIRECTORY" != "" ]; then
+    if [ -f $LOG_DIRECTORY/catalina.out ]; then
+        echo Viewing $LOG_DIRECTORY/catalina.out
+        echo
+        tail -f -n +1 $LOG_DIRECTORY/catalina.out
+    else
+        echo Could not find $LOG_DIRECTORY/catalina.out
+    fi
+else
+    if [ -f apache-tomcat-$TOMCAT/logs/catalina.out ]; then
+        echo Viewing apache-tomcat-$TOMCAT/logs/catalina.out
+        echo
+        tail -f -n +1 apache-tomcat-$TOMCAT/logs/catalina.out
+    else
+        echo Could not find apache-tomcat-$TOMCAT/logs/catalina.out
+    fi
 fi
