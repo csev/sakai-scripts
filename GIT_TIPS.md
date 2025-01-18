@@ -305,3 +305,20 @@ Switching from 23.x to 25.x
 5. sakai-scripts/ — bash qmv.sh (after everything compiles, your Apache and codebase will
 now switch back to 25.x)
 
+Common Things to Check for Prior to Code Review
+-----------------------------------------------
+
+White spacing.  Reviewers get distracted by this.  Just fix it - whatever lines you insert, follow
+the convention of the lines before and after.  Don't fix whitespace for an entire file (as much
+as you want to).
+
+Log.debug startments that use concatenation.
+
+    bad: log.debug("Error in the value "+value);
+    fix: log.debug("Error in the value {}", value);
+
+Not using StringUtils or similar:
+
+    bad: if ( value != null && value.length() > 0 )
+    fix: if ( StringUtils.isNotEmpty(value) )
+
