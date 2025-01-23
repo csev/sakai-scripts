@@ -36,8 +36,8 @@ echo Compile Sakai from $mywd to $tomcatdir
 cd "$mywd/trunk"
 
 if command -v mvnd >/dev/null 2>&1; then
-    echo mvnd -e -Dmaven.test.skip=true -Dmaven.tomcat.home=/Users/csev/sakai/scripts/apache-tomcat-9.0.21/ -Dsakai.cleanup=true clean install sakai:deploy
-    mvnd -e -Dmaven.test.skip=true -Dmaven.tomcat.home=/Users/csev/sakai/scripts/apache-tomcat-9.0.21/ -Dsakai.cleanup=true clean install sakai:deploy
+    echo mvnd -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true clean install sakai:deploy
+    mvnd -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true clean install sakai:deploy
 elif [[ "$THREADS" > 1 ]] ; then
     echo Compiling with $THREADS threads
     echo mvn -T $THREADS -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true $goals

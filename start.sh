@@ -35,6 +35,13 @@ export CATALINA_OPTS="-server -Xms1g -Xmx2g -Djava.awt.headless=true -XX:+UseCom
 echo JAVA_OPTS:
 echo $JAVA_OPTS
 
+# If the first argument is -debugger, then start Tomcat in debug mode on port 8000
+if [ "$1" = "-debugger" ]; then
+    echo "Starting Tomcat in debug mode on port 8000"
+    export JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
+    export CATALINA_OPTS="$CATALINA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000"
+fi
+
 if [ -f apache-tomcat-$TOMCAT/bin/startup.sh ]; then
     echo "Removing logs"
     if [ "$LOG_DIRECTORY" != "" ]; then

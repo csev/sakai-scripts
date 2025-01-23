@@ -1,4 +1,4 @@
-! /bin/bash
+#! /bin/bash
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 source config-dist.sh
 if [ "$PORT" == "" ]; then
