@@ -1,4 +1,5 @@
 #! /bin/bash
+
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 source config-dist.sh
 if [ "$PORT" == "" ]; then 
@@ -6,9 +7,11 @@ if [ "$PORT" == "" ]; then
     exit 
 fi
 
+ARGUMENT='no'
 if [ $# -eq 1 ]
   then
     GIT_REPO=$1
+    ARGUMENT='yes'
 fi
 
 # Do a full check out of all of the source
@@ -30,10 +33,12 @@ fi
 
 # Setting up the upstream master
 if [ "$GIT_REPO" != "https://github.com/sakaiproject/sakai.git" ]; then 
-    echo "Setting upstream master"
-    cd trunk
-    git remote add upstream https://github.com/sakaiproject/sakai
-    cd ..
+    if [ "$ARGUMENT" != "yes" ]; then
+        echo "Setting upstream master"
+        cd trunk
+        git remote add upstream https://github.com/sakaiproject/sakai
+        cd ..
+    fi
 else
     echo " "
     echo "You checked out the Sakai Repository - you may not be able to"
