@@ -35,7 +35,7 @@ echo Compile Sakai from $mywd to $tomcatdir
 
 cd "$mywd/trunk"
 
-if command -v mvnd >/dev/null 2>&1; then
+if command -v mvnd >/dev/null 2>&1 && [ "${THREADS:-0}" -gt 1 ]; then
     echo mvnd -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true clean install sakai:deploy
     mvnd -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true clean install sakai:deploy
 elif [[ "$THREADS" > 1 ]] ; then
