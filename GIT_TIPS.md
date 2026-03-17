@@ -237,7 +237,7 @@ git rebase -Xours upstream/master
 
 # If all is good, I can update Github against with my changes
 # This needs --force per Noah
-git push --force origin SAK-xxx
+git push --force-with-lease origin SAK-5X
 
 # Added by Chuck
 git checkout master
