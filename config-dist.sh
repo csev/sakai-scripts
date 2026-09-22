@@ -53,7 +53,8 @@ LOCAL_HOST_ACCESS=localhost
 
 MYSQL=8.0.25
 MYSQL=maria
-TOMCAT=9.0.21
+# TOMCAT=9.0.21
+TOMCAT=10.1.60
 THREADS=1
 
 # Leave LOG_DIRECTORY value empty to leave the logs inside tomcat
@@ -71,6 +72,7 @@ if [ -f "/Applications/MAMP/Library/bin/mysql80/bin/mysql" ] ; then
     MYSQL_PORT=8889
     MYSQL_SOURCE="jdbc:mariadb://127.0.0.1:8889/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
     MYSQL_COMMAND="/Applications/MAMP/Library/bin/mysql80/bin/mysql -S /Applications/MAMP/tmp/mysql/mysql.sock -u $MYSQL_ROOT_USER --password=$MYSQL_ROOT_PASSWORD"
+    HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
 
 # Defaults for Mac/MAMP MySQL on 3306
 elif [ -f "/Applications/XAMPP/xamppfiles/bin/mysql" ] ; then
@@ -78,13 +80,19 @@ elif [ -f "/Applications/XAMPP/xamppfiles/bin/mysql" ] ; then
     MYSQL_ROOT_PASSWORD=
     MYSQL_SOURCE="jdbc:mariadb://$MYSQL_HOST:3306/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
     MYSQL_COMMAND="/Applications/XAMPP/xamppfiles/bin/mysql  --port=$MYSQL_PORT"
+    HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
 
 # Ubuntu / normal 3306 MariaDB
 else
     echo "Using command line SQL"
     MYSQL_COMMAND="mysql -u $MYSQL_ROOT_USER --host=$MYSQL_HOST --port=$MYSQL_PORT --password=$MYSQL_ROOT_PASSWORD"
     MYSQL_SOURCE="jdbc:mariadb://$MYSQL_HOST:$MYSQL_PORT/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
+    HIBERNATE_DIALECT=org.hibernate.dialect.MariaDBDialect
 fi
+
+# Override if auto-detect is wrong (MAMP/XAMPP=MySQL, Linux=MariaDB)
+# HIBERNATE_DIALECT=org.hibernate.dialect.MariaDBDialect
+# HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
 
 # Make sure sdkman is setup - even if we are running disconnected from a terminal
 if [ "$JAVA_HOME" = "" ] ;then

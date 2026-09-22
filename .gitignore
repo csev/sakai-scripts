@@ -10,5 +10,8 @@ ojdbc*jar
 henplus-0*
 sakai-reference
 server.xml
+server-9.xml
+server-10.xml
+server-11.xml
 save/*
 *.jks

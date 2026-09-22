@@ -29,7 +29,8 @@ else
   mkdir keepzips
 fi
 
-TOMCATURL=https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT:0:1}/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
+TOMCAT_MAJOR=${TOMCAT%%.*}
+TOMCATURL=https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR}/v$TOMCAT/bin/apache-tomcat-$TOMCAT.zip
 echo $TOMCATURL
 
 if [ -f keepzips/apache-tomcat-$TOMCAT.zip ]
@@ -38,7 +39,15 @@ then
 else
   echo Downloading keepzips/tomcat-$TOMCAT.zip ...
   cd keepzips
-  curl -O $TOMCATURL
+  if ! curl -f -O $TOMCATURL
+  then
+    echo "======"
+    echo "Error, unable to download Tomcat version $TOMCAT"
+    echo "Tried $TOMCATURL"
+    echo "======"
+    cd $MYPATH
+    exit 1
+  fi
   cd $MYPATH
 fi
 
@@ -141,16 +150,24 @@ echo Patching sakai.properties with SQL access information if needed
 
 echo $MYSQL_SOURCE
 echo $PROPFILE
-sed < $PROPFILE "s'MYSQL_USER'$MYSQL_USER'" | sed "s'MYSQL_PASSWORD'$MYSQL_PASSWORD'" | sed "s'MYSQL_SOURCE'$MYSQL_SOURCE'" | sed "s'username@javax.sql.BaseDataSource=sakaiuser'username@javax.sql.BaseDataSource=$MYSQL_USER'" | sed "s'password@javax.sql.BaseDataSource=sakaipass'password@javax.sql.BaseDataSource=$MYSQL_PASSWORD'" > apache-tomcat-$TOMCAT/sakai/sakai.properties
+echo Hibernate dialect: $HIBERNATE_DIALECT
+sed < $PROPFILE "s'MYSQL_USER'$MYSQL_USER'" | sed "s'MYSQL_PASSWORD'$MYSQL_PASSWORD'" | sed "s'MYSQL_SOURCE'$MYSQL_SOURCE'" | sed "s'HIBERNATE_DIALECT'$HIBERNATE_DIALECT'" | sed "s'username@javax.sql.BaseDataSource=sakaiuser'username@javax.sql.BaseDataSource=$MYSQL_USER'" | sed "s'password@javax.sql.BaseDataSource=sakaipass'password@javax.sql.BaseDataSource=$MYSQL_PASSWORD'" > apache-tomcat-$TOMCAT/sakai/sakai.properties
 
-if [ -f "server.xml" ]
+if [ -f "server-${TOMCAT_MAJOR}.xml" ]
+then
+    echo "Using local server-${TOMCAT_MAJOR}.xml"
+    cp server-${TOMCAT_MAJOR}.xml apache-tomcat-$TOMCAT/conf/server.xml
+elif [ -f "server.xml" ]
 then
     echo "Using local server.xml"
     cp server.xml apache-tomcat-$TOMCAT/conf/server.xml
+elif [ -f "patches/server-localhost-${TOMCAT_MAJOR}.xml" ]
+then
+    echo "Using patches/server-localhost-${TOMCAT_MAJOR}.xml"
+    sed < patches/server-localhost-${TOMCAT_MAJOR}.xml "s/8080/$PORT/" | sed "s/8005/$SHUTDOWN_PORT/" > apache-tomcat-$TOMCAT/conf/server.xml
 else
-    echo "Patching server.xml"
-    cp apache-tomcat-$TOMCAT/conf/server.xml patches/server.xml
-    sed < patches/server.xml "s/8080/$PORT/" | sed "s/8005/$SHUTDOWN_PORT/" > apache-tomcat-$TOMCAT/conf/server.xml
+    echo "Patching stock server.xml"
+    sed < apache-tomcat-$TOMCAT/conf/server.xml "s/8080/$PORT/" | sed "s/8005/$SHUTDOWN_PORT/" > apache-tomcat-$TOMCAT/conf/server.xml
 fi
 
 if [ "$LOG_DIRECTORY" != "" ]; then
@@ -190,14 +207,16 @@ in apache-tomcat-$TOMCAT/conf/server.xml
                scheme="https"
                redirectPort="8443" />
 
-There are several sample server.xml files for various scenarios:
+There are sample server.xml files in patches/, versioned by Tomcat major:
 
-    server-localhost.xml
-    server-internal-https.xml  (i.e. using certbot)
-    server-external-https.xml  (i.e. like CloudFlare)
+    patches/server-localhost-9.xml / patches/server-localhost-10.xml
+    patches/server-internal-https-9.xml / patches/server-internal-https-10.xml  (certbot)
+    patches/server-external-https-9.xml / patches/server-external-https-10.xml  (CloudFlare)
+    patches/server-self-signed-9.xml / patches/server-self-signed-10.xml
 
-You can copy one of these to server.xml so that it is always installed into
-your fresh Tomcat.
+na.sh installs patches/server-localhost-\$TOMCAT_MAJOR.xml by default.
+To keep a local override per major so you can switch 9/10, copy a sample to
+server-9.xml or server-10.xml. An unversioned server.xml still works for both.
 
 EOF
 

@@ -276,8 +276,9 @@ need to tweak the parameters simply copy this to config.sh so git does
 not try to check it in.  If there is a config.sh, it will be used instead
 of config-dist.sh.
 
-Generally you need to change the git repo to be checked out and the
-root mysql password for non-MAMP MySQL connections.
+Generally you need to change the git repo to be checked out, the
+`TOMCAT=` version (9 vs 10), and the root mysql password for non-MAMP
+MySQL connections.
 
 But there is a lot of flexibility here if you are setting up nightly build
 servers.   Changing things like the HTTP port, shutdown port, and location
@@ -311,7 +312,8 @@ na.sh
 -----
 
 Download and create a fresh instance of Tomcat, patch configurations,
-and set up a sakai.properties
+and set up a sakai.properties.  The Tomcat version comes from `TOMCAT=`
+in `config.sh`.  See "Tomcat 9 and Tomcat 10" below.
 
 qmv.sh
 ------
@@ -390,6 +392,69 @@ compiles the code and starts Tomcat.   Since the script stops and starts the
 right Tomcat automatically, you can run this script over and over interactively
 or in a cron job.
 
+
+Tomcat 9 and Tomcat 10
+======================
+
+Set the Tomcat version in `config.sh` (or `config-dist.sh`):
+
+        # TOMCAT=9.0.21
+        TOMCAT=10.1.60
+
+`na.sh` downloads that exact version from Apache and applies matching
+patches.  You can switch back and forth by changing `TOMCAT=` and
+running `bash na.sh` again.
+
+Which one to use
+----------------
+
+* **Tomcat 9** for Sakai 25 and earlier.  Those builds are Java EE
+  (`javax.servlet`).  Community QA for Sakai 25 is on Tomcat 9.
+* **Tomcat 10.1** for the `jakarta` branch (Sakai 26 work).  Tomcat 10
+  only provides Jakarta EE (`jakarta.servlet`).  A `javax` WAR on
+  Tomcat 10 fails immediately with `ClassNotFoundException:
+  javax.servlet.ServletException`.
+
+Do not put a Sakai 25 build on Tomcat 10, and do not put a jakarta
+build on Tomcat 9.  Check `git status` in `trunk/` before you compile.
+
+Patches and server.xml
+----------------------
+
+`na.sh` looks for versioned files under `patches/`:
+
+* `patches/apache-9.0.21-*` and `patches/apache-10.1.60-*` for
+  `context.xml`, `setenv.sh`, and `catalina.properties`
+* `patches/server-localhost-9.xml` / `patches/server-localhost-10.xml`
+  (and the https / self-signed variants)
+
+Local overrides stay in the scripts root so git ignores them:
+
+* `server-9.xml` or `server-10.xml` for a per-major override
+* `server.xml` still works for both if you only run one Tomcat line
+
+Hibernate dialect
+-----------------
+
+Hibernate 6 on the jakarta branch dropped `MariaDB103Dialect`.
+`MariaDBDialect` emits `select next value for ...` sequences, which
+MariaDB 10.3+ accepts and MySQL rejects.
+
+`na.sh` fills `hibernate.dialect=HIBERNATE_DIALECT` from the same
+MAMP / XAMPP / Linux check used for the JDBC URL:
+
+* MAMP or XAMPP (desktop MySQL) → `org.hibernate.dialect.MySQLDialect`
+* Linux command-line mysql (MariaDB) → `org.hibernate.dialect.MariaDBDialect`
+
+Override in `config.sh` if that guess is wrong.  Both dialect class
+names exist on Hibernate 5 (Sakai 25 / Tomcat 9) and Hibernate 6
+(jakarta / Tomcat 10).
+
+Do not reuse a Sakai 25 schema for a jakarta first start.  Hibernate 6
+uses a different ID generator for message bundles; leftover
+`SAKAI_MESSAGE_BUNDLE` rows plus a stale `SAKAI_MESSAGEBUNDLE_S`
+table produce duplicate primary keys.  Use a fresh database (or
+truncate those two tables) when switching to jakarta.
 
 Java Versions and Sakai
 =======================
