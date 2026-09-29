@@ -52,16 +52,17 @@ Getting Started on Mac (as needed)
 
         xcode-select --install
 
-* Make sure you have Java-17 JDK (not JRE) Installed
+* Make sure you have Java-21 JDK (not JRE) Installed
 
         java -version
         javac -version
 
-* If you need a JDK-17 is is easiest to use using https://sdkman.io/
+* If you need a JDK-21 it is easiest to use https://sdkman.io/
 
         curl -s "https://get.sdkman.io" | bash
         source ~/.sdkman/bin/sdkman-init.sh
-        sdk install java 17.0.13-tem
+        sdk install java 21.0.12-tem
+        sdk use java 21.0.12-tem
 
 * Make sure you have Maven (mvn) 3.8 or later installed. If you have Homebrew installed, you can use
 
@@ -153,7 +154,7 @@ Verify that Java is installed with:
 
 It should respond with something like:
 
-    openjdk 11.0.12 2021-07-20
+    openjdk 21.0.12 2026-07-21 LTS
 
 Continue with the common steps below.  Note we are doing all the steps
 below in WSL as root.
@@ -463,17 +464,23 @@ There are a number of branches for this set of scripts.
 
 * SDK-8 For Sakai 21 and earlier
 * SDK-11 For Sakai 22 and Sakai 23
-* main For Sakai 25 and later
+* main For Sakai 25 (Java 17, Tomcat 9)
+* jakarta For Sakai 26 / jakarta (Java 21, Tomcat 10.1)
 
-The main branch will be the current under Sakai version in active development.
+The jakarta branch of these scripts expects Java 21.  If a script
+finds an older JDK it stops and prints:
 
-You can switch back and forth between JDK-17 and JDK-11 as follows:
+    sdk install java 21.0.12-tem
+    sdk use java 21.0.12-tem
+
+You can switch JDKs with sdkman as follows:
 
     git checkout JDK-11
     sdk use java 11.0.12-tem
 
-or:
-
     git checkout main
     sdk use java 17.0.13-tem
+
+    git checkout jakarta
+    sdk use java 21.0.12-tem
 

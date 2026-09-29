@@ -1,19 +1,28 @@
 #! /bin/bash
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 
+# Make sure sdkman is setup - even if we are running disconnected from a terminal
+if [ "$JAVA_HOME" = "" ] ;then
+        echo "Setting up sdkman..."
+        export HOME=~
+        unset SDKMAN_DIR
+        [ -f ~/.sdkman/bin/sdkman-init.sh ] && source ~/.sdkman/bin/sdkman-init.sh
+        echo JAVA_HOME $JAVA_HOME
+fi
+
 INSTALLED_JAVA_VER=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}' | awk -F '.' '{sub("^$", "0", $2); print $1$2}')
 
-if [[ $INSTALLED_JAVA_VER -lt 170 ]];
+if [[ $INSTALLED_JAVA_VER -lt 210 ]];
 then
-    echo 'These scripts expect Java 17.0 or higher (Sakai-25 and later)'
+    echo 'These scripts expect Java 21.0 or higher (Sakai jakarta / 26)'
     java --version
 
     echo Try these commands:
     echo
-    echo sdk install java 17.0.13-tem
-    echo sdk use java 17.0.13-tem 
+    echo sdk install java 21.0.12-tem
+    echo sdk use java 21.0.12-tem
     echo
-    exit
+    exit 1
 fi
 
 # If you want to change this file (and you should)
@@ -93,13 +102,4 @@ fi
 # Override if auto-detect is wrong (MAMP/XAMPP=MySQL, Linux=MariaDB)
 # HIBERNATE_DIALECT=org.hibernate.dialect.MariaDBDialect
 # HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
-
-# Make sure sdkman is setup - even if we are running disconnected from a terminal
-if [ "$JAVA_HOME" = "" ] ;then
-        echo "Setting up sdkman..."
-        export HOME=~
-        unset SDKMAN_DIR
-        [ -f ~/.sdkman/bin/sdkman-init.sh ] && source ~/.sdkman/bin/sdkman-init.sh
-        echo JAVA_HOME $JAVA_HOME
-fi
 
