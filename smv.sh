@@ -4,6 +4,21 @@
 # so it can be used to compile from any point in the Sakai
 # hierarchy that has a pom.xml
 
+JAVA_MAJOR=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}' | awk -F '.' '{print $1}')
+if [[ "$JAVA_MAJOR" != "17" ]];
+then
+    echo 'These scripts expect Java 17 (Sakai 25).'
+    java --version
+    echo
+    echo Try these commands:
+    echo
+    echo sdk install java 17.0.13-tem
+    echo sdk use java 17.0.13-tem
+    echo
+    exit 1
+fi
+
+
 startwd=`pwd`
 for i in `seq 1 15`; do
    newwd=`pwd`

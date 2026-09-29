@@ -1,19 +1,28 @@
 #! /bin/bash
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 
-INSTALLED_JAVA_VER=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}' | awk -F '.' '{sub("^$", "0", $2); print $1$2}')
+# Make sure sdkman is setup - even if we are running disconnected from a terminal
+if [ "$JAVA_HOME" = "" ] ;then
+        echo "Setting up sdkman..."
+        export HOME=~
+        unset SDKMAN_DIR
+        [ -f ~/.sdkman/bin/sdkman-init.sh ] && source ~/.sdkman/bin/sdkman-init.sh
+        echo JAVA_HOME $JAVA_HOME
+fi
 
-if [[ $INSTALLED_JAVA_VER -lt 170 ]];
+JAVA_MAJOR=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}' | awk -F '.' '{print $1}')
+
+if [[ "$JAVA_MAJOR" != "17" ]];
 then
-    echo 'These scripts expect Java 17.0 or higher (Sakai-25 and later)'
+    echo 'These scripts expect Java 17 (Sakai 25).'
     java --version
 
     echo Try these commands:
     echo
     echo sdk install java 17.0.13-tem
-    echo sdk use java 17.0.13-tem 
+    echo sdk use java 17.0.13-tem
     echo
-    exit
+    exit 1
 fi
 
 # If you want to change this file (and you should)
@@ -86,12 +95,4 @@ else
     MYSQL_SOURCE="jdbc:mariadb://$MYSQL_HOST:$MYSQL_PORT/$MYSQL_DATABASE?useUnicode=true\&characterEncoding=UTF-8"
 fi
 
-# Make sure sdkman is setup - even if we are running disconnected from a terminal
-if [ "$JAVA_HOME" = "" ] ;then
-        echo "Setting up sdkman..."
-        export HOME=~
-        unset SDKMAN_DIR
-        [ -f ~/.sdkman/bin/sdkman-init.sh ] && source ~/.sdkman/bin/sdkman-init.sh
-        echo JAVA_HOME $JAVA_HOME
-fi
 

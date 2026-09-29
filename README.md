@@ -62,6 +62,7 @@ Getting Started on Mac (as needed)
         curl -s "https://get.sdkman.io" | bash
         source ~/.sdkman/bin/sdkman-init.sh
         sdk install java 17.0.13-tem
+        sdk use java 17.0.13-tem
 
 * Make sure you have Maven (mvn) 3.8 or later installed. If you have Homebrew installed, you can use
 
@@ -398,17 +399,23 @@ There are a number of branches for this set of scripts.
 
 * SDK-8 For Sakai 21 and earlier
 * SDK-11 For Sakai 22 and Sakai 23
-* main For Sakai 25 and later
+* main For Sakai 25 (Java 17, Tomcat 9)
+* jakarta For Sakai 26 / jakarta (Java 21, Tomcat 10.1)
 
-The main branch will be the current under Sakai version in active development.
+The main branch expects Java 17.  If a script finds a different JDK
+it stops and prints:
 
-You can switch back and forth between JDK-17 and JDK-11 as follows:
+    sdk install java 17.0.13-tem
+    sdk use java 17.0.13-tem
+
+You can switch JDKs with sdkman as follows:
 
     git checkout JDK-11
     sdk use java 11.0.12-tem
 
-or:
-
     git checkout main
     sdk use java 17.0.13-tem
+
+    git checkout jakarta
+    sdk use java 21.0.12-tem
 
