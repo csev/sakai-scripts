@@ -79,9 +79,14 @@ else
     exit
 fi
 
-FROMFILE="patches/apache-$TOMCAT-jdk17-setenv.sh"
+FROMFILE="patches/apache-$TOMCAT-jdk21-setenv.sh"
+if [ ! -f "$FROMFILE" ]
+then
+    FROMFILE="patches/apache-$TOMCAT-jdk17-setenv.sh"
+fi
 if [ -f  $FROMFILE ]
 then
+    echo "Using $FROMFILE"
     cp $FROMFILE apache-tomcat-$TOMCAT/bin/setenv.sh
 else
     echo "ERROR: You need a patch for $FROMFILE"
