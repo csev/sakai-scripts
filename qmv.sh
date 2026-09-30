@@ -35,18 +35,27 @@ echo Compile Sakai from $mywd to $tomcatdir
 
 cd "$mywd/trunk"
 
+mvn_args=(
+    -e
+    -Dmaven.test.skip=true
+    -Dsakai.skip.webcomponents.tests=true
+    -Dmaven.tomcat.home="$tomcatdir"
+    -Dsakai.cleanup=true
+)
+
 if command -v mvnd >/dev/null 2>&1 && [ "${THREADS:-0}" -gt 1 ]; then
-    echo mvnd -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true clean install sakai:deploy
-    mvnd -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true clean install sakai:deploy
-elif [[ "$THREADS" > 1 ]] ; then
-    echo Compiling with $THREADS threads
-    echo mvn -T $THREADS -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true $goals
-    mvn -T $THREADS -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true $goals
+    echo mvnd "${mvn_args[@]}" clean install sakai:deploy
+    mvnd "${mvn_args[@]}" clean install sakai:deploy
+
+elif [ "${THREADS:-0}" -gt 1 ]; then
+    echo "Compiling with $THREADS threads"
+    echo mvn -T "$THREADS" "${mvn_args[@]}" $goals
+    mvn -T "$THREADS" "${mvn_args[@]}" $goals
+
 else
-    echo Compiling with 1 thread
-    # Given how we register log4j - even 1 thread parallel messes up
-    # mvn -T 1 -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir $goals
-    echo mvn -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true $goals
-    mvn -e -Dmaven.test.skip=true -Dmaven.tomcat.home=$tomcatdir -Dsakai.cleanup=true $goals
+    echo "Compiling with 1 thread"
+    # Given how we register log4j, even -T 1 messes things up
+    echo mvn "${mvn_args[@]}" $goals
+    mvn "${mvn_args[@]}" $goals
 fi
 
