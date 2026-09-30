@@ -280,7 +280,7 @@ sakai-scripts/trunk — git remote -v
 9. sakai-scripts/trunk — git push origin 23.x
 10. sakai-scripts/trunk — Do a cd ../ to go to sakai-scripts repo
    
-11. sakai-scripts — diff sakai.properties apache-tomcat-9.0.2/sakai/sakai.properties
+11. sakai-scripts — diff sakai.properties apache-tomcat-10.1.60/sakai/sakai.properties
 (just to check if there’s been any misalignment between your sakai.properties and the one in Apache)
 12. sakai-scripts — bash na.sh (to start a fresh Tomcat instance)
 13. sakai-scripts — bash qmv.sh (to recompile everything and fill up your Tomcat)

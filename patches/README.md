@@ -1,16 +1,14 @@
+Tomcat 10.1.60 patches for this jakarta branch.
 
+context.xml, setenv.sh, and catalina.properties are named
+`apache-10.1.60-*`.  `na.sh` copies them into a fresh Tomcat.
 
-cp apache-tomcat-8.0.23/conf/catalina.properties /tmp/cataling.properties
-vi apache-tomcat-8.0.23/conf/catalina.properties
+server-localhost-10.xml is the default `server.xml`.
+HTTPS samples are the `-internal-https-10`, `-external-https-10`,
+and `-self-signed-10` files.
 
-... Make changes 
+To refresh catalina.properties after a Tomcat upgrade:
 
-diff -u /tmp/catalina.orig apache-tomcat-8.0.23/conf/catalina.properties > patches/tomcat-8.0.23.patch 
-
-vi patches/tomcat-8.0.23.patch
-
-Make the top have the same file name in both places:
-
---- apache-tomcat-8.0.23/conf/catalina.properties   2015-06-11 14:27:36.000000000 -0400
-+++ apache-tomcat-8.0.23/conf/catalina.properties   2015-06-11 14:27:36.000000000 -0400
-
+    cp apache-tomcat-10.1.60/conf/catalina.properties /tmp/catalina.orig
+    # add serializer.jar to jarsToSkip
+    diff -u /tmp/catalina.orig apache-tomcat-10.1.60/conf/catalina.properties

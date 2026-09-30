@@ -277,9 +277,9 @@ need to tweak the parameters simply copy this to config.sh so git does
 not try to check it in.  If there is a config.sh, it will be used instead
 of config-dist.sh.
 
-Generally you need to change the git repo to be checked out, the
-`TOMCAT=` version (9 vs 10), and the root mysql password for non-MAMP
-MySQL connections.
+Generally you need to change the git repo to be checked out and the
+root mysql password for non-MAMP MySQL connections.  Java and Tomcat
+versions are fixed per branch (`config-dist.sh`), not in `config.sh`.
 
 But there is a lot of flexibility here if you are setting up nightly build
 servers.   Changing things like the HTTP port, shutdown port, and location
@@ -313,8 +313,8 @@ na.sh
 -----
 
 Download and create a fresh instance of Tomcat, patch configurations,
-and set up a sakai.properties.  The Tomcat version comes from `TOMCAT=`
-in `config.sh`.  See "Tomcat 9 and Tomcat 10" below.
+and set up a sakai.properties.  The Tomcat version is fixed by the
+branch.  See "Tomcat 10.1" below.
 
 qmv.sh
 ------
@@ -394,52 +394,42 @@ right Tomcat automatically, you can run this script over and over interactively
 or in a cron job.
 
 
-Tomcat 9 and Tomcat 10
-======================
+Tomcat 10.1
+===========
 
-Set the Tomcat version in `config.sh` (or `config-dist.sh`):
+This jakarta branch pins **Tomcat 10.1.60** and **Java 21** in
+`config-dist.sh`.  It will not run Sakai 25, Tomcat 9, or JDK 17.
+`na.sh` downloads that zip from Apache and applies the 10.1.60
+patches.  Do not set `TOMCAT=` in `config.sh`.
 
-        # TOMCAT=9.0.21
-        TOMCAT=10.1.60
+To try a different 10.1.x zip on this branch only:
 
-`na.sh` downloads that exact version from Apache and applies matching
-patches.  You can switch back and forth by changing `TOMCAT=` and
-running `bash na.sh` again.
+        TOMCAT_OVERRIDE=10.1.60
 
-Which one to use
-----------------
-
-* **Tomcat 9** for Sakai 25 and earlier.  Those builds are Java EE
-  (`javax.servlet`).  Community QA for Sakai 25 is on Tomcat 9.
-* **Tomcat 10.1** for the `jakarta` branch (Sakai 26 work).  Tomcat 10
-  only provides Jakarta EE (`jakarta.servlet`).  A `javax` WAR on
-  Tomcat 10 fails immediately with `ClassNotFoundException:
-  javax.servlet.ServletException`.
-
-Do not put a Sakai 25 build on Tomcat 10, and do not put a jakarta
-build on Tomcat 9.  Check `git status` in `trunk/` before you compile.
+Sakai 25 / Tomcat 9 / Java 17 lives on `main`.  Check `git status`
+in `trunk/` before you compile so you are on the jakarta source.
 
 Patches and server.xml
 ----------------------
 
-`na.sh` looks for versioned files under `patches/`:
+`na.sh` looks for files under `patches/`:
 
-* `patches/apache-9.0.21-*` and `patches/apache-10.1.60-*` for
-  `context.xml`, `setenv.sh`, and `catalina.properties`
-* `patches/server-localhost-9.xml` / `patches/server-localhost-10.xml`
-  (and the https / self-signed variants)
+* `patches/apache-10.1.60-context.xml`
+* `patches/apache-10.1.60-jdk21-setenv.sh`
+* `patches/apache-10.1.60-catalina.properties`
+* `patches/server-localhost-10.xml` (default)
+  plus the https / self-signed `-10` variants
 
 Local overrides stay in the scripts root so git ignores them:
 
-* `server-9.xml` or `server-10.xml` for a per-major override
-* `server.xml` still works for both if you only run one Tomcat line
+* `server-10.xml` or `server.xml`
 
 Hibernate dialect
 -----------------
 
-Hibernate 6 on the jakarta branch dropped `MariaDB103Dialect`.
-`MariaDBDialect` emits `select next value for ...` sequences, which
-MariaDB 10.3+ accepts and MySQL rejects.
+Hibernate 6 dropped `MariaDB103Dialect`.  `MariaDBDialect` emits
+`select next value for ...` sequences, which MariaDB 10.3+ accepts
+and MySQL rejects.
 
 `na.sh` fills `hibernate.dialect=HIBERNATE_DIALECT` from the same
 MAMP / XAMPP / Linux check used for the JDBC URL:
@@ -447,9 +437,7 @@ MAMP / XAMPP / Linux check used for the JDBC URL:
 * MAMP or XAMPP (desktop MySQL) → `org.hibernate.dialect.MySQLDialect`
 * Linux command-line mysql (MariaDB) → `org.hibernate.dialect.MariaDBDialect`
 
-Override in `config.sh` if that guess is wrong.  Both dialect class
-names exist on Hibernate 5 (Sakai 25 / Tomcat 9) and Hibernate 6
-(jakarta / Tomcat 10).
+Override in `config.sh` if that guess is wrong.
 
 Do not reuse a Sakai 25 schema for a jakarta first start.  Hibernate 6
 uses a different ID generator for message bundles; leftover
@@ -467,8 +455,8 @@ There are a number of branches for this set of scripts.
 * main For Sakai 25 (Java 17, Tomcat 9)
 * jakarta For Sakai 26 / jakarta (Java 21, Tomcat 10.1)
 
-The jakarta branch of these scripts expects Java 21.  If a script
-finds an older JDK it stops and prints:
+The jakarta branch of these scripts demands Java 21.  If a script
+finds a different JDK it stops and prints:
 
     sdk install java 21.0.12-tem
     sdk use java 21.0.12-tem

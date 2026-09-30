@@ -80,10 +80,6 @@ else
 fi
 
 FROMFILE="patches/apache-$TOMCAT-jdk21-setenv.sh"
-if [ ! -f "$FROMFILE" ]
-then
-    FROMFILE="patches/apache-$TOMCAT-jdk17-setenv.sh"
-fi
 if [ -f  $FROMFILE ]
 then
     echo "Using $FROMFILE"
@@ -93,7 +89,7 @@ else
     exit
 fi
 
-FROMFILE="patches/apache-$TOMCAT-jdk17-catalina.properties"
+FROMFILE="patches/apache-$TOMCAT-catalina.properties"
 if [ -f  $FROMFILE ]
 then
     cp $FROMFILE apache-tomcat-$TOMCAT/conf/catalina.properties
@@ -212,16 +208,15 @@ in apache-tomcat-$TOMCAT/conf/server.xml
                scheme="https"
                redirectPort="8443" />
 
-There are sample server.xml files in patches/, versioned by Tomcat major:
+There are sample server.xml files in patches/:
 
-    patches/server-localhost-9.xml / patches/server-localhost-10.xml
-    patches/server-internal-https-9.xml / patches/server-internal-https-10.xml  (certbot)
-    patches/server-external-https-9.xml / patches/server-external-https-10.xml  (CloudFlare)
-    patches/server-self-signed-9.xml / patches/server-self-signed-10.xml
+    patches/server-localhost-10.xml
+    patches/server-internal-https-10.xml  (certbot)
+    patches/server-external-https-10.xml  (CloudFlare)
+    patches/server-self-signed-10.xml
 
-na.sh installs patches/server-localhost-\$TOMCAT_MAJOR.xml by default.
-To keep a local override per major so you can switch 9/10, copy a sample to
-server-9.xml or server-10.xml. An unversioned server.xml still works for both.
+na.sh installs patches/server-localhost-10.xml by default.
+To keep a local override, copy a sample to server.xml or server-10.xml.
 
 EOF
 

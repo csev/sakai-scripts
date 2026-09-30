@@ -18,7 +18,7 @@ My normal build script runs roughly:
 mvn -T 2 -e \
   -Dmaven.test.skip=true \
   -Dsakai.skip.webcomponents.tests=true \
-  -Dmaven.tomcat.home=/Users/csev/sakai/scripts/apache-tomcat-9.0.21/ \
+  -Dmaven.tomcat.home=/Users/csev/sakai/scripts/apache-tomcat-10.1.60/ \
   -Dsakai.cleanup=true \
   clean install sakai:deploy
 ```
