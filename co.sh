@@ -46,3 +46,15 @@ else
     echo "and set up config.sh to point to your forked repository."
 fi
 
+
+# Apply Big Sur compatibility patch automatically on macOS 11
+if [ "$(uname -s)" = "Darwin" ] && \
+   [ "$(sw_vers -productVersion | cut -d. -f1)" = "11" ]; then
+
+    echo "macOS 11 Big Sur detected - applying compatibility patch..."
+
+    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+    cd "$SCRIPT_DIR/trunk" || exit 1
+    bash "$SCRIPT_DIR/macos/patch-trunk-macos11.sh"
+fi
