@@ -13,3 +13,5 @@ server.xml
 server-10.xml
 save/*
 *.jks
+watchdog.log
+watchdog-config.err

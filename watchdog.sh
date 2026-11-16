@@ -12,6 +12,18 @@
 # while nightly.sh is rebuilding).
 #
 # Requires a local config.sh. Refuses to run on config-dist.sh defaults.
+#
+# crontab -e
+#
+#     */5 * * * * /absolute/path/to/watchdog.sh
+#
+# The path has to be absolute. Cron starts in $HOME. This script cds to
+# its own directory. On dev1 that entry is:
+#
+#     */5 * * * * /root/sakai-scripts/watchdog.sh
+#
+# Restarts are appended to watchdog.log next to this script. A healthy
+# Tomcat prints nothing, so cron stays quiet.
 
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 
