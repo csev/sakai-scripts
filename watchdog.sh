@@ -16,7 +16,9 @@
 if [ "$BASH" = "" ] ;then echo "Please run with bash"; exit 1; fi
 
 # cron's PATH is tiny. lsof lives in /usr/sbin on macOS.
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:/usr/local/bin:$PATH"
+# Append these directories. Prepending /usr/bin hides a newer java
+# already on PATH while JAVA_HOME still points at Java 17.
+export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:/usr/local/bin"
 
 cd "$(dirname "$0")" || exit 1
 DIR="$(pwd)"

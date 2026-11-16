@@ -15,7 +15,7 @@ JAVA_MAJOR=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}' | awk -F '.'
 if [[ "$JAVA_MAJOR" != "17" ]];
 then
     echo 'These scripts expect Java 17 (Sakai 25).'
-    java --version
+    java -version 2>&1
 
     echo Try these commands:
     echo
