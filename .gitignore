@@ -12,3 +12,5 @@ sakai-reference
 server.xml
 save/*
 *.jks
+watchdog.log
+watchdog-config.err
